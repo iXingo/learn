@@ -14,7 +14,7 @@ import java.util.Iterator;
  * TCP/IP的NIO非阻塞方式
  * 服务器端
  * */
-public class Server implements Runnable {
+public class    Server implements Runnable {
 
     //第一个端口
     private Integer port1 = 8099;
