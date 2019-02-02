@@ -1,10 +1,10 @@
 # learn
-This project was created for shawn to learn new technology.
+This project was created for shawn to learn new technology;
 ## Multi-Thread
-Including Thread pool and Multi-thread
+Including Thread pool and Multi-thread;
 ## NIO
-Non-blocking IO , Netty
+Non-blocking IO / Netty;
 ## Socket
-Netty framework
+Netty framework;
 ##  Concurrent 
-JUC package in JDK
+JUC package in JDK.
