@@ -9,6 +9,12 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
 
+/*
+1.  针对不同类型的事件来调用 ChannelHandler ;
+2. 应用程序通过实现或者扩展 ChannelHandler 来挂钩到事件的生命周期,并且提供自定义的应用程序逻辑;
+3. 在架构上, ChannelHandler 有助于保持业务逻辑与网络处理代码的分离。这简化了开发过程,因为代码必须不断地演化以响应不断变化的需求。
+*/
+
 
 
 //标示一个 ChannelHandler 可以被多个Channel安全地共享
@@ -56,4 +62,13 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         为此, 你的应用程序应该提供至少有一个实现了 exceptionCaught() 方法的 ChannelHandler 。
         (6.4 节详细地讨论了异常处理)。
      */
+
+
+/*  EchoServerHandler 实现了业务逻辑;main() 方法引导了服务器;
+    引导过程中所需要的步骤如下:
+        1 创建一个 ServerBootstrap 的实例以引导和绑定服务器;
+        2 创建并分配一个 NioEventLoopGroup 实例以进行事件的处理, 如接受新连接以及读/写数据;
+        3 指定服务器绑定的本地的 InetSocketAddress ;
+        4 使用一个 EchoServerHandler 的实例初始化每一个新的 Channel ;
+        5 调用 ServerBootstrap.bind() 方法以绑定服务器。*/
 }
