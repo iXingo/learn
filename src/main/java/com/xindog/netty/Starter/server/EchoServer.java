@@ -1,4 +1,4 @@
-package com.xindog.netty.server;
+package com.xindog.netty.Starter.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -41,11 +41,14 @@ public class EchoServer {
            使用一个 EchoServerHandler 的实例初始化每一个新的 Channel；
            调用 ServerBootstrap.bind()方法以绑定服务器。
     */
+
     public void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
         //创建Event-LoopGroup
         EventLoopGroup group = new NioEventLoopGroup();
         try {
+            /*  你创建了一个 ServerBootstrap 实例。因为你正在使用的是 NIO 传输,所以你指定了 NioEventLoopGroup 来接受和处理新的连接,
+    并且将 Channel 的类型指定为 NioServer-SocketChannel*/
             //创建ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
@@ -61,10 +64,24 @@ public class EchoServer {
                             ch.pipeline().addLast(serverHandler);
                         }
                     });
+
+/*          对 sync() 方法的调用将导致当前 Thread阻塞,一直到绑定操作完成为止)。
+            该应用程序将会阻塞等待直到服务器的 Channel 关闭。
+            (因为你在 Channel 的 CloseFuture 上调用了 sync() 方法)。
+            然后,你将可以关闭EventLoopGroup ,并释放所有的资源,包括所有被创建的线程*/
             ChannelFuture f = b.bind().sync();
             f.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
         }
     }
+
+/*  你使用了一个特殊的类—— ChannelInitializer 。这是关键。
+    当一个新的连接被接受时,一个新的子 Channel 将会被创建,而 ChannelInitializer 将会把一个你的
+    EchoServerHandler 的实例添加到该 Channel 的 ChannelPipeline 中。
+    正如我们之前所解释的,这个 ChannelHandler 将会收到有关入站消息的通知。*/
+
+
+
+
 }
