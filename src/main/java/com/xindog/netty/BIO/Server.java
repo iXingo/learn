@@ -1,4 +1,4 @@
-package com.xindog.BIO;
+package com.xindog.netty.BIO;
 
 import java.io.BufferedReader;
 import java.io.IOException;

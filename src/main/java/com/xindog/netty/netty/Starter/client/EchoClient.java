@@ -1,4 +1,4 @@
-package com.xindog.netty.Starter.client;
+package com.xindog.netty.netty.Starter.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

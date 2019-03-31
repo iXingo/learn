@@ -1,4 +1,4 @@
-package com.xindog.netty.Starter.server;
+package com.xindog.netty.netty.Starter.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

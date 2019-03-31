@@ -1,4 +1,4 @@
-package com.xindog.transfer.plain;
+package com.xindog.netty.transfer.plain;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

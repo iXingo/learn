@@ -1,4 +1,4 @@
-package com.xindog.transfer.netty;
+package com.xindog.netty.transfer.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;

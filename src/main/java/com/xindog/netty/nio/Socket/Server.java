@@ -1,4 +1,4 @@
-package com.xindog.nio.Socket;
+package com.xindog.netty.nio.Socket;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

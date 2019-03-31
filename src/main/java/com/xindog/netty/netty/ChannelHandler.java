@@ -1,4 +1,4 @@
-package com.xindog.netty;
+package com.xindog.netty.netty;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

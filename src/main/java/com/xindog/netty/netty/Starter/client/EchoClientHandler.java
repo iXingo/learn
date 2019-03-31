@@ -1,4 +1,4 @@
-package com.xindog.netty.Starter.client;
+package com.xindog.netty.netty.Starter.client;
 
 /*
     Echo 客户端将会：
