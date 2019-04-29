@@ -20,7 +20,7 @@ public class FutureTaskExample {
 
         new Thread(futureTask).start();
         log.info("do something in main");
-        Thread.sleep(1000);
+        Thread.sleep(4000);
         String result = futureTask.get();
         log.info("result：{}", result);
     }
