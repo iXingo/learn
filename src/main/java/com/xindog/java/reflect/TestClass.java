@@ -1,7 +1,7 @@
 package com.xindog.java.reflect;
 
 /**
- * Created by Xingog.com(TM).
+ * Created by Xindog.com(TM).
  * Author:  Shawn.Wang / i.am@shawn.wang
  * Date:    5/16/19
  * Time:    11:20 AM
