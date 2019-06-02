@@ -1,5 +1,8 @@
 package com.xindog.datatime;
 
+import org.joda.time.DateTime;
+
+import javax.ejb.Local;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,17 +22,24 @@ import java.util.concurrent.Executors;
 public class DataTimeExample {
 
     public static void main(String[] args) {
-        LocalDateTime nowTime = LocalDateTime.of(LocalDate.of(2019,05,22 ), LocalTime.of(0,06,41));
+//        LocalDateTime nowTime = LocalDateTime.of(LocalDate.of(2019,05,22 ), LocalTime.of(0,06,41));
+//
+//        LocalDateTime nextTime = nowTime.minusWeeks(2);
+//
+//        System.out.print("\n"+nextTime+"Z ");
+//        System.out.println(nowTime+"Z");
+//
+//        System.out.println(Instant.now());
+//        Runnable runnable = () -> {
+//            System.out.println("Hello World");
+//        };
+//        Executor executor = Executors.newSingleThreadExecutor();
 
-        LocalDateTime nextTime = nowTime.minusWeeks(2);
 
-        System.out.print("\n"+nextTime+"Z ");
-        System.out.println(nowTime+"Z");
-
-        System.out.println(Instant.now());
-        Runnable runnable = () -> {
-            System.out.println("Hello World");
-        };
-        Executor executor = Executors.newSingleThreadExecutor();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime xiqishan = now.minusDays(9029);
+        LocalDateTime wenxiu = now.minusDays(8906);
+        System.out.println(wenxiu);
+        System.out.println(xiqishan);
     }
 }
