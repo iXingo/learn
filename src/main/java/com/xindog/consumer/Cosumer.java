@@ -1,16 +1,31 @@
 package com.xindog.consumer;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Cosumer {
 
 
 
     public static void main(String[] args){
-        new Thread(()->{
-            while(true){
+        ExecutorService executors= Executors.newCachedThreadPool();
+        executors.submit(()->{System.out.println("Test1");
+            try {
+                System.out.println("Test1"+System.currentTimeMillis());
+                Thread.sleep(2000);
+                System.out.println("Test1"+System.currentTimeMillis());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }).start();
+        });
+        executors.submit(()-> {System.out.println("Test2");
+        try {
+            System.out.println("Test2"+System.currentTimeMillis());
+            Thread.sleep(2000);
+            System.out.println("Test2"+System.currentTimeMillis());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }});
+        executors.shutdown();
     }
 }
