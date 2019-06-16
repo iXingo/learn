@@ -1,4 +1,4 @@
-package com.xindog.concurrency.ConsumerProducer;
+package com.xindog.concurrency.consumerproducer;
 
 public class Task {
     public int no;

@@ -1,11 +1,11 @@
-package com.xindog.concurrency.ConsumerProducer;
+package com.xindog.concurrency.consumerproducer;
 
-public abstract class AbstractConsumer implements Consumer, Runnable{
+public abstract class AbstractProducer implements Producer, Runnable{
     @Override
     public void run() {
         while (true) {
             try {
-                consume();
+                produce();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 break;

@@ -1,6 +1,6 @@
-package com.xindog.concurrency.ConsumerProducer.model;
+package com.xindog.concurrency.consumerproducer.model;
 
-import com.xindog.concurrency.ConsumerProducer.*;
+import com.xindog.concurrency.consumerproducer.*;
 
 import java.util.LinkedList;
 import java.util.Queue;

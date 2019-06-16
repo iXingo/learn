@@ -1,4 +1,4 @@
-package com.xindog.concurrency.ConsumerProducer.model;
+package com.xindog.concurrency.consumerproducer.model;
 
 public interface Model {
     Runnable newRunnableConsumer();
