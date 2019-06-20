@@ -14,7 +14,7 @@ import java.time.LocalTime;
 public class DataTimeExample {
 
     public static void main(String[] args) {
-        LocalDateTime nowTime = LocalDateTime.of(LocalDate.of(2019,05,22 ), LocalTime.of(0,06,41));
+        LocalDateTime nowTime = LocalDateTime.of(LocalDate.of(2019,05,28 ), LocalTime.of(23,02,12));
 
         LocalDateTime nextTime = nowTime.minusWeeks(2);
 
