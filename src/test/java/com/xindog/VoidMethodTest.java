@@ -6,6 +6,8 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Xindog.com(TM).
  * Author:  Shawn.Wang / i.am@shawn.wang
@@ -17,20 +19,22 @@ public class VoidMethodTest {
 
 
     @Test
-    public void testHelloWorld() throws Exception {
+    public void testHelloWorld() {
         People  mockPeople =Mockito.mock(People.class);
         Mockito.doAnswer(new Answer<Object>() {
-            public Object answer(InvocationOnMock invocation) {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 Object[] args = invocation.getArguments();
-                return "called with arguments: " + args;
+                invocation.callRealMethod();
+                System.out.println("success");
+                return "success";
             }
         }).when(mockPeople).sayHello("h");
+        mockPeople.sayHello("h");
     }
 }
 
 class People{
-    public void sayHello(String str) throws Exception {
+    public void sayHello(String str) {
         System.out.println(str);
-        if(str.equals("h")) throw new Exception("Hello");
     }
 }
