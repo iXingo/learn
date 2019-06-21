@@ -1,12 +1,10 @@
 package com.xindog;
 
-import com.xindog.concurrency.consumerproducer.model.WaitNotifyModel;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Xindog.com(TM).

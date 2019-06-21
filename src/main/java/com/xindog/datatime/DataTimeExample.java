@@ -1,16 +1,7 @@
 package com.xindog.datatime;
 
-import org.joda.time.DateTime;
 
-import javax.ejb.Local;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAdjuster;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 /**
  * Created by Xindog.com(TM).
