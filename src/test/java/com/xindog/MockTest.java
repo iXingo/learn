@@ -2,9 +2,6 @@ package com.xindog;
 
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import static org.mockito.Mockito.RETURNS_SMART_NULLS;
@@ -48,5 +45,15 @@ public class MockTest {
 //        }
 
 
+    }
+
+    @Test
+    public void bitTest(){
+        System.out.println(3<<3);
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE) );
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE + 1) );
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.toString(8,2));
+        System.out.println();
     }
 }
