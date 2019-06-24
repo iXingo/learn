@@ -1,9 +1,12 @@
 package com.xindog.classloader;
 
+import org.springframework.web.client.HttpMessageConverterExtractor;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 
 /**
  * Created by Xindog.com(TM).
@@ -52,6 +55,16 @@ public class ClassLoaderExample {
             in.close();
             System.out.println(new String(b, 0, len));
         }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        try {
+            Class<HttpMessageConverterExtractor> extractor = (Class<HttpMessageConverterExtractor>) loader.loadClass("org.springframework.web.client.HttpMessageConverterExtractor");
+            for (Method method : extractor.getDeclaredMethods()){
+                System.out.println(method.getName());
+            }
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
