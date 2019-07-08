@@ -13,10 +13,6 @@ public class MyServerHandler extends SimpleChannelInboundHandler<String> {
         ctx.channel().writeAndFlush("from server: "+ UUID.randomUUID());
     }
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush("Hello World@");
-    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {

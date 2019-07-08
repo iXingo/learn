@@ -21,4 +21,10 @@ public class MyClientHandler extends SimpleChannelInboundHandler<String> {
         cause.printStackTrace();
         ctx.close();
     }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        ctx.writeAndFlush("Hello World");
+    }
 }
