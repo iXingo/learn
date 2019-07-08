@@ -31,6 +31,8 @@ public class VoidMethodTest {
     }
 }
 
+
+//Inner class
 class People{
     public void sayHello(String str) {
         System.out.println(str);
