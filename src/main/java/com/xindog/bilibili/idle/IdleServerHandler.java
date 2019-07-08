@@ -12,22 +12,21 @@ public class IdleServerHandler extends ChannelInboundHandlerAdapter {
         if(evt instanceof IdleStateEvent){
             IdleStateEvent event = (IdleStateEvent) evt;
 
-            String eventtype = null;
+            String eventType = null;
 
             switch (event.state()){
                 case READER_IDLE:
-                    eventtype = "读空闲";
+                    eventType = "读空闲";
                     break;
                 case WRITER_IDLE:
-                    eventtype = "写空闲";
+                    eventType = "写空闲";
                     break;
                 case ALL_IDLE:
-                    eventtype = "读写空闲";
+                    eventType = "读写空闲";
                     break;
-
             }
 
-            System.out.println(ctx.channel().remoteAddress() + "超时事件" +  eventtype );
+            System.out.println(ctx.channel().remoteAddress() + "超时事件" +  eventType );
             ctx.channel().close();
         }
     }
