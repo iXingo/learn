@@ -1,4 +1,4 @@
-package com.xindog.bilibili;
+package com.xindog.bilibili.example;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
