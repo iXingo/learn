@@ -18,7 +18,7 @@ public class JMyChatClient {
         try{
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
-                    .handler(new MyChatServerInitializer());
+                    .handler(new MyChatClientInitializer());
 
             Channel channel = bootstrap.connect("localhost", 9099).sync().channel();
 
