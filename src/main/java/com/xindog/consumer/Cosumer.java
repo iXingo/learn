@@ -5,8 +5,6 @@ import java.util.concurrent.Executors;
 
 public class Cosumer {
 
-
-
     public static void main(String[] args){
         ExecutorService executors= Executors.newCachedThreadPool();
         executors.submit(()->{System.out.println("Test1");
