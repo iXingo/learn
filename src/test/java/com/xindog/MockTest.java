@@ -2,6 +2,7 @@ package com.xindog;
 
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static org.mockito.Mockito.RETURNS_SMART_NULLS;
@@ -55,5 +56,19 @@ public class MockTest {
         System.out.println(Integer.MAX_VALUE);
         System.out.println(Integer.toString(8,2));
         System.out.println();
+    }
+
+    @Test
+    public void charTest(){
+        String c = "字";
+        try {
+            System.out.println(c.getBytes("GBK").length);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        char s = '字';
+        System.out.println(s);
+        byte  b = -128;
+
     }
 }
