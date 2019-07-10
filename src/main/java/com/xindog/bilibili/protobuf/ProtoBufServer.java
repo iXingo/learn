@@ -17,7 +17,7 @@ public class ProtoBufServer {
             serverBootstrap.group(bossGroup,workGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new ProtoBufServerInitializer());
 
-            ChannelFuture channelFuture = serverBootstrap.bind(8877).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(8099).sync();
             channelFuture.channel().closeFuture().sync();
         }finally {
             workGroup.shutdownGracefully();
