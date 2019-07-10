@@ -10,8 +10,8 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 public class ProtoBufClientInitalizer extends ChannelInitializer<SocketChannel> {
 
-@Override
-protected void initChannel(SocketChannel ch) throws Exception {
+    @Override
+    protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
 
 
@@ -21,5 +21,5 @@ protected void initChannel(SocketChannel ch) throws Exception {
         pipeline.addLast(new ProtobufEncoder());
 
         pipeline.addLast(new ProtoBufClientHandler());
-        }
+    }
 }

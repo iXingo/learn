@@ -10,14 +10,14 @@ public class ProtoBufClient {
     public static void main(String[] args) throws InterruptedException {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
                     .handler(new ProtoBufClientInitalizer());
 
             ChannelFuture channelFuture = bootstrap.connect("localhost", 8099).sync();
             channelFuture.channel().closeFuture().sync();
-        }finally {
+        } finally {
             eventLoopGroup.shutdownGracefully();
         }
     }

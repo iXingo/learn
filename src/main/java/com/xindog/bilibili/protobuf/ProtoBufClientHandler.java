@@ -10,7 +10,6 @@ public class ProtoBufClientHandler extends SimpleChannelInboundHandler<MyDataInf
     protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.MyMessage msg) throws Exception {
 
 
-
     }
 
     @Override
@@ -20,16 +19,16 @@ public class ProtoBufClientHandler extends SimpleChannelInboundHandler<MyDataInf
 
         MyDataInfo.MyMessage myMessage = null;
 
-        if(0 == randomInt){
-             myMessage = MyDataInfo.MyMessage.newBuilder()
+        if (0 == randomInt) {
+            myMessage = MyDataInfo.MyMessage.newBuilder()
                     .setDataType(MyDataInfo.MyMessage.DataType.PersonType)
-                     .setPerson(MyDataInfo.Person.newBuilder()
-                     .setName("张三")
-                     .setAge(20)
-                     .setAddress("北京")
-                     .build())
-             .build();
-        }else if(1 == randomInt){
+                    .setPerson(MyDataInfo.Person.newBuilder()
+                            .setName("张三")
+                            .setAge(20)
+                            .setAddress("北京")
+                            .build())
+                    .build();
+        } else if (1 == randomInt) {
             myMessage = MyDataInfo.MyMessage.newBuilder()
                     .setDataType(MyDataInfo.MyMessage.DataType.DogType)
                     .setDog(MyDataInfo.Dog.newBuilder()
@@ -37,7 +36,7 @@ public class ProtoBufClientHandler extends SimpleChannelInboundHandler<MyDataInf
                             .setAge(2)
                             .build())
                     .build();
-        }else{
+        } else {
             myMessage = MyDataInfo.MyMessage.newBuilder()
                     .setDataType(MyDataInfo.MyMessage.DataType.CatType)
                     .setCat(MyDataInfo.Cat.newBuilder()

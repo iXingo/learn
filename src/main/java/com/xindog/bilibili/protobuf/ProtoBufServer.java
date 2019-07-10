@@ -12,14 +12,14 @@ public class ProtoBufServer {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup,workGroup).channel(NioServerSocketChannel.class)
+            serverBootstrap.group(bossGroup, workGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new ProtoBufServerInitializer());
 
             ChannelFuture channelFuture = serverBootstrap.bind(8099).sync();
             channelFuture.channel().closeFuture().sync();
-        }finally {
+        } finally {
             workGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }
