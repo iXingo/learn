@@ -27,14 +27,14 @@ public class WebSocketServerhandler extends SimpleChannelInboundHandler<TextWebS
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("链接开启" + ctx.channel().id().asLongText());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("链接开启" + LocalDateTime.now()));
+        System.out.println("连接开启" + ctx.channel().id().asLongText());
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("连接开启" + LocalDateTime.now()));
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("链接关闭" + ctx.channel().id().asLongText());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("链接关闭" + LocalDateTime.now()));
+        System.out.println("连接关闭" + ctx.channel().id().asLongText());
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("连接关闭" + LocalDateTime.now()));
     }
 
     @Override

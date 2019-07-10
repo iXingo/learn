@@ -19,15 +19,15 @@
 
         socket.onopen =function (event) {
             var ta = document.getElementById("responseText");
-            ta.value = "链接开启";
+            ta.value = "连接开启";
         }
 
         socket.onclose = function (event) {
             var ta = document.getElementById("responseText");
-            ta.value = ta.value + "\n" + "链接失败";
+            ta.value = ta.value + "\n" + "连接失败";
         }
     }else{
-        alert("浏览器不支持Websocket");
+        alert("您的浏览器不支持Websocket");
     }
 
 
@@ -38,15 +38,18 @@
         if(socket.readyState == WebSocket.OPEN){
             socket.send(message);
         }else{
-            alert("链接尚未开始");
+            alert("连接尚未开始");
         }
     }
 </script>
 <form onsubmit="return false;">
     <textarea name="message" style="width: 400px;height: 200px;"></textarea>
+
     <input type="button" value="发送数据" onclick="send(this.form.message.value)">
+
     <h3>服务端输入：</h3>
     <textarea id="responseText" style="width: 400px;height: 200px;"></textarea>
+
     <input type="button" onclick="javascript:document.getElementById('responseText').value=''" value="清空内容">
 </form>
 </body>
