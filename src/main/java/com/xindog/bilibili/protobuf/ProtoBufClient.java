@@ -1,6 +1,5 @@
 package com.xindog.bilibili.protobuf;
 
-import com.xindog.bilibili.example.MyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
