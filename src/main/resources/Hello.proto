@@ -1,5 +1,7 @@
 syntax = "proto2";
 
+//protoc --java_out=../java ./Hello.proto
+
 package tutorial;
 
 option java_package = "com.xindog.protobuf";
