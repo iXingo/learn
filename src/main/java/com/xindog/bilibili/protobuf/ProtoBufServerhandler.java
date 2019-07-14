@@ -27,4 +27,10 @@ public class ProtoBufServerhandler extends SimpleChannelInboundHandler<MyDataInf
             System.out.println(cat.getCity());
         }
     }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+        ctx.channel().close();
+    }
 }
