@@ -19,6 +19,6 @@ public class ProtoBufServerInitializer extends ChannelInitializer<SocketChannel>
         pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast(new ProtobufEncoder());
 
-        pipeline.addLast(new ProtoBufServerhandler());
+        pipeline.addLast(new ProtoBufServerHandler());
     }
 }
