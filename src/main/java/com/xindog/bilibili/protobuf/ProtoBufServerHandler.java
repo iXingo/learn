@@ -3,7 +3,7 @@ package com.xindog.bilibili.protobuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class ProtoBufServerhandler extends SimpleChannelInboundHandler<MyDataInfo.MyMessage> {
+public class ProtoBufServerHandler extends SimpleChannelInboundHandler<MyDataInfo.MyMessage> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.MyMessage msg) throws Exception {
