@@ -49,4 +49,10 @@ public class AppTest
     public void Test1(){
         System.out.println(String.valueOf(Integer.MAX_VALUE).length());
     }
+
+    @Test
+    public void Test2(){
+        long redisCacheTTL = 60*60*24*60*1000L;
+        System.out.println(redisCacheTTL);
+    }
 }
