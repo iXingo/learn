@@ -14,7 +14,13 @@ public class OptionalDemo {
     public static void main(String[] args) {
         Optional<String> stringOptional = Optional.empty();
         stringOptional.ifPresent(System.out::println);
-        String s = stringOptional.orElse(new String("Hello World"));
+        String s = stringOptional.orElse("Hello World");
+        System.out.println(s);
+        String t = stringOptional.orElseGet(()-> "Hello");
+        System.out.println(t);
+        String str = stringOptional.orElseThrow(()-> new NullPointerException());
+
+
         System.out.println(s);
     }
 }
