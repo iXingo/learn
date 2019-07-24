@@ -4,13 +4,18 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import java.io.*;
 import java.time.Instant;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest implements Serializable
 {
+    private static final long serialVersionUID = 4298267169635650739L;
+
     /**
      * Rigorous Test :-)
      */
@@ -48,5 +53,32 @@ public class AppTest
     @Test
     public void Test1(){
         System.out.println(String.valueOf(Integer.MAX_VALUE).length());
+    }
+
+    @Test
+    public void Test2(){
+        long redisCacheTTL = 60*60*24*60*1000L;
+        System.out.println(redisCacheTTL);
+    }
+
+    @Test
+    public void Test3() throws IOException, ClassNotFoundException {
+        Object o1 = null;
+        Object o2 = null;
+
+        FileOutputStream output = new FileOutputStream("out");
+        ObjectOutputStream outputStream = new ObjectOutputStream(output);
+
+        AppTest o = new AppTest();
+        outputStream.writeObject(o);
+
+        ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("out"));
+        AppTest object = (AppTest) inputStream.readObject();
+        System.out.println(Objects.equals(o,object));
+
+        output.close();
+        outputStream.close();
+        inputStream.close();
+
     }
 }
