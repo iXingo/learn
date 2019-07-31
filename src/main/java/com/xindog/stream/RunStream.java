@@ -46,7 +46,7 @@ public class RunStream {
                 }).parallel();
 
         // 终止操作
-        stream.count();
+        System.out.println(stream.count());
     }
 
     /**
@@ -54,13 +54,13 @@ public class RunStream {
      *
      * @param s
      */
-    public static void print(String s) {
+    private static void print(String s) {
         // System.out.println(s);
         // 带线程名(测试并行情况)
         System.out.println(Thread.currentThread().getName() + " > " + s);
         try {
             TimeUnit.MILLISECONDS.sleep(5);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
     }
 

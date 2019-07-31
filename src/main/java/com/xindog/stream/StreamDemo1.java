@@ -23,7 +23,7 @@ public class StreamDemo1 {
 		IntStream.of(nums).map(StreamDemo1::doubleNum);
 	}
 
-	public static int doubleNum(int i) {
+	private static int doubleNum(int i) {
 		System.out.println("执行了乘以2");
 		return i * 2;
 	}

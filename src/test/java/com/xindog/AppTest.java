@@ -31,7 +31,7 @@ public class AppTest implements Serializable
 
         System.out.println(Integer.MAX_VALUE);
         System.out.println(Integer.MIN_VALUE);
-        Integer x = Integer.MAX_VALUE & Integer.MAX_VALUE;
+        Integer x = Integer.MAX_VALUE;
         System.out.println(x);
 
 
