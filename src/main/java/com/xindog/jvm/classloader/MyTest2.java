@@ -6,7 +6,6 @@ public class MyTest2 {
         Singleton singleton = Singleton.getInstance();
         System.out.println("counter1： "+ Singleton.counter1);
         System.out.println("counter2： "+ Singleton.counter2);
-
     }
 }
 
