@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
+/**
+ * @author shawang
+ */
 @SpringBootApplication
 public class DemoApplication {
 
