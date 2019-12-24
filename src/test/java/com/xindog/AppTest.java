@@ -81,4 +81,9 @@ public class AppTest implements Serializable
         inputStream.close();
 
     }
+
+    @Test
+    public void testSplitter(){
+        System.out.println(File.separator);
+    }
 }

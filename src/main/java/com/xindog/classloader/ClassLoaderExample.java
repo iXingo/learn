@@ -43,11 +43,11 @@ public class ClassLoaderExample {
 
 
         InputStream in = loader.getResourceAsStream("Text");
-        byte b[] = new byte[1024];
+        byte[] b = new byte[1024];
         int len = 0;
-        int temp = 0; //全部读取的内容都使用temp接收
+        int temp = 0;
         try {
-            while ((temp = in.read()) != -1) { //当没有读取完时，继续读取
+            while ((temp = in.read()) != -1) {
                 b[len] = (byte) temp;
                 System.out.println((char) temp);
                 len++;

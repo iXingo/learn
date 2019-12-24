@@ -35,14 +35,17 @@ public class DynamicProxyTest {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            if(method.getName() == "sayHello") {
+            String sayHello = "sayHello";
+            if(sayHello.equals(method.getName())) {
                 System.out.println("--------pre method------------");
                 Object result = method.invoke(originalObj, args);
                 System.out.println(method.getName() + "()");
                 System.out.println("--------post method-----------");
                 return result;
             }
-            else return method.invoke(originalObj, args);
+            else {
+                return method.invoke(originalObj, args);
+            }
         }
     }
 
