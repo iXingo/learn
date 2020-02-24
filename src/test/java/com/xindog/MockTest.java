@@ -68,6 +68,11 @@ public class MockTest {
         }
         char s = '字';
         System.out.println(s);
+        char[] ch = "I am 君山".toCharArray();
+        for (char ch1 : ch) {
+            System.out.println(Integer.toHexString(ch1));
+//            49 20 61 6d 20 541b 5c71
+        }
         byte  b = -128;
 
     }
