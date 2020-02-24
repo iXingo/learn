@@ -71,4 +71,14 @@ public class MockTest {
         byte  b = -128;
 
     }
+
+    @Test
+    public void floatTest(){
+        float flt = 0.1f;
+        for (int i = 0; i < 100; i++) {
+            flt += 0.1f;
+        }
+
+        System.out.println(flt);
+    }
 }
