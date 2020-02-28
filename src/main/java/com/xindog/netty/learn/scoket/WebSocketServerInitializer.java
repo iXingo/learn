@@ -1,4 +1,4 @@
-package com.xindog.bilibili.scoket;
+package com.xindog.netty.learn.scoket;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

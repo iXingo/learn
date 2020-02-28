@@ -1,4 +1,4 @@
-package com.xindog.bilibili.chat;
+package com.xindog.netty.learn.chat;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;

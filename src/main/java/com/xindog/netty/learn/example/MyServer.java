@@ -1,4 +1,4 @@
-package com.xindog.bilibili.scoket;
+package com.xindog.netty.learn.example;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -6,23 +6,22 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class WebSocketServer {
+public class MyServer {
 
-
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup,workGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new WebSocketServerInitializer());
+            serverBootstrap.group(bossGroup, workGroup).channel(NioServerSocketChannel.class)
+                    .childHandler(new MyServerInitializer());
 
-            ChannelFuture channelFuture = serverBootstrap.bind(8877).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(8099).sync();
             channelFuture.channel().closeFuture().sync();
         }finally {
-            workGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
+            workGroup.shutdownGracefully();
         }
     }
 }
