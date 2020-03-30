@@ -1,4 +1,4 @@
-package com.xindog.bilibili.chat;
+package com.xindog.netty.learn.chat;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -9,7 +9,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 
-public class MyChatClientInitializer extends ChannelInitializer<SocketChannel> {
+public class MyChatServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -17,6 +17,6 @@ public class MyChatClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
         pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
-        pipeline.addLast(new MyChatClientHandler());
+        pipeline.addLast(new MyChatServerHandler());
     }
 }

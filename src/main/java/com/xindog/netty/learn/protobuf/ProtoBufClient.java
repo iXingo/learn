@@ -1,4 +1,4 @@
-package com.xindog.bilibili.protobuf;
+package com.xindog.netty.learn.protobuf;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

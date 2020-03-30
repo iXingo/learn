@@ -118,5 +118,10 @@ public class Java8TimeTest {
         System.out.print(d.minusDays(9651).getMonthValue()+"-");
         System.out.print(d.minusDays(9651).getDayOfMonth()+1+"-");
 
+        LocalDate localDate9 = LocalDate.now();
+        System.out.println(localDate9.minusDays(9154).getDayOfMonth());
+        System.out.println(localDate9.minusDays(9154).getMonthValue());
+        System.out.println(localDate9.minusDays(9154).getYear());
+
     }
 }

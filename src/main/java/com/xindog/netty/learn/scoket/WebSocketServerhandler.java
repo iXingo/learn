@@ -1,4 +1,4 @@
-package com.xindog.bilibili.scoket;
+package com.xindog.netty.learn.scoket;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

@@ -1,4 +1,4 @@
-package com.xindog.bilibili.example;
+package com.xindog.netty.learn.example;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

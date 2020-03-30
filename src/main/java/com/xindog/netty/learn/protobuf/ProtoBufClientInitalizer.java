@@ -1,4 +1,4 @@
-package com.xindog.bilibili.protobuf;
+package com.xindog.netty.learn.protobuf;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

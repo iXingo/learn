@@ -1,4 +1,4 @@
-package com.xindog.bilibili.idle;
+package com.xindog.netty.learn.idle;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
