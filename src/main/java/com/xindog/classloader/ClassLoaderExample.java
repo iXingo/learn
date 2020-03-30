@@ -3,7 +3,6 @@ package com.xindog.classloader;
 import org.springframework.web.client.HttpMessageConverterExtractor;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
@@ -14,12 +13,14 @@ import java.lang.reflect.Method;
  * Date:    6/24/19
  * Time:    2:21 PM
  * Project: learn
+ * @author shawang
  */
 public class ClassLoaderExample {
 
 
     public static void main(String[] args) {
-        Class clazz = ClassLoaderExample.class;
+        Class<ClassLoaderExample> clazz = ClassLoaderExample.class;
+        System.out.println(clazz.getName());
         ClassLoader  loader = clazz.getClassLoader();
         System.out.println(loader);
         System.out.println(loader.getParent());
