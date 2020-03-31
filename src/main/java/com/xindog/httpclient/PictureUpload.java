@@ -37,12 +37,15 @@ public class PictureUpload {
         JsonElement token = object.get("token");
         String authToken = token.getAsString();
 
-        HttpResponse<String> response2 = Unirest.post("http://localhost:8080/api/upload/file")
-//                .header("Content-Type", "application/form-data")
+        HttpResponse<String> response2 = Unirest.post("http://localhost:8080/api/upload/files")
                 .header("Accept", "application/json")
                 .header("Authorization", authToken)
-                .field("file", new File("/home/shawang/Desktop/2020-01-16_20-22.png"))
+                .field("files", new File("/home/shawang/Desktop/2020-01-16_20-22.png"))
+                .field("files", new File("/home/shawang/Desktop/picture/master-wang-in-night.jpeg"))
                 .asString();
         System.out.println(response2.getBody());
+
+
+
     }
 }
