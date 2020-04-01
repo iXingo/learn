@@ -6,7 +6,9 @@ import com.google.gson.JsonParser;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * Created by Xindog.com(TM).
@@ -18,10 +20,32 @@ import java.io.File;
  */
 public class PictureUpload {
     public static void main(String[] args) {
+        String token = getToken();
+        Path dir = Paths.get("/home/shawang/Desktop/picture");
+        try {
+            Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                    uploadFile(token, file.getFileName());
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        Unirest.config().connectTimeout(300000);
+    public static void uploadFile(String authToken, Path path){
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/api/upload/file")
+                .header("Accept", "application/json")
+                .header("Authorization", authToken)
+                .field("files", path.toFile())
+                .asString();
+        System.out.println(response.getBody());
+    }
 
-        HttpResponse<String> response1 = Unirest.post("http://localhost:8080/api/auth/signin")
+    public static String getToken(){
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/api/auth/signin")
                 .header("Content-Type", "application/json")
                 .header("DNT", "1")
                 .header("Origin", "http://localhost:3000")
@@ -32,20 +56,9 @@ public class PictureUpload {
                 .body("{\n    \"usernameOrEmail\": \"shawang@nvidia.com\",\n    \"password\": \"123456\"\n}")
                 .asString();
 
-        JsonElement jsonElement = new JsonParser().parse(response1.getBody());
+        JsonElement jsonElement = new JsonParser().parse(response.getBody());
         JsonObject object = jsonElement.getAsJsonObject();
         JsonElement token = object.get("token");
-        String authToken = token.getAsString();
-
-        HttpResponse<String> response2 = Unirest.post("http://localhost:8080/api/upload/files")
-                .header("Accept", "application/json")
-                .header("Authorization", authToken)
-                .field("files", new File("/home/shawang/Desktop/2020-01-16_20-22.png"))
-                .field("files", new File("/home/shawang/Desktop/picture/master-wang-in-night.jpeg"))
-                .asString();
-        System.out.println(response2.getBody());
-
-
-
+        return token.getAsString();
     }
 }
