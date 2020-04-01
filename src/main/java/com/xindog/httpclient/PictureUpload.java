@@ -16,26 +16,30 @@ import java.nio.file.attribute.BasicFileAttributes;
  * Date:    3/30/20
  * Time:    6:02 PM
  * Project: learn
+ *
  * @author shawang
  */
 public class PictureUpload {
     public static void main(String[] args) {
         String token = getToken();
         Path dir = Paths.get("/home/shawang/Desktop/picture");
+        System.out.println("=============Upload started.=============");
         try {
             Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     uploadFile(token, file.getFileName());
+                    System.out.println("Uploaded file： " + file.getFileName());
                     return FileVisitResult.CONTINUE;
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("=============Upload finished.=============");
     }
 
-    public static void uploadFile(String authToken, Path path){
+    public static void uploadFile(String authToken, Path path) {
         HttpResponse<String> response = Unirest.post("http://localhost:8080/api/upload/file")
                 .header("Accept", "application/json")
                 .header("Authorization", authToken)
@@ -44,7 +48,7 @@ public class PictureUpload {
         System.out.println(response.getBody());
     }
 
-    public static String getToken(){
+    public static String getToken() {
         HttpResponse<String> response = Unirest.post("http://localhost:8080/api/auth/signin")
                 .header("Content-Type", "application/json")
                 .header("DNT", "1")
