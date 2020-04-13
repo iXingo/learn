@@ -10,12 +10,13 @@ import io.netty.channel.socket.oio.OioServerSocketChannel;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class NettyOioServer {
 
     public void server(int port) throws Exception{
         final ByteBuf buf = Unpooled.unreleasableBuffer(
-                Unpooled.copiedBuffer("Hi!\r\n", Charset.forName("UTF-8"))
+                Unpooled.copiedBuffer("Hi!\r\n", StandardCharsets.UTF_8)
         );
         EventLoopGroup group = new OioEventLoopGroup();
         try{
@@ -29,7 +30,8 @@ public class NettyOioServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(
+                            ChannelPipeline pipeline = ch.pipeline();
+                            pipeline.addLast(
                                     // 添加一个ChannelInBoundHandlerAdapter以拦截和处理事件
                                     new ChannelInboundHandlerAdapter() {
                                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -49,6 +51,14 @@ public class NettyOioServer {
         }finally{
             // 释放所有的资源
             group.shutdownGracefully().sync();
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            new NettyOioServer().server(9099);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
