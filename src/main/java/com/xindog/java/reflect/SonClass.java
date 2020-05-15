@@ -1,7 +1,5 @@
 package com.xindog.java.reflect;
 
-import org.springframework.stereotype.Component;
-
 /**
  * Created by Xindog.com(TM).
  * Author:  Shawn.Wang / i.am@shawn.wang
