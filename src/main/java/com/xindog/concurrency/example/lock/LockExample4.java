@@ -5,8 +5,8 @@ import java.util.concurrent.locks.StampedLock;
 public class LockExample4 {
 
     class Point {
-        private double x, y;
         private final StampedLock sl = new StampedLock();
+        private double x, y;
 
         void move(double deltaX, double deltaY) { // an exclusively locked method
             long stamp = sl.writeLock();

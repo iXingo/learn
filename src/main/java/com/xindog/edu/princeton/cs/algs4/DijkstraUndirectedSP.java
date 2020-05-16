@@ -38,37 +38,37 @@ package com.xindog.edu.princeton.cs.algs4;
 
 
 /**
- *  The {@code DijkstraUndirectedSP} class represents a data type for solving
- *  the single-source shortest paths problem in edge-weighted graphs
- *  where the edge weights are nonnegative.
- *  <p>
- *  This implementation uses Dijkstra's algorithm with a binary heap.
- *  The constructor takes time proportional to <em>E</em> log <em>V</em>,
- *  where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
- *  Each call to {@code distTo(int)} and {@code hasPathTo(int)} takes constant time;
- *  each call to {@code pathTo(int)} takes time proportional to the number of
- *  edges in the shortest path returned.
- *  <p>
- *  For additional documentation,    
- *  see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of    
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne. 
- *  See {@link DijkstraSP} for a version on edge-weighted digraphs.
+ * The {@code DijkstraUndirectedSP} class represents a data type for solving
+ * the single-source shortest paths problem in edge-weighted graphs
+ * where the edge weights are nonnegative.
+ * <p>
+ * This implementation uses Dijkstra's algorithm with a binary heap.
+ * The constructor takes time proportional to <em>E</em> log <em>V</em>,
+ * where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
+ * Each call to {@code distTo(int)} and {@code hasPathTo(int)} takes constant time;
+ * each call to {@code pathTo(int)} takes time proportional to the number of
+ * edges in the shortest path returned.
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * See {@link DijkstraSP} for a version on edge-weighted digraphs.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- *  @author Nate Liu
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
+ * @author Nate Liu
  */
 public class DijkstraUndirectedSP {
-    private double[] distTo;          // distTo[v] = distance  of shortest s->v path
-    private Edge[] edgeTo;            // edgeTo[v] = last edge on shortest s->v path
-    private IndexMinPQ<Double> pq;    // priority queue of vertices
+    private final double[] distTo;          // distTo[v] = distance  of shortest s->v path
+    private final Edge[] edgeTo;            // edgeTo[v] = last edge on shortest s->v path
+    private final IndexMinPQ<Double> pq;    // priority queue of vertices
 
     /**
      * Computes a shortest-paths tree from the source vertex {@code s} to every
      * other vertex in the edge-weighted graph {@code G}.
      *
-     * @param  G the edge-weighted digraph
-     * @param  s the source vertex
+     * @param G the edge-weighted digraph
+     * @param s the source vertex
      * @throws IllegalArgumentException if an edge weight is negative
      * @throws IllegalArgumentException unless {@code 0 <= s < V}
      */
@@ -100,6 +100,34 @@ public class DijkstraUndirectedSP {
         assert check(G, s);
     }
 
+    /**
+     * Unit tests the {@code DijkstraUndirectedSP} data type.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(String[] args) {
+        In in = new In(args[0]);
+        EdgeWeightedGraph G = new EdgeWeightedGraph(in);
+        int s = Integer.parseInt(args[1]);
+
+        // compute shortest paths
+        DijkstraUndirectedSP sp = new DijkstraUndirectedSP(G, s);
+
+
+        // print shortest path
+        for (int t = 0; t < G.V(); t++) {
+            if (sp.hasPathTo(t)) {
+                StdOut.printf("%d to %d (%.2f)  ", s, t, sp.distTo(t));
+                for (Edge e : sp.pathTo(t)) {
+                    StdOut.print(e + "   ");
+                }
+                StdOut.println();
+            } else {
+                StdOut.printf("%d to %d         no path\n", s, t);
+            }
+        }
+    }
+
     // relax edge e and update pq if changed
     private void relax(Edge e, int v) {
         int w = e.other(v);
@@ -107,7 +135,7 @@ public class DijkstraUndirectedSP {
             distTo[w] = distTo[v] + e.weight();
             edgeTo[w] = e;
             if (pq.contains(w)) pq.decreaseKey(w, distTo[w]);
-            else                pq.insert(w, distTo[w]);
+            else pq.insert(w, distTo[w]);
         }
     }
 
@@ -115,9 +143,9 @@ public class DijkstraUndirectedSP {
      * Returns the length of a shortest path between the source vertex {@code s} and
      * vertex {@code v}.
      *
-     * @param  v the destination vertex
+     * @param v the destination vertex
      * @return the length of a shortest path between the source vertex {@code s} and
-     *         the vertex {@code v}; {@code Double.POSITIVE_INFINITY} if no such path
+     * the vertex {@code v}; {@code Double.POSITIVE_INFINITY} if no such path
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public double distTo(int v) {
@@ -129,9 +157,9 @@ public class DijkstraUndirectedSP {
      * Returns true if there is a path between the source vertex {@code s} and
      * vertex {@code v}.
      *
-     * @param  v the destination vertex
+     * @param v the destination vertex
      * @return {@code true} if there is a path between the source vertex
-     *         {@code s} to vertex {@code v}; {@code false} otherwise
+     * {@code s} to vertex {@code v}; {@code false} otherwise
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public boolean hasPathTo(int v) {
@@ -142,9 +170,9 @@ public class DijkstraUndirectedSP {
     /**
      * Returns a shortest path between the source vertex {@code s} and vertex {@code v}.
      *
-     * @param  v the destination vertex
+     * @param v the destination vertex
      * @return a shortest path between the source vertex {@code s} and vertex {@code v};
-     *         {@code null} if no such path
+     * {@code null} if no such path
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public Iterable<Edge> pathTo(int v) {
@@ -158,7 +186,6 @@ public class DijkstraUndirectedSP {
         }
         return path;
     }
-
 
     // check optimality conditions:
     // (i) for all edges e = v-w:            distTo[w] <= distTo[v] + e.weight()
@@ -215,36 +242,7 @@ public class DijkstraUndirectedSP {
     private void validateVertex(int v) {
         int V = distTo.length;
         if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
-    }
-
-    /**
-     * Unit tests the {@code DijkstraUndirectedSP} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        EdgeWeightedGraph G = new EdgeWeightedGraph(in);
-        int s = Integer.parseInt(args[1]);
-
-        // compute shortest paths
-        DijkstraUndirectedSP sp = new DijkstraUndirectedSP(G, s);
-
-
-        // print shortest path
-        for (int t = 0; t < G.V(); t++) {
-            if (sp.hasPathTo(t)) {
-                StdOut.printf("%d to %d (%.2f)  ", s, t, sp.distTo(t));
-                for (Edge e : sp.pathTo(t)) {
-                    StdOut.print(e + "   ");
-                }
-                StdOut.println();
-            }
-            else {
-                StdOut.printf("%d to %d         no path\n", s, t);
-            }
-        }
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 
 }

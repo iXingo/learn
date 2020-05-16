@@ -10,20 +10,20 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
 
 
-    private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         Channel channel = ctx.channel();
-        channels.forEach(ch ->{
-            if(channel != ch){
+        channels.forEach(ch -> {
+            if (channel != ch) {
                 ch.writeAndFlush(channel.remoteAddress() + " 发送的消息" + msg);
 
-            }else{
+            } else {
                 ch.writeAndFlush("【自己】" + msg + "\n");
             }
         });
     }
-
 
 
     @Override

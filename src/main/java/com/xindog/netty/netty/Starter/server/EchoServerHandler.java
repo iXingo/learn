@@ -16,7 +16,6 @@ import io.netty.util.CharsetUtil;
 */
 
 
-
 //标示一个 ChannelHandler 可以被多个Channel安全地共享
 @ChannelHandler.Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {

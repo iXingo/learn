@@ -25,41 +25,41 @@
 package com.xindog.edu.princeton.cs.algs4;
 
 /**
- *  The {@code EdgeWeightedGraph} class represents an edge-weighted
- *  graph of vertices named 0 through <em>V</em> – 1, where each
- *  undirected edge is of type {@link Edge} and has a real-valued weight.
- *  It supports the following two primary operations: add an edge to the graph,
- *  iterate over all of the edges incident to a vertex. It also provides
- *  methods for returning the number of vertices <em>V</em> and the number
- *  of edges <em>E</em>. Parallel edges and self-loops are permitted.
- *  By convention, a self-loop <em>v</em>-<em>v</em> appears in the
- *  adjacency list of <em>v</em> twice and contributes two to the degree
- *  of <em>v</em>.
- *  <p>
- *  This implementation uses an adjacency-lists representation, which 
- *  is a vertex-indexed array of {@link Bag} objects.
- *  All operations take constant time (in the worst case) except
- *  iterating over the edges incident to a given vertex, which takes
- *  time proportional to the number of such edges.
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/43mst">Section 4.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code EdgeWeightedGraph} class represents an edge-weighted
+ * graph of vertices named 0 through <em>V</em> – 1, where each
+ * undirected edge is of type {@link Edge} and has a real-valued weight.
+ * It supports the following two primary operations: add an edge to the graph,
+ * iterate over all of the edges incident to a vertex. It also provides
+ * methods for returning the number of vertices <em>V</em> and the number
+ * of edges <em>E</em>. Parallel edges and self-loops are permitted.
+ * By convention, a self-loop <em>v</em>-<em>v</em> appears in the
+ * adjacency list of <em>v</em> twice and contributes two to the degree
+ * of <em>v</em>.
+ * <p>
+ * This implementation uses an adjacency-lists representation, which
+ * is a vertex-indexed array of {@link Bag} objects.
+ * All operations take constant time (in the worst case) except
+ * iterating over the edges incident to a given vertex, which takes
+ * time proportional to the number of such edges.
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/43mst">Section 4.3</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class EdgeWeightedGraph {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;
     private int E;
-    private Bag<Edge>[] adj;
-    
+    private final Bag<Edge>[] adj;
+
     /**
      * Initializes an empty edge-weighted graph with {@code V} vertices and 0 edges.
      *
-     * @param  V the number of vertices
+     * @param V the number of vertices
      * @throws IllegalArgumentException if {@code V < 0}
      */
     public EdgeWeightedGraph(int V) {
@@ -75,8 +75,8 @@ public class EdgeWeightedGraph {
     /**
      * Initializes a random edge-weighted graph with {@code V} vertices and <em>E</em> edges.
      *
-     * @param  V the number of vertices
-     * @param  E the number of edges
+     * @param V the number of vertices
+     * @param E the number of edges
      * @throws IllegalArgumentException if {@code V < 0}
      * @throws IllegalArgumentException if {@code E < 0}
      */
@@ -92,14 +92,14 @@ public class EdgeWeightedGraph {
         }
     }
 
-    /**  
+    /**
      * Initializes an edge-weighted graph from an input stream.
      * The format is the number of vertices <em>V</em>,
      * followed by the number of edges <em>E</em>,
      * followed by <em>E</em> pairs of vertices and edge weights,
      * with each entry separated by whitespace.
      *
-     * @param  in the input stream
+     * @param in the input stream
      * @throws IllegalArgumentException if the endpoints of any edge are not in prescribed range
      * @throws IllegalArgumentException if the number of vertices or edges is negative
      */
@@ -121,7 +121,7 @@ public class EdgeWeightedGraph {
     /**
      * Initializes a new edge-weighted graph that is a deep copy of {@code G}.
      *
-     * @param  G the edge-weighted graph to copy
+     * @param G the edge-weighted graph to copy
      */
     public EdgeWeightedGraph(EdgeWeightedGraph G) {
         this(G.V());
@@ -138,6 +138,16 @@ public class EdgeWeightedGraph {
         }
     }
 
+    /**
+     * Unit tests the {@code EdgeWeightedGraph} data type.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(String[] args) {
+        In in = new In(args[0]);
+        EdgeWeightedGraph G = new EdgeWeightedGraph(in);
+        StdOut.println(G);
+    }
 
     /**
      * Returns the number of vertices in this edge-weighted graph.
@@ -160,13 +170,13 @@ public class EdgeWeightedGraph {
     // throw an IllegalArgumentException unless {@code 0 <= v < V}
     private void validateVertex(int v) {
         if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 
     /**
      * Adds the undirected edge {@code e} to this edge-weighted graph.
      *
-     * @param  e the edge
+     * @param e the edge
      * @throws IllegalArgumentException unless both endpoints are between {@code 0} and {@code V-1}
      */
     public void addEdge(Edge e) {
@@ -182,7 +192,7 @@ public class EdgeWeightedGraph {
     /**
      * Returns the edges incident on vertex {@code v}.
      *
-     * @param  v the vertex
+     * @param v the vertex
      * @return the edges incident on vertex {@code v} as an Iterable
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
@@ -194,8 +204,8 @@ public class EdgeWeightedGraph {
     /**
      * Returns the degree of vertex {@code v}.
      *
-     * @param  v the vertex
-     * @return the degree of vertex {@code v}               
+     * @param v the vertex
+     * @return the degree of vertex {@code v}
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public int degree(int v) {
@@ -233,7 +243,7 @@ public class EdgeWeightedGraph {
      * This method takes time proportional to <em>E</em> + <em>V</em>.
      *
      * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
-     *         followed by the <em>V</em> adjacency lists of edges
+     * followed by the <em>V</em> adjacency lists of edges
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -246,17 +256,6 @@ public class EdgeWeightedGraph {
             s.append(NEWLINE);
         }
         return s.toString();
-    }
-
-    /**
-     * Unit tests the {@code EdgeWeightedGraph} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        EdgeWeightedGraph G = new EdgeWeightedGraph(in);
-        StdOut.println(G);
     }
 
 }

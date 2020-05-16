@@ -20,7 +20,7 @@ public class HashMapExample {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static Map<Integer, Integer> map = new HashMap<>();
+    private static final Map<Integer, Integer> map = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

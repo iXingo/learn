@@ -30,21 +30,22 @@
 package com.xindog.edu.princeton.cs.algs4;
 
 /**
- *  The {@code Whitelist} class provides a client for reading in
- *  a set of integers from a file; reading in a sequence of integers
- *  from standard input; and printing to standard output those 
- *  integers not in the whitelist.
- *  <p>
- *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Whitelist} class provides a client for reading in
+ * a set of integers from a file; reading in a sequence of integers
+ * from standard input; and printing to standard output those
+ * integers not in the whitelist.
+ * <p>
+ * For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class Whitelist {
 
     // Do not instantiate.
-    private Whitelist() { }
+    private Whitelist() {
+    }
 
     /**
      * Reads in a sequence of integers from the whitelist file, specified as

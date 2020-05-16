@@ -12,7 +12,7 @@ public class StreamTest9 {
 
         List<String> list = new ArrayList<>(5000000);
 
-        for(int i = 0; i < 5000000; ++i) {
+        for (int i = 0; i < 5000000; ++i) {
             list.add(UUID.randomUUID().toString());
         }
 

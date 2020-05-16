@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Date:    3/31/20
  * Time:    4:36 PM
  * Project: learn
+ *
  * @author shawang
  */
 public class PathAndDirectory {
@@ -19,11 +20,11 @@ public class PathAndDirectory {
 
         for (int i = 0; i < tempList.length; i++) {
             if (tempList[i].isFile()) {
-              System.out.println("" + tempList[i]);
+                System.out.println("" + tempList[i]);
                 files.add(tempList[i].toString());
             }
             if (tempList[i].isDirectory()) {
-              System.out.println("    " + tempList[i]);
+                System.out.println("    " + tempList[i]);
             }
         }
         System.out.println(files);

@@ -1,6 +1,6 @@
 package com.xindog.concurrency.consumerproducer;
 
-public abstract class AbstractProducer implements Producer, Runnable{
+public abstract class AbstractProducer implements Producer, Runnable {
     @Override
     public void run() {
         while (true) {

@@ -19,6 +19,22 @@ public class EchoClient {
         this.port = port;
     }
 
+    public static void main(String[] args) throws Exception {
+        if (args.length != 2) {
+            System.err.println("Usage: " + EchoClient.class.getSimpleName() + " <host> <port>");
+            return;
+        }
+        String host = args[0];
+        int port = Integer.parseInt(args[1]);
+        new EchoClient(host, port).start();
+    }
+
+    //为初始化客户端，创建了一个Bootstrap实例；
+    //为进行事件处理分配了一个 NioEventLoopGroup实例，其中事件处理包括创建新的连接以及处理入站和出站数据；
+    //为服务器连接创建了一个InetSocketAddress实例；
+    //当连接被建立时，一个EchoClientHandler实例会被安装到（该Channel的）ChannelPipeline中；
+    //在一切都设置完成后，调用 Bootstrap.connect()方法连接到远程节点；
+
     public void start() throws Exception {
         //一个 EventLoopGroup 包含一个或者多个 EventLoop；
         //一个 EventLoop 在它的生命周期内只和一个 Thread 绑定；
@@ -49,21 +65,5 @@ public class EchoClient {
             //关闭线程池并且释放所有的资源
             group.shutdownGracefully().sync();
         }
-    }
-
-    //为初始化客户端，创建了一个Bootstrap实例；
-    //为进行事件处理分配了一个 NioEventLoopGroup实例，其中事件处理包括创建新的连接以及处理入站和出站数据；
-    //为服务器连接创建了一个InetSocketAddress实例；
-    //当连接被建立时，一个EchoClientHandler实例会被安装到（该Channel的）ChannelPipeline中；
-    //在一切都设置完成后，调用 Bootstrap.connect()方法连接到远程节点；
-
-    public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
-            System.err.println("Usage: " + EchoClient.class.getSimpleName() + " <host> <port>");
-            return;
-        }
-        String host = args[0];
-        int port = Integer.parseInt(args[1]);
-        new EchoClient(host, port).start();
     }
 }

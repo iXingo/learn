@@ -34,9 +34,8 @@ public class StreamTest4 {
 //        set.forEach(System.out::println);
 
         Stream<String> stream = Stream.of("hello", "world", "helloworld");
-        String str = stream.collect(Collectors.joining()).toString();
+        String str = stream.collect(Collectors.joining());
         System.out.println(str);
-
 
 
     }

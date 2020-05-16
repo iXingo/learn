@@ -7,29 +7,29 @@ package com.xindog.java.reflect;
  * Time:    11:01 AM
  * Project: learn
  */
-public class SonClass extends FatherClass{
-    private String mSonName;
-    protected int mSonAge;
+public class SonClass extends FatherClass {
     public String mSonBirthday;
+    protected int mSonAge;
+    private String mSonName;
 
-    public void printSonMsg(){
+    public void printSonMsg() {
         System.out.println("Son Msg - name : "
                 + mSonName + "; age : " + mSonAge);
     }
 
-    private void setSonName(String name){
-        mSonName = name;
-    }
-
-    private void setSonAge(int age){
-        mSonAge = age;
-    }
-
-    private int getSonAge(){
+    private int getSonAge() {
         return mSonAge;
     }
 
-    private String getSonName(){
+    private void setSonAge(int age) {
+        mSonAge = age;
+    }
+
+    private String getSonName() {
         return mSonName;
+    }
+
+    private void setSonName(String name) {
+        mSonName = name;
     }
 }

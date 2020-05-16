@@ -37,9 +37,9 @@ public class Server {
 
 
         // 开始处理循环
-        while ((request = in.readLine()) !=null){
+        while ((request = in.readLine()) != null) {
             // 如果客户端发送了"Done"，则退出处理循环
-            if("Done".equals(request)){
+            if ("Done".equals(request)) {
                 break;
             }
             // 请求被传递给服务器的处理方法

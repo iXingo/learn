@@ -13,19 +13,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @ThreadSafe
 public class AtomicExample6 {
 
-    private static AtomicBoolean isHappened = new AtomicBoolean(false);
-
     // 请求总数
     public static int clientTotal = 5000;
-
     // 同时并发执行的线程数
     public static int threadTotal = 200;
+    private static final AtomicBoolean isHappened = new AtomicBoolean(false);
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
-        for (int i = 0; i < clientTotal ; i++) {
+        for (int i = 0; i < clientTotal; i++) {
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();

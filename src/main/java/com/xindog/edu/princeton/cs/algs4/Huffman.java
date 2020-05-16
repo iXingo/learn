@@ -23,16 +23,16 @@
 package com.xindog.edu.princeton.cs.algs4;
 
 /**
- *  The {@code Huffman} class provides static methods for compressing
- *  and expanding a binary input using Huffman codes over the 8-bit extended
- *  ASCII alphabet.
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/55compression">Section 5.5</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Huffman} class provides static methods for compressing
+ * and expanding a binary input using Huffman codes over the 8-bit extended
+ * ASCII alphabet.
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/55compression">Section 5.5</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class Huffman {
 
@@ -40,31 +40,7 @@ public class Huffman {
     private static final int R = 256;
 
     // Do not instantiate.
-    private Huffman() { }
-
-    // Huffman trie node
-    private static class Node implements Comparable<Node> {
-        private final char ch;
-        private final int freq;
-        private final Node left, right;
-
-        Node(char ch, int freq, Node left, Node right) {
-            this.ch    = ch;
-            this.freq  = freq;
-            this.left  = left;
-            this.right = right;
-        }
-
-        // is the node a leaf node?
-        private boolean isLeaf() {
-            assert ((left == null) && (right == null)) || ((left != null) && (right != null));
-            return (left == null) && (right == null);
-        }
-
-        // compare, based on frequency
-        public int compareTo(Node that) {
-            return this.freq - that.freq;
-        }
+    private Huffman() {
     }
 
     /**
@@ -101,11 +77,9 @@ public class Huffman {
             for (int j = 0; j < code.length(); j++) {
                 if (code.charAt(j) == '0') {
                     BinaryStdOut.write(false);
-                }
-                else if (code.charAt(j) == '1') {
+                } else if (code.charAt(j) == '1') {
                     BinaryStdOut.write(true);
-                }
-                else throw new IllegalStateException("Illegal state");
+                } else throw new IllegalStateException("Illegal state");
             }
         }
 
@@ -125,19 +99,18 @@ public class Huffman {
         // special case in case there is only one character with a nonzero frequency
         if (pq.size() == 1) {
             if (freq['\0'] == 0) pq.insert(new Node('\0', 0, null, null));
-            else                 pq.insert(new Node('\1', 0, null, null));
+            else pq.insert(new Node('\1', 0, null, null));
         }
 
         // merge two smallest trees
         while (pq.size() > 1) {
-            Node left  = pq.delMin();
+            Node left = pq.delMin();
             Node right = pq.delMin();
             Node parent = new Node('\0', left.freq + right.freq, left, right);
             pq.insert(parent);
         }
         return pq.delMin();
     }
-
 
     // write bitstring-encoded trie to standard output
     private static void writeTrie(Node x) {
@@ -154,10 +127,9 @@ public class Huffman {
     // make a lookup table from symbols and their encodings
     private static void buildCode(String[] st, Node x, String s) {
         if (!x.isLeaf()) {
-            buildCode(st, x.left,  s + '0');
+            buildCode(st, x.left, s + '0');
             buildCode(st, x.right, s + '1');
-        }
-        else {
+        } else {
             st[x.ch] = s;
         }
     }
@@ -169,7 +141,7 @@ public class Huffman {
     public static void expand() {
 
         // read in Huffman trie from input stream
-        Node root = readTrie(); 
+        Node root = readTrie();
 
         // number of bytes to write
         int length = BinaryStdIn.readInt();
@@ -180,20 +152,18 @@ public class Huffman {
             while (!x.isLeaf()) {
                 boolean bit = BinaryStdIn.readBoolean();
                 if (bit) x = x.right;
-                else     x = x.left;
+                else x = x.left;
             }
             BinaryStdOut.write(x.ch, 8);
         }
         BinaryStdOut.close();
     }
 
-
     private static Node readTrie() {
         boolean isLeaf = BinaryStdIn.readBoolean();
         if (isLeaf) {
             return new Node(BinaryStdIn.readChar(), -1, null, null);
-        }
-        else {
+        } else {
             return new Node('\0', -1, readTrie(), readTrie());
         }
     }
@@ -205,9 +175,34 @@ public class Huffman {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        if      (args[0].equals("-")) compress();
+        if (args[0].equals("-")) compress();
         else if (args[0].equals("+")) expand();
         else throw new IllegalArgumentException("Illegal command line argument");
+    }
+
+    // Huffman trie node
+    private static class Node implements Comparable<Node> {
+        private final char ch;
+        private final int freq;
+        private final Node left, right;
+
+        Node(char ch, int freq, Node left, Node right) {
+            this.ch = ch;
+            this.freq = freq;
+            this.left = left;
+            this.right = right;
+        }
+
+        // is the node a leaf node?
+        private boolean isLeaf() {
+            assert ((left == null) && (right == null)) || ((left != null) && (right != null));
+            return (left == null) && (right == null);
+        }
+
+        // compare, based on frequency
+        public int compareTo(Node that) {
+            return this.freq - that.freq;
+        }
     }
 
 }

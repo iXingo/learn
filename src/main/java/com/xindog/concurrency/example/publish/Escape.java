@@ -9,10 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 @NotRecommend
 public class Escape {
 
-    private int thisCanBeEscape = 0;
+    private final int thisCanBeEscape = 0;
 
-    public Escape () {
+    public Escape() {
         new InnerClass();
+    }
+
+    public static void main(String[] args) {
+        new Escape();
     }
 
     private class InnerClass {
@@ -20,9 +24,5 @@ public class Escape {
         public InnerClass() {
             log.info("{}", Escape.this.thisCanBeEscape);
         }
-    }
-
-    public static void main(String[] args) {
-        new Escape();
     }
 }

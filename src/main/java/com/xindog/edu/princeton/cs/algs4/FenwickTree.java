@@ -8,9 +8,6 @@
 
 package com.xindog.edu.princeton.cs.algs4;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Created by ricardodpsx@gmail.com on 4/01/15.
  * <p>
@@ -37,7 +34,7 @@ import java.util.Arrays;
  * <p>
  * Memory usage:  O(n)
  *
- * @author Ricardo Pacheco 
+ * @author Ricardo Pacheco
  */
 public class FenwickTree {
 
@@ -46,67 +43,6 @@ public class FenwickTree {
     public FenwickTree(int size) {
         array = new int[size + 1];
     }
-
-    /**
-     * Range Sum query from 1 to ind
-     * ind is 1-indexed
-     * <p>
-     * Time-Complexity:    O(log(n))
-     *
-     * @param  ind index
-     * @return sum
-     */
-    public int rsq(int ind) {
-        assert ind > 0;
-        int sum = 0;
-        while (ind > 0) {
-            sum += array[ind];
-            //Extracting the portion up to the first significant one of the binary representation of 'ind' and decrementing ind by that number
-            ind -= ind & (-ind);
-        }
-
-        return sum;
-    }
-
-    /**
-     * Range Sum Query from a to b.
-     * Search for the sum from array index from a to b
-     * a and b are 1-indexed
-     * <p>
-     * Time-Complexity:    O(log(n))
-     *
-     * @param  a left index
-     * @param  b right index
-     * @return sum
-     */
-    public int rsq(int a, int b) {
-        assert b >= a && a > 0 && b > 0;
-
-        return rsq(b) - rsq(a - 1);
-    }
-
-    /**
-     * Update the array at ind and all the affected regions above ind.
-     * ind is 1-indexed
-     * <p>
-     * Time-Complexity:    O(log(n))
-     *
-     * @param  ind   index
-     * @param  value value
-     */
-    public void update(int ind, int value) {
-        assert ind > 0;
-        while (ind < array.length) {
-            array[ind] += value;
-            //Extracting the portion up to the first significant one of the binary representation of 'ind' and incrementing ind by that number
-            ind += ind & (-ind);
-        }
-    }
-
-    public int size() {
-        return array.length - 1;
-    }
-
 
     /**
      * Read the following commands:
@@ -159,29 +95,84 @@ public class FenwickTree {
                     StdOut.print(ft.rsq(i, i) + " ");
                 }
                 StdOut.println();
-            }
-            else if (line[0].equals("set")) {
+            } else if (line[0].equals("set")) {
                 ft = new FenwickTree(line.length - 1);
                 for (int i = 1; i <= line.length - 1; i++) {
                     ft.update(i, Integer.parseInt(line[i]));
                 }
-            }
-
-            else if (line[0].equals("up")) {
+            } else if (line[0].equals("up")) {
                 ft.update(arg1, arg2);
                 for (int i = 1; i <= ft.size(); i++) {
                     StdOut.print(ft.rsq(i, i) + " ");
                 }
                 StdOut.println();
-            }
-            else if (line[0].equals("rsq")) {
+            } else if (line[0].equals("rsq")) {
                 StdOut.printf("Sum from %d to %d = %d%n", arg1, arg2, ft.rsq(arg1, arg2));
-            }
-            else {
+            } else {
                 StdOut.println("Invalid command");
             }
 
         }
+    }
+
+    /**
+     * Range Sum query from 1 to ind
+     * ind is 1-indexed
+     * <p>
+     * Time-Complexity:    O(log(n))
+     *
+     * @param ind index
+     * @return sum
+     */
+    public int rsq(int ind) {
+        assert ind > 0;
+        int sum = 0;
+        while (ind > 0) {
+            sum += array[ind];
+            //Extracting the portion up to the first significant one of the binary representation of 'ind' and decrementing ind by that number
+            ind -= ind & (-ind);
+        }
+
+        return sum;
+    }
+
+    /**
+     * Range Sum Query from a to b.
+     * Search for the sum from array index from a to b
+     * a and b are 1-indexed
+     * <p>
+     * Time-Complexity:    O(log(n))
+     *
+     * @param a left index
+     * @param b right index
+     * @return sum
+     */
+    public int rsq(int a, int b) {
+        assert b >= a && a > 0 && b > 0;
+
+        return rsq(b) - rsq(a - 1);
+    }
+
+    /**
+     * Update the array at ind and all the affected regions above ind.
+     * ind is 1-indexed
+     * <p>
+     * Time-Complexity:    O(log(n))
+     *
+     * @param ind   index
+     * @param value value
+     */
+    public void update(int ind, int value) {
+        assert ind > 0;
+        while (ind < array.length) {
+            array[ind] += value;
+            //Extracting the portion up to the first significant one of the binary representation of 'ind' and incrementing ind by that number
+            ind += ind & (-ind);
+        }
+    }
+
+    public int size() {
+        return array.length - 1;
     }
 
 

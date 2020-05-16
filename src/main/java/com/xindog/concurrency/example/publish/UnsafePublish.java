@@ -9,11 +9,7 @@ import java.util.Arrays;
 @NotThreadSafe
 public class UnsafePublish {
 
-    private String[] states = {"a", "b", "c"};
-
-    public String[] getStates() {
-        return states;
-    }
+    private final String[] states = {"a", "b", "c"};
 
     public static void main(String[] args) {
         UnsafePublish unsafePublish = new UnsafePublish();
@@ -21,5 +17,9 @@ public class UnsafePublish {
 
         unsafePublish.getStates()[0] = "d";
         log.info("{}", Arrays.toString(unsafePublish.getStates()));
+    }
+
+    public String[] getStates() {
+        return states;
     }
 }

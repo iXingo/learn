@@ -1,7 +1,7 @@
 /******************************************************************************
  *  Compilation:  javac SegmentTree.java
  *  Execution:    java SegmentTree
- *  
+ *
  *  A segment tree data structure.
  *
  ******************************************************************************/
@@ -26,16 +26,16 @@ import java.util.Arrays;
  * st.update(0,3, 1)
  * In the above case only the node that represents the range [0,3] will be updated (and not their children) so in this case
  * the update task will be less than n*log(n)
- *
+ * <p>
  * Memory usage:  O(n)
  *
- * @author Ricardo Pacheco 
+ * @author Ricardo Pacheco
  */
 public class SegmentTree {
 
-    private Node[] heap;
-    private int[] array;
-    private int size;
+    private final Node[] heap;
+    private final int[] array;
+    private final int size;
 
     /**
      * Time-Complexity:  O(n*log(n))
@@ -45,11 +45,91 @@ public class SegmentTree {
     public SegmentTree(int[] array) {
         this.array = Arrays.copyOf(array, array.length);
         //The max size of this array is about 2 * 2 ^ log2(n) + 1
-        size = (int) (2 * Math.pow(2.0, Math.floor((Math.log((double) array.length) / Math.log(2.0)) + 1)));
+        size = (int) (2 * Math.pow(2.0, Math.floor((Math.log(array.length) / Math.log(2.0)) + 1)));
         heap = new Node[size];
         build(1, 0, array.length);
     }
 
+    /**
+     * Read the following commands:
+     * init n v     Initializes the array of size n with all v's
+     * set a b c... Initializes the array  with [a, b, c ...]
+     * rsq a b      Range Sum Query for the range [a, b]
+     * rmq a b      Range Min Query for the range [a, b]
+     * up  a b v    Update the [a,b] portion of the array with value v.
+     * exit
+     * <p>
+     * Example:
+     * init
+     * set 1 2 3 4 5 6
+     * rsq 1 3
+     * Sum from 1 to 3 = 6
+     * rmq 1 3
+     * Min from 1 to 3 = 1
+     * input up 1 3
+     * [3,2,3,4,5,6]
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(String[] args) {
+
+
+        SegmentTree st = null;
+
+        String cmd = "cmp";
+        while (true) {
+            String[] line = StdIn.readLine().split(" ");
+
+            if (line[0].equals("exit")) break;
+
+            int arg1 = 0, arg2 = 0, arg3 = 0;
+
+            if (line.length > 1) {
+                arg1 = Integer.parseInt(line[1]);
+            }
+            if (line.length > 2) {
+                arg2 = Integer.parseInt(line[2]);
+            }
+            if (line.length > 3) {
+                arg3 = Integer.parseInt(line[3]);
+            }
+
+            if ((!line[0].equals("set") && !line[0].equals("init")) && st == null) {
+                StdOut.println("Segment Tree not initialized");
+                continue;
+            }
+            int[] array;
+            if (line[0].equals("set")) {
+                array = new int[line.length - 1];
+                for (int i = 0; i < line.length - 1; i++) {
+                    array[i] = Integer.parseInt(line[i + 1]);
+                }
+                st = new SegmentTree(array);
+            } else if (line[0].equals("init")) {
+                array = new int[arg1];
+                Arrays.fill(array, arg2);
+                st = new SegmentTree(array);
+
+                for (int i = 0; i < st.size(); i++) {
+                    StdOut.print(st.rsq(i, i) + " ");
+                }
+                StdOut.println();
+            } else if (line[0].equals("up")) {
+                st.update(arg1, arg2, arg3);
+                for (int i = 0; i < st.size(); i++) {
+                    StdOut.print(st.rsq(i, i) + " ");
+                }
+                StdOut.println();
+            } else if (line[0].equals("rsq")) {
+                StdOut.printf("Sum from %d to %d = %d%n", arg1, arg2, st.rsq(arg1, arg2));
+            } else if (line[0].equals("rmq")) {
+                StdOut.printf("Min from %d to %d = %d%n", arg1, arg2, st.rMinQ(arg1, arg2));
+            } else {
+                StdOut.println("Invalid command");
+            }
+
+        }
+    }
 
     public int size() {
         return array.length;
@@ -77,11 +157,11 @@ public class SegmentTree {
 
     /**
      * Range Sum Query
-     *
+     * <p>
      * Time-Complexity: O(log(n))
      *
-     * @param  from from index
-     * @param  to to index
+     * @param from from index
+     * @param to   to index
      * @return sum
      */
     public int rsq(int from, int to) {
@@ -113,11 +193,11 @@ public class SegmentTree {
 
     /**
      * Range Min Query
-     * 
+     * <p>
      * Time-Complexity: O(log(n))
      *
-     * @param  from from index
-     * @param  to to index
+     * @param from from index
+     * @param to   to index
      * @return min
      */
     public int rMinQ(int from, int to) {
@@ -147,7 +227,6 @@ public class SegmentTree {
 
         return Integer.MAX_VALUE;
     }
-
 
     /**
      * Range Update Operation.
@@ -242,93 +321,6 @@ public class SegmentTree {
             return to - from + 1;
         }
 
-    }
-
-    /**
-     * Read the following commands:
-     * init n v     Initializes the array of size n with all v's
-     * set a b c... Initializes the array  with [a, b, c ...]
-     * rsq a b      Range Sum Query for the range [a, b]
-     * rmq a b      Range Min Query for the range [a, b]
-     * up  a b v    Update the [a,b] portion of the array with value v.
-     * exit
-     * <p>
-     * Example:
-     * init
-     * set 1 2 3 4 5 6
-     * rsq 1 3
-     * Sum from 1 to 3 = 6
-     * rmq 1 3
-     * Min from 1 to 3 = 1
-     * input up 1 3
-     * [3,2,3,4,5,6]
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-
-
-        SegmentTree st = null;
-
-        String cmd = "cmp";
-        while (true) {
-            String[] line = StdIn.readLine().split(" ");
-
-            if (line[0].equals("exit")) break;
-
-            int arg1 = 0, arg2 = 0, arg3 = 0;
-
-            if (line.length > 1) {
-                arg1 = Integer.parseInt(line[1]);
-            }
-            if (line.length > 2) {
-                arg2 = Integer.parseInt(line[2]);
-            }
-            if (line.length > 3) {
-                arg3 = Integer.parseInt(line[3]);
-            }
-
-            if ((!line[0].equals("set") && !line[0].equals("init")) && st == null) {
-                StdOut.println("Segment Tree not initialized");
-                continue;
-            }
-            int array[];
-            if (line[0].equals("set")) {
-                array = new int[line.length - 1];
-                for (int i = 0; i < line.length - 1; i++) {
-                    array[i] = Integer.parseInt(line[i + 1]);
-                }
-                st = new SegmentTree(array);
-            }
-            else if (line[0].equals("init")) {
-                array = new int[arg1];
-                Arrays.fill(array, arg2);
-                st = new SegmentTree(array);
-
-                for (int i = 0; i < st.size(); i++) {
-                    StdOut.print(st.rsq(i, i) + " ");
-                }
-                StdOut.println();
-            }
-
-            else if (line[0].equals("up")) {
-                st.update(arg1, arg2, arg3);
-                for (int i = 0; i < st.size(); i++) {
-                    StdOut.print(st.rsq(i, i) + " ");
-                }
-                StdOut.println();
-            }
-            else if (line[0].equals("rsq")) {
-                StdOut.printf("Sum from %d to %d = %d%n", arg1, arg2, st.rsq(arg1, arg2));
-            }
-            else if (line[0].equals("rmq")) {
-                StdOut.printf("Min from %d to %d = %d%n", arg1, arg2, st.rMinQ(arg1, arg2));
-            }
-            else {
-                StdOut.println("Invalid command");
-            }
-
-        }
     }
 
 }

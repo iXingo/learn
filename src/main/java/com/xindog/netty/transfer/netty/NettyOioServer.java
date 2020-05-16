@@ -9,17 +9,24 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.oio.OioServerSocketChannel;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class NettyOioServer {
 
-    public void server(int port) throws Exception{
+    public static void main(String[] args) {
+        try {
+            new NettyOioServer().server(9099);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void server(int port) throws Exception {
         final ByteBuf buf = Unpooled.unreleasableBuffer(
                 Unpooled.copiedBuffer("Hi!\r\n", StandardCharsets.UTF_8)
         );
         EventLoopGroup group = new OioEventLoopGroup();
-        try{
+        try {
             // 创建 ServerBootStrap
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
@@ -48,17 +55,9 @@ public class NettyOioServer {
             ChannelFuture f = b.bind().sync();
             // 绑定服务器以接受连接
             f.channel().closeFuture().sync();
-        }finally{
+        } finally {
             // 释放所有的资源
             group.shutdownGracefully().sync();
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            new NettyOioServer().server(9099);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

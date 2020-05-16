@@ -8,15 +8,6 @@ import java.util.function.Supplier;
 
 public class MethodReferenceTest {
 
-    public String getString(Supplier<String> supplier) {
-        return supplier.get() + "test";
-    }
-
-    public String getString2(String str, Function<String, String> function) {
-        return function.apply(str);
-    }
-
-
     public static void main(String[] args) {
         Student student1 = new Student("zhangsan", 10);
         Student student2 = new Student("lisi", 90);
@@ -76,5 +67,13 @@ public class MethodReferenceTest {
         System.out.println(methodReferenceTest.getString(String::new));
         System.out.println(methodReferenceTest.getString2("hello", String::new));
 
+    }
+
+    public String getString(Supplier<String> supplier) {
+        return supplier.get() + "test";
+    }
+
+    public String getString2(String str, Function<String, String> function) {
+        return function.apply(str);
     }
 }

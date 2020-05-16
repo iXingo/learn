@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
  * Date:    6/24/19
  * Time:    2:21 PM
  * Project: learn
+ *
  * @author shawang
  */
 public class ClassLoaderExample {
@@ -21,7 +22,7 @@ public class ClassLoaderExample {
     public static void main(String[] args) {
         Class<ClassLoaderExample> clazz = ClassLoaderExample.class;
         System.out.println(clazz.getName());
-        ClassLoader  loader = clazz.getClassLoader();
+        ClassLoader loader = clazz.getClassLoader();
         System.out.println(loader);
         System.out.println(loader.getParent());
         System.out.println(loader.getParent().getParent());
@@ -38,7 +39,7 @@ public class ClassLoaderExample {
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -55,14 +56,14 @@ public class ClassLoaderExample {
             }
             in.close();
             System.out.println(new String(b, 0, len));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
         try {
             Class<HttpMessageConverterExtractor> extractor = (Class<HttpMessageConverterExtractor>) loader.loadClass("org.springframework.web.client.HttpMessageConverterExtractor");
-            for (Method method : extractor.getDeclaredMethods()){
+            for (Method method : extractor.getDeclaredMethods()) {
                 System.out.println(method.getName());
             }
         } catch (ClassNotFoundException e) {

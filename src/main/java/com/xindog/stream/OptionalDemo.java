@@ -16,9 +16,9 @@ public class OptionalDemo {
         stringOptional.ifPresent(System.out::println);
         String s = stringOptional.orElse("Hello World");
         System.out.println(s);
-        String t = stringOptional.orElseGet(()-> "Hello");
+        String t = stringOptional.orElseGet(() -> "Hello");
         System.out.println(t);
-        String str = stringOptional.orElseThrow(()-> new NullPointerException());
+        String str = stringOptional.orElseThrow(() -> new NullPointerException());
 
 
         System.out.println(s);

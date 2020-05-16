@@ -13,13 +13,13 @@ import java.util.Iterator;
 /**
  * TCP/IP的NIO非阻塞方式
  * 服务器端
- * */
-public class    Server implements Runnable {
+ */
+public class Server implements Runnable {
 
     //第一个端口
-    private Integer port1 = 8099;
+    private final Integer port1 = 8099;
     //第二个端口
-    private Integer port2 = 9099;
+    private final Integer port2 = 9099;
     //第一个服务器通道 服务A
     private ServerSocketChannel serversocket1;
     //第二个服务器通道 服务B
@@ -33,10 +33,16 @@ public class    Server implements Runnable {
     private Selector selector;
 
     //缓冲区
-    private ByteBuffer buf = ByteBuffer.allocate(512);
+    private final ByteBuffer buf = ByteBuffer.allocate(512);
 
     public Server() {
         init();
+    }
+
+    public static void main(String[] args) {
+        Server server = new Server();
+        Thread thread = new Thread(server);
+        thread.start();
     }
 
     /**
@@ -45,7 +51,7 @@ public class    Server implements Runnable {
      * 2：打开两个通道
      * 3：给通道上绑定一个socket
      * 4：将选择器注册到通道上
-     * */
+     */
     public void init() {
         try {
             //创建选择器
@@ -75,8 +81,9 @@ public class    Server implements Runnable {
     /**
      * 这个方法是连接
      * 客户端连接服务器
+     *
      * @throws IOException
-     * */
+     */
     public void accept(SelectionKey key) throws IOException {
         ServerSocketChannel server = (ServerSocketChannel) key.channel();
         if (server.equals(serversocket1)) {
@@ -95,8 +102,9 @@ public class    Server implements Runnable {
     /**
      * 从通道中读取数据
      * 并且判断是给那个服务通道的
+     *
      * @throws IOException
-     * */
+     */
     public void read(SelectionKey key) throws IOException {
 
         this.buf.clear();
@@ -163,11 +171,5 @@ public class    Server implements Runnable {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Server server = new Server();
-        Thread thread = new Thread(server);
-        thread.start();
     }
 }

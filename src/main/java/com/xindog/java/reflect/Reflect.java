@@ -14,7 +14,7 @@ import java.lang.reflect.Parameter;
  */
 public class Reflect {
 
-    private static void printFields(){
+    private static void printFields() {
         //1.获取并输出类的名称
         Class mClass = SonClass.class;
         System.out.println("类的名称：" + mClass.getName());
@@ -41,7 +41,7 @@ public class Reflect {
     /**
      * 通过反射获取类的所有方法
      */
-    private static void printMethods(){
+    private static void printMethods() {
         //1.获取并输出类的名称
         Class mClass = SonClass.class;
         System.out.println("类的名称：" + mClass.getName());
@@ -64,17 +64,16 @@ public class Reflect {
                     + method.getName() + "( ");
             //获取并输出方法的所有参数
             Parameter[] parameters = method.getParameters();
-            for (Parameter parameter:
+            for (Parameter parameter :
                     parameters) {
                 System.out.print(parameter.getType().getName()
                         + " " + parameter.getName() + ",");
             }
             //获取并输出方法抛出的异常
             Class[] exceptionTypes = method.getExceptionTypes();
-            if (exceptionTypes.length == 0){
+            if (exceptionTypes.length == 0) {
                 System.out.println(" )");
-            }
-            else {
+            } else {
                 for (Class c : exceptionTypes) {
                     System.out.println(" ) throws "
                             + c.getName());
@@ -87,7 +86,7 @@ public class Reflect {
      * 访问对象的私有方法
      * 为简洁代码，在方法上抛出总的异常，实际开发别这样
      */
-    private static void getPrivateMethod() throws Exception{
+    private static void getPrivateMethod() throws Exception {
         //1. 获取 Class 类实例
         TestClass testClass = new TestClass();
         Class mClass = testClass.getClass();

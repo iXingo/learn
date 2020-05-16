@@ -11,17 +11,31 @@ public class WaitNotifyModel implements Model {
     private final Queue<Task> buffer = new LinkedList<>();
     private final int cap;
     private final AtomicInteger increTaskNo = new AtomicInteger(0);
+
     public WaitNotifyModel(int cap) {
         this.cap = cap;
     }
+
+    public static void main(String[] args) {
+        Model model = new WaitNotifyModel(3);
+        for (int i = 0; i < 2; i++) {
+            new Thread(model.newRunnableConsumer()).start();
+        }
+        for (int i = 0; i < 5; i++) {
+            new Thread(model.newRunnableProducer()).start();
+        }
+    }
+
     @Override
     public Runnable newRunnableConsumer() {
         return new ConsumerImpl();
     }
+
     @Override
     public Runnable newRunnableProducer() {
         return new ProducerImpl();
     }
+
     private class ConsumerImpl extends AbstractConsumer implements Consumer, Runnable {
         @Override
         public void consume() throws InterruptedException {
@@ -38,6 +52,7 @@ public class WaitNotifyModel implements Model {
             }
         }
     }
+
     private class ProducerImpl extends AbstractProducer implements Producer, Runnable {
         @Override
         public void produce() throws InterruptedException {
@@ -52,15 +67,6 @@ public class WaitNotifyModel implements Model {
                 System.out.println("produce: " + task.no);
                 BUFFER_LOCK.notifyAll();
             }
-        }
-    }
-    public static void main(String[] args) {
-        Model model = new WaitNotifyModel(3);
-        for (int i = 0; i < 2; i++) {
-            new Thread(model.newRunnableConsumer()).start();
-        }
-        for (int i = 0; i < 5; i++) {
-            new Thread(model.newRunnableProducer()).start();
         }
     }
 }

@@ -11,12 +11,6 @@ interface MyInterface {
 
 public class Test2 {
 
-    private void myTest(MyInterface myInterface) {
-        System.out.println(1);
-        myInterface.test();
-        System.out.println(2);
-    }
-
     public static void main(String[] args) {
         Test2 test2 = new Test2();
 
@@ -33,5 +27,11 @@ public class Test2 {
         System.out.println(myInterface.getClass());
         System.out.println(myInterface.getClass().getSuperclass());
         System.out.println(myInterface.getClass().getInterfaces()[0]);
+    }
+
+    private void myTest(MyInterface myInterface) {
+        System.out.println(1);
+        myInterface.test();
+        System.out.println(2);
     }
 }

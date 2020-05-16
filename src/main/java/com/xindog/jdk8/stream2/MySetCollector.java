@@ -11,18 +11,25 @@ import java.util.stream.Collector;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 import static java.util.stream.Collector.Characteristics.UNORDERED;
 
-public class MySetCollector<T> implements Collector<T, Set<T>, Set<T>>{
+public class MySetCollector<T> implements Collector<T, Set<T>, Set<T>> {
+
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("hello", "world", "welcome", "hello");
+        Set<String> set = list.stream().collect(new MySetCollector<>());
+
+        System.out.println(set);
+    }
 
     @Override
     public Supplier<Set<T>> supplier() {
         System.out.println("supplier invoked!");
-        return HashSet<T>::new;
+        return HashSet::new;
     }
 
     @Override
     public BiConsumer<Set<T>, T> accumulator() {
         System.out.println("accumulator invoked!");
-        return Set<T>::add;
+        return Set::add;
     }
 
     @Override
@@ -45,13 +52,6 @@ public class MySetCollector<T> implements Collector<T, Set<T>, Set<T>>{
     public Set<Characteristics> characteristics() {
         System.out.println("characteristics invoked!");
         return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, UNORDERED));
-    }
-
-    public static void main(String[] args) {
-        List<String> list = Arrays.asList("hello", "world", "welcome", "hello");
-        Set<String> set = list.stream().collect(new MySetCollector<>());
-
-        System.out.println(set);
     }
 }
 

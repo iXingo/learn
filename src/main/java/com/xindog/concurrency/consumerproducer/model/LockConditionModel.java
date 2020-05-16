@@ -26,6 +26,16 @@ public class LockConditionModel implements Model {
         this.cap = cap;
     }
 
+    public static void main(String[] args) {
+        Model model = new LockConditionModel(3);
+        for (int i = 0; i < 2; i++) {
+            new Thread(model.newRunnableConsumer()).start();
+        }
+        for (int i = 0; i < 5; i++) {
+            new Thread(model.newRunnableProducer()).start();
+        }
+    }
+
     @Override
     public Runnable newRunnableConsumer() {
         return new ConsumerImpl();
@@ -35,7 +45,6 @@ public class LockConditionModel implements Model {
     public Runnable newRunnableProducer() {
         return new ProducerImpl();
     }
-
 
     private class ConsumerImpl extends AbstractConsumer implements Consumer, Runnable {
 
@@ -59,7 +68,6 @@ public class LockConditionModel implements Model {
 
     }
 
-
     private class ProducerImpl extends AbstractProducer implements Producer, Runnable {
 
         @Override
@@ -80,16 +88,5 @@ public class LockConditionModel implements Model {
             }
         }
 
-    }
-
-
-    public static void main(String[] args) {
-        Model model = new LockConditionModel(3);
-        for (int i = 0; i < 2; i++) {
-            new Thread(model.newRunnableConsumer()).start();
-        }
-        for (int i = 0; i < 5; i++) {
-            new Thread(model.newRunnableProducer()).start();
-        }
     }
 }
