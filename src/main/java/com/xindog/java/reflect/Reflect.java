@@ -16,7 +16,7 @@ public class Reflect {
 
     private static void printFields() {
         //1.获取并输出类的名称
-        Class mClass = SonClass.class;
+        Class<SonClass> mClass = SonClass.class;
         System.out.println("类的名称：" + mClass.getName());
 
         //2.1 获取所有 public 访问权限的变量
@@ -43,7 +43,7 @@ public class Reflect {
      */
     private static void printMethods() {
         //1.获取并输出类的名称
-        Class mClass = SonClass.class;
+        Class<SonClass> mClass = SonClass.class;
         System.out.println("类的名称：" + mClass.getName());
 
         //2.1 获取所有 public 访问权限的方法
@@ -74,7 +74,7 @@ public class Reflect {
             if (exceptionTypes.length == 0) {
                 System.out.println(" )");
             } else {
-                for (Class c : exceptionTypes) {
+                for (Class<? extends Object> c : exceptionTypes) {
                     System.out.println(" ) throws "
                             + c.getName());
                 }
@@ -99,17 +99,15 @@ public class Reflect {
                 mClass.getDeclaredMethod("privateMethod", String.class, int.class);
 
         //3. 开始操作方法
-        if (privateMethod != null) {
-            //获取私有方法的访问权
-            //只是获取访问权，并不是修改实际权限
-            privateMethod.setAccessible(true);
+        //获取私有方法的访问权
+        //只是获取访问权，并不是修改实际权限
+        privateMethod.setAccessible(true);
 
-            //使用 invoke 反射调用私有方法
-            //privateMethod 是获取到的私有方法
-            //testClass 要操作的对象
-            //后面两个参数传实参
-            privateMethod.invoke(testClass, "Java Reflect ", 666);
-        }
+        //使用 invoke 反射调用私有方法
+        //privateMethod 是获取到的私有方法
+        //testClass 要操作的对象
+        //后面两个参数传实参
+        privateMethod.invoke(testClass, "Java Reflect ", 666);
     }
 
 
@@ -120,26 +118,24 @@ public class Reflect {
     private static void modifyPrivateFiled() throws Exception {
         //1. 获取 Class 类实例
         TestClass testClass = new TestClass();
-        Class mClass = testClass.getClass();
+        Class<? extends TestClass> mClass = testClass.getClass();
 
         //2. 获取私有变量
         Field privateField = mClass.getDeclaredField("MSG");
 
         //3. 操作私有变量
-        if (privateField != null) {
-            //获取私有变量的访问权
-            privateField.setAccessible(true);
+        //获取私有变量的访问权
+        privateField.setAccessible(true);
 
-            //修改私有变量，并输出以测试
-            System.out.println("Before Modify：MSG = " + testClass.getMsg());
+        //修改私有变量，并输出以测试
+        System.out.println("Before Modify：MSG = " + testClass.getMsg());
 
-            //调用 set(object , value) 修改变量的值
-            //privateField 是获取到的私有变量
-            //testClass 要操作的对象
-            //"Modified" 为要修改成的值
-            privateField.set(testClass, "Modified");
-            System.out.println("After Modify：MSG = " + testClass.getMsg());
-        }
+        //调用 set(object , value) 修改变量的值
+        //privateField 是获取到的私有变量
+        //testClass 要操作的对象
+        //"Modified" 为要修改成的值
+        privateField.set(testClass, "Modified");
+        System.out.println("After Modify：MSG = " + testClass.getMsg());
     }
 
     /**
@@ -149,35 +145,33 @@ public class Reflect {
     private static void modifyFinalFiled() throws Exception {
         //1. 获取 Class 类实例
         TestClass testClass = new TestClass();
-        Class mClass = testClass.getClass();
+        Class<? extends TestClass> mClass = testClass.getClass();
 
         //2. 获取私有常量
         Field finalField = mClass.getDeclaredField("FINAL_VALUE");
 
         //3. 修改常量的值
-        if (finalField != null) {
 
-            //获取私有常量的访问权
-            finalField.setAccessible(true);
+        //获取私有常量的访问权
+        finalField.setAccessible(true);
 
-            //调用 finalField 的 getter 方法
-            //输出 FINAL_VALUE 修改前的值
-            System.out.println("Before Modify：FINAL_VALUE = "
-                    + finalField.get(testClass));
+        //调用 finalField 的 getter 方法
+        //输出 FINAL_VALUE 修改前的值
+        System.out.println("Before Modify：FINAL_VALUE = "
+                + finalField.get(testClass));
 
-            //修改私有常量
-            finalField.set(testClass, "Modified");
+        //修改私有常量
+        finalField.set(testClass, "Modified");
 
-            //调用 finalField 的 getter 方法
-            //输出 FINAL_VALUE 修改后的值
-            System.out.println("After Modify：FINAL_VALUE = "
-                    + finalField.get(testClass));
+        //调用 finalField 的 getter 方法
+        //输出 FINAL_VALUE 修改后的值
+        System.out.println("After Modify：FINAL_VALUE = "
+                + finalField.get(testClass));
 
-            //使用对象调用类的 getter 方法
-            //获取值并输出
-            System.out.println("Actually ：FINAL_VALUE = "
-                    + testClass.getFinalValue());
-        }
+        //使用对象调用类的 getter 方法
+        //获取值并输出
+        System.out.println("Actually ：FINAL_VALUE = "
+                + testClass.getFinalValue());
     }
 
     public static void main(String[] args) {
