@@ -10,7 +10,7 @@ public class StreamDemo3 {
 
         // 把每个单词的长度调用出来
         Stream.of(str.split(" ")).filter(s -> s.length() > 2)
-                .map(s -> s.length()).forEach(System.out::println);
+                .map(String::length).forEach(System.out::println);
 
         // flatMap A->B属性(是个集合), 最终得到所有的A元素里面的所有B属性集合
         // intStream/longStream 并不是Stream的子类, 所以要进行装箱 boxed

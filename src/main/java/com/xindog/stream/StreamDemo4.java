@@ -1,9 +1,6 @@
 package com.xindog.stream;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,13 +31,13 @@ public class StreamDemo4 {
         System.out.println(reduce);
 
         // 计算所有单词总长度
-        Integer length = Stream.of(str.split(" ")).map(s -> s.length())
-                .reduce(0, (s1, s2) -> s1 + s2);
+        Integer length = Stream.of(str.split(" ")).map(String::length)
+                .reduce(0, Integer::sum);
         System.out.println(length);
 
         // max 的使用
         Optional<String> max = Stream.of(str.split(" "))
-                .max((s1, s2) -> s1.length() - s2.length());
+                .max(Comparator.comparingInt(String::length));
         System.out.println(max.get());
 
         // 使用 findFirst 短路操作
