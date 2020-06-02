@@ -28,8 +28,8 @@ public class StreamDemo2 {
         Random random = new Random();
 
         // 自己产生流
-        Stream.generate(() -> random.nextInt()).limit(20).forEach(System.out::println);
-        Stream.generate(() -> random.nextInt()).limit(20).map(i -> i++).reduce((i, j) -> i + j);
+        Stream.generate(random::nextInt).limit(20).forEach(System.out::println);
+        Stream.generate(random::nextInt).limit(20).map(i -> i++).reduce(Integer::sum);
 
     }
 
