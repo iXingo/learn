@@ -2,6 +2,7 @@ package com.xindog.nio;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by Xindog.com(TM).
@@ -18,7 +19,7 @@ public class PathAndDirectory {
         File file = new File(args[0]);
         File[] tempList = file.listFiles();
 
-        for (int i = 0; i < tempList.length; i++) {
+        for (int i = 0; i < Objects.requireNonNull(tempList).length; i++) {
             if (tempList[i].isFile()) {
                 System.out.println("" + tempList[i]);
                 files.add(tempList[i].toString());
