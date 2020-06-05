@@ -17,7 +17,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class FileOperation {
 
     public static void main(String[] args) {
-        Path dir = Paths.get("/home/shawang/Desktop/picture");
+        Path dir = Paths.get("/Users/shawn/Desktop/");
         try {
             Files.walkFileTree(dir, new FileVisitor());
         } catch (IOException e) {
