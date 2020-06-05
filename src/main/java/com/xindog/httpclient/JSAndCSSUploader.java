@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -29,7 +30,7 @@ public class JSAndCSSUploader {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     System.out.println(file.getFileName());
 //                    uploadFile(token, file.getFileName());
-                    System.out.println("Uploaded file： " + file.getFileName());
+                    uploadFile(token, Paths.get(file.getParent() + File.separator + file.getFileName()));
                     return FileVisitResult.CONTINUE;
                 }
             });
@@ -40,10 +41,10 @@ public class JSAndCSSUploader {
     }
 
     public static void uploadFile(String authToken, Path path) {
-        HttpResponse<String> response = Unirest.post("http://localhost:8080/api/upload/file")
+        HttpResponse<String> response = Unirest.post("https://www.ixingo.com.cn/api/upload/file")
                 .header("Accept", "application/json")
                 .header("Authorization", authToken)
-                .field("files", path.toFile())
+                .field("file", path.toFile())
                 .asString();
         System.out.println(response.getBody());
     }
