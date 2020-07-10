@@ -13,14 +13,14 @@ public class WebSocketServer {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup,workGroup).channel(NioServerSocketChannel.class)
+            serverBootstrap.group(bossGroup, workGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new WebSocketServerInitializer());
 
             ChannelFuture channelFuture = serverBootstrap.bind(8877).sync();
             channelFuture.channel().closeFuture().sync();
-        }finally {
+        } finally {
             workGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }

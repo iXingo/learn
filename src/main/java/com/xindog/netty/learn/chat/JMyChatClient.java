@@ -15,7 +15,7 @@ public class JMyChatClient {
     public static void main(String[] args) throws InterruptedException, IOException {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
                     .handler(new MyChatClientInitializer());
@@ -23,10 +23,10 @@ public class JMyChatClient {
             Channel channel = bootstrap.connect("localhost", 9099).sync().channel();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            for(;;){
+            for (; ; ) {
                 channel.writeAndFlush(bufferedReader.readLine() + "\r\n");
             }
-        }finally {
+        } finally {
             eventLoopGroup.shutdownGracefully();
         }
     }

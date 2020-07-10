@@ -7,10 +7,10 @@ package com.xindog.jvm.classloader;
 //对于数组来说，JavaDoc经常将构成数组的元素为Component实际上就是将数组降低一个纬度后的类型
 
 /*
-* 助记符：
-* annewarray 表示创建一个引用类型的（如类、接口、数组），并将其引用值压入栈顶
-* newarray 表示创建于一个制定的原始类型(int, float, char） 等的数组，并将其引用值压入栈顶
-*/
+ * 助记符：
+ * annewarray 表示创建一个引用类型的（如类、接口、数组），并将其引用值压入栈顶
+ * newarray 表示创建于一个制定的原始类型(int, float, char） 等的数组，并将其引用值压入栈顶
+ */
 
 public class MyTest {
 
@@ -41,7 +41,7 @@ public class MyTest {
     }
 }
 
-class Parent{
+class Parent {
     static {
         System.out.println("My Parent static block");
     }

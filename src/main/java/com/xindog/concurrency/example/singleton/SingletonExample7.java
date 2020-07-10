@@ -22,7 +22,7 @@ public class SingletonExample7 {
     private enum Singleton {
         INSTANCE;
 
-        private SingletonExample7 singleton;
+        private final SingletonExample7 singleton;
 
         // JVM保证这个方法绝对只调用一次
         Singleton() {

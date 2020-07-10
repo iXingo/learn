@@ -20,7 +20,7 @@ public class VectorExample1 {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static List<Integer> list = new Vector<>();
+    private static final List<Integer> list = new Vector<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

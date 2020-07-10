@@ -11,30 +11,30 @@
 package com.xindog.edu.princeton.cs.algs4;
 
 /**
- *  The {@code DirectedCycleX} class represents a data type for 
- *  determining whether a digraph has a directed cycle.
- *  The <em>hasCycle</em> operation determines whether the digraph has
- *  a simple directed cycle and, if so, the <em>cycle</em> operation
- *  returns one.
- *  <p>
- *  This implementation uses a nonrecursive, queue-based algorithm.
- *  The constructor takes time proportional to <em>V</em> + <em>E</em>
- *  (in the worst case),
- *  where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
- *  Afterwards, the <em>hasCycle</em> operation takes constant time;
- *  the <em>cycle</em> operation takes time proportional
- *  to the length of the cycle.
- *  <p>
- *  See {@link DirectedCycle} for a recursive version that uses depth-first search.
- *  See {@link Topological} or {@link TopologicalX} to compute a topological order
- *  when the digraph is acyclic.
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code DirectedCycleX} class represents a data type for
+ * determining whether a digraph has a directed cycle.
+ * The <em>hasCycle</em> operation determines whether the digraph has
+ * a simple directed cycle and, if so, the <em>cycle</em> operation
+ * returns one.
+ * <p>
+ * This implementation uses a nonrecursive, queue-based algorithm.
+ * The constructor takes time proportional to <em>V</em> + <em>E</em>
+ * (in the worst case),
+ * where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
+ * Afterwards, the <em>hasCycle</em> operation takes constant time;
+ * the <em>cycle</em> operation takes time proportional
+ * to the length of the cycle.
+ * <p>
+ * See {@link DirectedCycle} for a recursive version that uses depth-first search.
+ * See {@link Topological} or {@link TopologicalX} to compute a topological order
+ * when the digraph is acyclic.
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 
 public class DirectedCycleX {
@@ -96,44 +96,6 @@ public class DirectedCycleX {
         assert check();
     }
 
-    /**
-     * Returns a directed cycle if the digraph has a directed cycle, and {@code null} otherwise.
-     * @return a directed cycle (as an iterable) if the digraph has a directed cycle,
-     *    and {@code null} otherwise
-     */
-    public Iterable<Integer> cycle() {
-        return cycle;
-    }
-
-    /**
-     * Does the digraph have a directed cycle?
-     * @return {@code true} if the digraph has a directed cycle, {@code false} otherwise
-     */
-    public boolean hasCycle() {
-        return cycle != null;
-    }
-
-    // certify that digraph has a directed cycle if it reports one
-    private boolean check() {
-
-        if (hasCycle()) {
-            // verify cycle
-            int first = -1, last = -1;
-            for (int v : cycle()) {
-                if (first == -1) first = v;
-                last = v;
-            }
-            if (first != last) {
-                System.err.printf("cycle begins with %d and ends with %d\n", first, last);
-                return false;
-            }
-        }
-
-
-        return true;
-    }
-
-
     public static void main(String[] args) {
 
         // create random DAG with V vertices and E edges; then add F random edges
@@ -159,12 +121,49 @@ public class DirectedCycleX {
                 StdOut.print(v + " ");
             }
             StdOut.println();
-        }
-
-        else {
+        } else {
             StdOut.println("No directed cycle");
         }
         StdOut.println();
+    }
+
+    /**
+     * Returns a directed cycle if the digraph has a directed cycle, and {@code null} otherwise.
+     *
+     * @return a directed cycle (as an iterable) if the digraph has a directed cycle,
+     * and {@code null} otherwise
+     */
+    public Iterable<Integer> cycle() {
+        return cycle;
+    }
+
+    /**
+     * Does the digraph have a directed cycle?
+     *
+     * @return {@code true} if the digraph has a directed cycle, {@code false} otherwise
+     */
+    public boolean hasCycle() {
+        return cycle != null;
+    }
+
+    // certify that digraph has a directed cycle if it reports one
+    private boolean check() {
+
+        if (hasCycle()) {
+            // verify cycle
+            int first = -1, last = -1;
+            for (int v : cycle()) {
+                if (first == -1) first = v;
+                last = v;
+            }
+            if (first != last) {
+                System.err.printf("cycle begins with %d and ends with %d\n", first, last);
+                return false;
+            }
+        }
+
+
+        return true;
     }
 
 }

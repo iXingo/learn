@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 @ThreadSafe
 public class AtomicExample5 {
 
-    private static AtomicIntegerFieldUpdater<AtomicExample5> updater =
+    private static final AtomicIntegerFieldUpdater<AtomicExample5> updater =
             AtomicIntegerFieldUpdater.newUpdater(AtomicExample5.class, "count");
 
     @Getter

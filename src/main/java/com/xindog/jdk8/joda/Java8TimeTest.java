@@ -28,7 +28,7 @@ public class Java8TimeTest {
         MonthDay monthDay = MonthDay.of(localDate3.getMonth(), localDate3.getDayOfMonth());
         MonthDay monthDay2 = MonthDay.from(LocalDate.of(2011, 3, 26));
 
-        if(monthDay.equals(monthDay2)) {
+        if (monthDay.equals(monthDay2)) {
             System.out.println("equals");
         } else {
             System.out.println("not equals");
@@ -114,9 +114,9 @@ public class Java8TimeTest {
 
         System.out.println(Instant.now());
         LocalDate d = LocalDate.now();
-        System.out.print(d.minusDays(9651).getYear()+"-");
-        System.out.print(d.minusDays(9651).getMonthValue()+"-");
-        System.out.print(d.minusDays(9651).getDayOfMonth()+1+"-");
+        System.out.print(d.minusDays(9651).getYear() + "-");
+        System.out.print(d.minusDays(9651).getMonthValue() + "-");
+        System.out.print(d.minusDays(9651).getDayOfMonth() + 1 + "-");
 
         LocalDate localDate9 = LocalDate.now();
         System.out.println(localDate9.minusDays(9154).getDayOfMonth());

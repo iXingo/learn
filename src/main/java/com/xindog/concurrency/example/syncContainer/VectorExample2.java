@@ -7,7 +7,7 @@ import java.util.Vector;
 @NotThreadSafe
 public class VectorExample2 {
 
-    private static Vector<Integer> vector = new Vector<>();
+    private static final Vector<Integer> vector = new Vector<>();
 
     public static void main(String[] args) {
 

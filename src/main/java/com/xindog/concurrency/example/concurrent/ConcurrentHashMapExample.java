@@ -16,7 +16,7 @@ public class ConcurrentHashMapExample {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static Map<Integer, Integer> map = new ConcurrentHashMap<>();
+    private static final Map<Integer, Integer> map = new ConcurrentHashMap<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

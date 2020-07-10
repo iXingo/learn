@@ -9,12 +9,17 @@ import java.nio.channels.SocketChannel;
 /**
  * TCP/IP的NIO非阻塞方式
  * 客户端
- * */
+ */
 public class Client {
 
     //创建缓冲区
-    private ByteBuffer buffer = ByteBuffer.allocate(512);
+    private final ByteBuffer buffer = ByteBuffer.allocate(512);
     //访问服务器
+
+    public static void main(String[] args) throws IOException {
+        new Client().query("localhost", 9099);
+
+    }
 
     public void query(String host, int port) throws IOException {
         InetSocketAddress address = new InetSocketAddress(InetAddress.getByName(host), port);
@@ -38,10 +43,5 @@ public class Client {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Client().query("localhost", 9099);
-
     }
 }

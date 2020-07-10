@@ -16,7 +16,7 @@ public class ConcurrentSkipListSetExample {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static Set<Integer> set = new ConcurrentSkipListSet<>();
+    private static final Set<Integer> set = new ConcurrentSkipListSet<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

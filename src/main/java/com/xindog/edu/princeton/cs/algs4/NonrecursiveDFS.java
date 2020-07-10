@@ -40,28 +40,30 @@ package com.xindog.edu.princeton.cs.algs4;
 import java.util.Iterator;
 
 /**
- *  The {@code NonrecursiveDFS} class represents a data type for finding
- *  the vertices connected to a source vertex <em>s</em> in the undirected
- *  graph.
- *  <p>
- *  This implementation uses a nonrecursive version of depth-first search
- *  with an explicit stack.
- *  See {@link DepthFirstSearch} for the classic recursive version.
- *  The constructor takes time proportional to <em>V</em> + <em>E</em>,
- *  where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
- *  It uses extra space (not including the graph) proportional to <em>V</em>.
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/41graph">Section 4.1</a>   
- *  of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code NonrecursiveDFS} class represents a data type for finding
+ * the vertices connected to a source vertex <em>s</em> in the undirected
+ * graph.
+ * <p>
+ * This implementation uses a nonrecursive version of depth-first search
+ * with an explicit stack.
+ * See {@link DepthFirstSearch} for the classic recursive version.
+ * The constructor takes time proportional to <em>V</em> + <em>E</em>,
+ * where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
+ * It uses extra space (not including the graph) proportional to <em>V</em>.
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/41graph">Section 4.1</a>
+ * of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class NonrecursiveDFS {
-    private boolean[] marked;  // marked[v] = is there an s-v path?
+    private final boolean[] marked;  // marked[v] = is there an s-v path?
+
     /**
      * Computes the vertices connected to the source vertex {@code s} in the graph {@code G}.
+     *
      * @param G the graph
      * @param s the source vertex
      * @throws IllegalArgumentException unless {@code 0 <= s < V}
@@ -93,31 +95,11 @@ public class NonrecursiveDFS {
                     stack.push(w);
                     // StdOut.printf("dfs(%d)\n", w);
                 }
-            }
-            else {
+            } else {
                 // StdOut.printf("%d done\n", v);
                 stack.pop();
             }
         }
-    }
-
-    /**
-     * Is vertex {@code v} connected to the source vertex {@code s}?
-     * @param v the vertex
-     * @return {@code true} if vertex {@code v} is connected to the source vertex {@code s},
-     *    and {@code false} otherwise
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
-     */
-    public boolean marked(int v) {
-        validateVertex(v);
-        return marked[v];
-    }
-
-    // throw an IllegalArgumentException unless {@code 0 <= v < V}
-    private void validateVertex(int v) {
-        int V = marked.length;
-        if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
     }
 
     /**
@@ -134,6 +116,26 @@ public class NonrecursiveDFS {
             if (dfs.marked(v))
                 StdOut.print(v + " ");
         StdOut.println();
+    }
+
+    /**
+     * Is vertex {@code v} connected to the source vertex {@code s}?
+     *
+     * @param v the vertex
+     * @return {@code true} if vertex {@code v} is connected to the source vertex {@code s},
+     * and {@code false} otherwise
+     * @throws IllegalArgumentException unless {@code 0 <= v < V}
+     */
+    public boolean marked(int v) {
+        validateVertex(v);
+        return marked[v];
+    }
+
+    // throw an IllegalArgumentException unless {@code 0 <= v < V}
+    private void validateVertex(int v) {
+        int V = marked.length;
+        if (v < 0 || v >= V)
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 
 

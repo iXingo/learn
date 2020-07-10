@@ -2,6 +2,17 @@ package com.xindog.jvm.classloader;
 
 import java.util.Random;
 
+interface Parent1 {
+    //    public static int a = 5;
+    int a = new Random().nextInt(2);
+}
+
+interface MyChild1 extends Parent1 {
+    int b = 6;
+
+//    public static int b = new Random().nextInt(2);
+}
+
 public class MyTest1 {
 
     /*
@@ -12,15 +23,4 @@ public class MyTest1 {
     public static void main(String[] args) {
         System.out.println(MyChild1.b);
     }
-}
-
-interface  Parent1{
-//    public static int a = 5;
-    public static int a = new  Random().nextInt(2);
-}
-
-interface MyChild1 extends Parent1{
-    public static int b = 6;
-
-//    public static int b = new Random().nextInt(2);
 }

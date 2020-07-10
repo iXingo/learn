@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class CyclicBarrierExample3 {
 
-    private static CyclicBarrier barrier = new CyclicBarrier(5, () -> {
+    private static final CyclicBarrier barrier = new CyclicBarrier(5, () -> {
         log.info("callback is running");
     });
 

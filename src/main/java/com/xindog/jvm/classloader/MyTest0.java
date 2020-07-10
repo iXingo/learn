@@ -14,15 +14,15 @@ public class MyTest0 {
 
 
 class MyParent {
-    public static final String  str = "Hello World";
+    public static final String str = "Hello World";
 
     static {
         System.out.println("Parent ");
     }
 }
 
-class MyChild0 extends MyParent{
-    public static final String  str2 = "MyChild";
+class MyChild0 extends MyParent {
+    public static final String str2 = "MyChild";
 
     static {
         System.out.println("MyChild");

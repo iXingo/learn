@@ -14,54 +14,54 @@ package com.xindog.edu.princeton.cs.algs4;
 import java.util.Iterator;
 
 /**
- *  The {@code HopcroftKarp} class represents a data type for computing a
- *  <em>maximum (cardinality) matching</em> and a
- *  <em>minimum (cardinality) vertex cover</em> in a bipartite graph.
- *  A <em>bipartite graph</em> in a graph whose vertices can be partitioned
- *  into two disjoint sets such that every edge has one endpoint in either set.
- *  A <em>matching</em> in a graph is a subset of its edges with no common
- *  vertices. A <em>maximum matching</em> is a matching with the maximum number
- *  of edges.
- *  A <em>perfect matching</em> is a matching which matches all vertices in the graph.
- *  A <em>vertex cover</em> in a graph is a subset of its vertices such that
- *  every edge is incident to at least one vertex. A <em>minimum vertex cover</em>
- *  is a vertex cover with the minimum number of vertices.
- *  By Konig's theorem, in any biparite
- *  graph, the maximum number of edges in matching equals the minimum number
- *  of vertices in a vertex cover.
- *  The maximum matching problem in <em>nonbipartite</em> graphs is
- *  also important, but all known algorithms for this more general problem
- *  are substantially more complicated.
- *  <p>
- *  This implementation uses the <em>Hopcroft-Karp algorithm</em>.
- *  The order of growth of the running time in the worst case is
- *  (<em>E</em> + <em>V</em>) sqrt(<em>V</em>),
- *  where <em>E</em> is the number of edges and <em>V</em> is the number
- *  of vertices in the graph. It uses extra space (not including the graph)
- *  proportional to <em>V</em>.
- *  <p>
- *  See also {@link BipartiteMatching}, which solves the problem in
- *  O(<em>E V</em>) time using the <em>alternating path algorithm</em>
- *  and <a href = "https://algs4.cs.princeton.edu/65reductions/BipartiteMatchingToMaxflow.java.html">BipartiteMatchingToMaxflow</a>,
- *  which solves the problem in O(<em>E V</em>) time via a reduction
- *  to the maxflow problem.
- *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/65reductions">Section 6.5</a>
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code HopcroftKarp} class represents a data type for computing a
+ * <em>maximum (cardinality) matching</em> and a
+ * <em>minimum (cardinality) vertex cover</em> in a bipartite graph.
+ * A <em>bipartite graph</em> in a graph whose vertices can be partitioned
+ * into two disjoint sets such that every edge has one endpoint in either set.
+ * A <em>matching</em> in a graph is a subset of its edges with no common
+ * vertices. A <em>maximum matching</em> is a matching with the maximum number
+ * of edges.
+ * A <em>perfect matching</em> is a matching which matches all vertices in the graph.
+ * A <em>vertex cover</em> in a graph is a subset of its vertices such that
+ * every edge is incident to at least one vertex. A <em>minimum vertex cover</em>
+ * is a vertex cover with the minimum number of vertices.
+ * By Konig's theorem, in any biparite
+ * graph, the maximum number of edges in matching equals the minimum number
+ * of vertices in a vertex cover.
+ * The maximum matching problem in <em>nonbipartite</em> graphs is
+ * also important, but all known algorithms for this more general problem
+ * are substantially more complicated.
+ * <p>
+ * This implementation uses the <em>Hopcroft-Karp algorithm</em>.
+ * The order of growth of the running time in the worst case is
+ * (<em>E</em> + <em>V</em>) sqrt(<em>V</em>),
+ * where <em>E</em> is the number of edges and <em>V</em> is the number
+ * of vertices in the graph. It uses extra space (not including the graph)
+ * proportional to <em>V</em>.
+ * <p>
+ * See also {@link BipartiteMatching}, which solves the problem in
+ * O(<em>E V</em>) time using the <em>alternating path algorithm</em>
+ * and <a href = "https://algs4.cs.princeton.edu/65reductions/BipartiteMatchingToMaxflow.java.html">BipartiteMatchingToMaxflow</a>,
+ * which solves the problem in O(<em>E V</em>) time via a reduction
+ * to the maxflow problem.
+ * <p>
+ * For additional documentation, see
+ * <a href="https://algs4.cs.princeton.edu/65reductions">Section 6.5</a>
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class HopcroftKarp {
     private static final int UNMATCHED = -1;
 
     private final int V;                 // number of vertices in the graph
-    private BipartiteX bipartition;      // the bipartition
+    private final BipartiteX bipartition;      // the bipartition
     private int cardinality;             // cardinality of current matching
-    private int[] mate;                  // mate[v] =  w if v-w is an edge in current matching
-                                         //         = -1 if v is not in current matching
-    private boolean[] inMinVertexCover;  // inMinVertexCover[v] = true iff v is in min vertex cover
+    private final int[] mate;                  // mate[v] =  w if v-w is an edge in current matching
+    //         = -1 if v is not in current matching
+    private final boolean[] inMinVertexCover;  // inMinVertexCover[v] = true iff v is in min vertex cover
     private boolean[] marked;            // marked[v] = true iff v is reachable via alternating path
     private int[] distTo;                // distTo[v] = number of edges on shortest path to v
 
@@ -69,7 +69,7 @@ public class HopcroftKarp {
      * Determines a maximum matching (and a minimum vertex cover)
      * in a bipartite graph.
      *
-     * @param  G the bipartite graph
+     * @param G the bipartite graph
      * @throws IllegalArgumentException if {@code G} is not bipartite
      */
     public HopcroftKarp(Graph G) {
@@ -107,7 +107,7 @@ public class HopcroftKarp {
                     if (!adj[v].hasNext())
                         path.pop();
 
-                    // advance
+                        // advance
                     else {
                         // process edge v-w only if it is an edge in level graph
                         int w = adj[v].next();
@@ -153,16 +153,58 @@ public class HopcroftKarp {
         return s;
     }
 
-   // is the edge v-w in the level graph?
+    /**
+     * Unit tests the {@code HopcroftKarp} data type.
+     * Takes three command-line arguments {@code V1}, {@code V2}, and {@code E};
+     * creates a random bipartite graph with {@code V1} + {@code V2} vertices
+     * and {@code E} edges; computes a maximum matching and minimum vertex cover;
+     * and prints the results.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(String[] args) {
+
+        int V1 = Integer.parseInt(args[0]);
+        int V2 = Integer.parseInt(args[1]);
+        int E = Integer.parseInt(args[2]);
+        Graph G = GraphGenerator.bipartite(V1, V2, E);
+        if (G.V() < 1000) StdOut.println(G);
+
+        HopcroftKarp matching = new HopcroftKarp(G);
+
+        // print maximum matching
+        StdOut.printf("Number of edges in max matching        = %d\n", matching.size());
+        StdOut.printf("Number of vertices in min vertex cover = %d\n", matching.size());
+        StdOut.printf("Graph has a perfect matching           = %b\n", matching.isPerfect());
+        StdOut.println();
+
+        if (G.V() >= 1000) return;
+
+        StdOut.print("Max matching: ");
+        for (int v = 0; v < G.V(); v++) {
+            int w = matching.mate(v);
+            if (matching.isMatched(v) && v < w)  // print each edge only once
+                StdOut.print(v + "-" + w + " ");
+        }
+        StdOut.println();
+
+        // print minimum vertex cover
+        StdOut.print("Min vertex cover: ");
+        for (int v = 0; v < G.V(); v++)
+            if (matching.inMinVertexCover(v))
+                StdOut.print(v + " ");
+        StdOut.println();
+    }
+
+    // is the edge v-w in the level graph?
     private boolean isLevelGraphEdge(int v, int w) {
         return (distTo[w] == distTo[v] + 1) && isResidualGraphEdge(v, w);
     }
 
-   // is the edge v-w a forward edge not in the matching or a reverse edge in the matching?
+    // is the edge v-w a forward edge not in the matching or a reverse edge in the matching?
     private boolean isResidualGraphEdge(int v, int w) {
-        if ((mate[v] != w) &&  bipartition.color(v)) return true;
-        if ((mate[v] == w) && !bipartition.color(v)) return true;
-        return false;
+        if ((mate[v] != w) && bipartition.color(v)) return true;
+        return (mate[v] == w) && !bipartition.color(v);
     }
 
     /*
@@ -224,11 +266,10 @@ public class HopcroftKarp {
      * Returns the vertex to which the specified vertex is matched in
      * the maximum matching computed by the algorithm.
      *
-     * @param  v the vertex
+     * @param v the vertex
      * @return the vertex to which vertex {@code v} is matched in the
-     *         maximum matching; {@code -1} if the vertex is not matched
+     * maximum matching; {@code -1} if the vertex is not matched
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
-     *
      */
     public int mate(int v) {
         validate(v);
@@ -239,11 +280,10 @@ public class HopcroftKarp {
      * Returns true if the specified vertex is matched in the maximum matching
      * computed by the algorithm.
      *
-     * @param  v the vertex
+     * @param v the vertex
      * @return {@code true} if vertex {@code v} is matched in maximum matching;
-     *         {@code false} otherwise
+     * {@code false} otherwise
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
-     *
      */
     public boolean isMatched(int v) {
         validate(v);
@@ -265,7 +305,7 @@ public class HopcroftKarp {
      * of the number of vertices in the graph (so that every vertex is matched).
      *
      * @return {@code true} if the graph contains a perfect matching;
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean isPerfect() {
         return cardinality * 2 == V;
@@ -275,9 +315,9 @@ public class HopcroftKarp {
      * Returns true if the specified vertex is in the minimum vertex cover
      * computed by the algorithm.
      *
-     * @param  v the vertex
+     * @param v the vertex
      * @return {@code true} if vertex {@code v} is in the minimum vertex cover;
-     *         {@code false} otherwise
+     * {@code false} otherwise
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
     public boolean inMinVertexCover(int v) {
@@ -288,11 +328,11 @@ public class HopcroftKarp {
     // throw an exception if vertex is invalid
     private void validate(int v) {
         if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 
     /**************************************************************************
-     *   
+     *
      *  The code below is solely for testing correctness of the data type.
      *
      **************************************************************************/
@@ -311,7 +351,7 @@ public class HopcroftKarp {
         for (int v = 0; v < V; v++) {
             if (mate(v) != -1) matchedVertices++;
         }
-        if (2*size() != matchedVertices) return false;
+        if (2 * size() != matchedVertices) return false;
 
         // check that size() is consistent with minVertexCover()
         int sizeOfMinVertexCover = 0;
@@ -347,49 +387,6 @@ public class HopcroftKarp {
                 if (!inMinVertexCover(v) && !inMinVertexCover(w)) return false;
 
         return true;
-    }
-
-    /** 
-     * Unit tests the {@code HopcroftKarp} data type.   
-     * Takes three command-line arguments {@code V1}, {@code V2}, and {@code E};
-     * creates a random bipartite graph with {@code V1} + {@code V2} vertices
-     * and {@code E} edges; computes a maximum matching and minimum vertex cover;
-     * and prints the results.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-
-        int V1 = Integer.parseInt(args[0]);
-        int V2 = Integer.parseInt(args[1]);
-        int E  = Integer.parseInt(args[2]);
-        Graph G = GraphGenerator.bipartite(V1, V2, E);
-        if (G.V() < 1000) StdOut.println(G);
-
-        HopcroftKarp matching = new HopcroftKarp(G);
-
-        // print maximum matching
-        StdOut.printf("Number of edges in max matching        = %d\n", matching.size());
-        StdOut.printf("Number of vertices in min vertex cover = %d\n", matching.size());
-        StdOut.printf("Graph has a perfect matching           = %b\n", matching.isPerfect());
-        StdOut.println();
-
-        if (G.V() >= 1000) return;
-
-        StdOut.print("Max matching: ");
-        for (int v = 0; v < G.V(); v++) {
-            int w = matching.mate(v);
-            if (matching.isMatched(v) && v < w)  // print each edge only once
-                StdOut.print(v + "-" + w + " ");
-        }
-        StdOut.println();
-
-        // print minimum vertex cover
-        StdOut.print("Min vertex cover: ");
-        for (int v = 0; v < G.V(); v++)
-            if (matching.inMinVertexCover(v))
-                StdOut.print(v + " ");
-        StdOut.println();
     }
 
 }

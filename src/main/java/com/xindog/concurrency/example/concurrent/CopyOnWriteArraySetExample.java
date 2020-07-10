@@ -16,7 +16,7 @@ public class CopyOnWriteArraySetExample {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static Set<Integer> set = new CopyOnWriteArraySet<>();
+    private static final Set<Integer> set = new CopyOnWriteArraySet<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

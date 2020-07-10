@@ -31,7 +31,7 @@ public class StreamTest13 {
                 collect(Collectors.partitioningBy(student -> student.getScore() >= 90));
 
 
-        map.forEach((k,v)-> System.out.println(k+" "+v));
+        map.forEach((k, v) -> System.out.println(k + " " + v));
 
 
     }

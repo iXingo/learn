@@ -8,7 +8,8 @@ import java.util.Optional;
 
 public class OptionalTest2 {
 
-    private static int anInt = 1;
+    private static final int anInt = 1;
+
     public static void main(String[] args) {
         Employee employee = new Employee();
         employee.setName("zhangsan");
@@ -32,7 +33,6 @@ public class OptionalTest2 {
 
 
     }
-
 
 
     public void test(Optional optional) {

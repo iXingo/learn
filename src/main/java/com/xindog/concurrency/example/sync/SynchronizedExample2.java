@@ -29,10 +29,10 @@ public class SynchronizedExample2 {
         SynchronizedExample2 example2 = new SynchronizedExample2();
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(() -> {
-            example1.test1(1);
+            test1(1);
         });
         executorService.execute(() -> {
-            example2.test1(2);
+            test1(2);
         });
     }
 }

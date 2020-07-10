@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @ThreadSafe
 public class AtomicExample4 {
 
-    private static AtomicReference<Integer> count = new AtomicReference<>(0);
+    private static final AtomicReference<Integer> count = new AtomicReference<>(0);
 
     public static void main(String[] args) {
         count.compareAndSet(0, 2); // 2

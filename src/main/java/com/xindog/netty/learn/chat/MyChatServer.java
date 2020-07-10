@@ -20,7 +20,7 @@ public class MyChatServer {
 
             ChannelFuture channelFuture = serverBootstrap.bind(9099).sync();
             channelFuture.channel().closeFuture().sync();
-        }finally {
+        } finally {
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
         }

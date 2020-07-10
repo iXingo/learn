@@ -5,6 +5,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@FunctionalInterface
+interface TheInterface {
+
+    void myMethod();
+}
+
+
+@FunctionalInterface
+interface TheInterface2 {
+
+    void myMethod2();
+}
+
 public class Test3 {
 
     public static void main(String[] args) {
@@ -34,18 +47,5 @@ public class Test3 {
 
 
     }
-}
-
-
-@FunctionalInterface
-interface TheInterface {
-
-    void myMethod();
-}
-
-@FunctionalInterface
-interface TheInterface2 {
-
-    void myMethod2();
 }
 

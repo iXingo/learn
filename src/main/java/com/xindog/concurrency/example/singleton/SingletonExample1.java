@@ -9,13 +9,13 @@ import com.xindog.concurrency.annoations.NotThreadSafe;
 @NotThreadSafe
 public class SingletonExample1 {
 
+    // 单例对象
+    private static SingletonExample1 instance = null;
+
     // 私有构造函数
     private SingletonExample1() {
 
     }
-
-    // 单例对象
-    private static SingletonExample1 instance = null;
 
     // 静态的工厂方法
     public static SingletonExample1 getInstance() {

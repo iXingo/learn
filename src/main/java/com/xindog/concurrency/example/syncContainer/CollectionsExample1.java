@@ -21,7 +21,7 @@ public class CollectionsExample1 {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static List<Integer> list = Collections.synchronizedList(Lists.newArrayList());
+    private static final List<Integer> list = Collections.synchronizedList(Lists.newArrayList());
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

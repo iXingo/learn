@@ -10,12 +10,28 @@ import java.util.concurrent.RecursiveTask;
 public class ForkJoinTaskExample extends RecursiveTask<Integer> {
 
     public static final int threshold = 2;
-    private int start;
-    private int end;
+    private final int start;
+    private final int end;
 
     public ForkJoinTaskExample(int start, int end) {
         this.start = start;
         this.end = end;
+    }
+
+    public static void main(String[] args) {
+        ForkJoinPool forkjoinPool = new ForkJoinPool();
+
+        //生成一个计算任务，计算1+2+3+4
+        ForkJoinTaskExample task = new ForkJoinTaskExample(1, 100);
+
+        //执行一个任务
+        Future<Integer> result = forkjoinPool.submit(task);
+
+        try {
+            log.info("result:{}", result.get());
+        } catch (Exception e) {
+            log.error("exception", e);
+        }
     }
 
     @Override
@@ -46,21 +62,5 @@ public class ForkJoinTaskExample extends RecursiveTask<Integer> {
             sum = leftResult + rightResult;
         }
         return sum;
-    }
-
-    public static void main(String[] args) {
-        ForkJoinPool forkjoinPool = new ForkJoinPool();
-
-        //生成一个计算任务，计算1+2+3+4
-        ForkJoinTaskExample task = new ForkJoinTaskExample(1, 100);
-
-        //执行一个任务
-        Future<Integer> result = forkjoinPool.submit(task);
-
-        try {
-            log.info("result:{}", result.get());
-        } catch (Exception e) {
-            log.error("exception", e);
-        }
     }
 }
