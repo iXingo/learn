@@ -45,6 +45,7 @@ public class PictureUpload {
         HttpResponse<String> response = Unirest.post("https://www.ixingo.com.cn/api/upload/file")
                 .header("Accept", "application/json")
                 .header("Authorization", authToken)
+                .field("prefix", "img")
                 .field("file", path.toFile())
                 .asString();
         System.out.println(response.getBody());
