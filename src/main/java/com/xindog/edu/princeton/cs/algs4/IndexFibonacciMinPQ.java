@@ -37,11 +37,11 @@ import java.util.NoSuchElementException;
 public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     private final Comparator<Key> comp; //Comparator over the keys
     private final Node<Key>[] nodes;            //Array of Nodes in the heap
+    private final int n;                        //Maximum number of elements in the heap
+    private final HashMap<Integer, Node<Key>> table = new HashMap<Integer, Node<Key>>(); //Used for the consolidate operation
     private Node<Key> head;                //Head of the circular root list
     private Node<Key> min;                //Minimum Node in the heap
     private int size;                    //Number of keys in the heap
-    private final int n;                        //Maximum number of elements in the heap
-    private final HashMap<Integer, Node<Key>> table = new HashMap<Integer, Node<Key>>(); //Used for the consolidate operation
 
     /**
      * Initializes an empty indexed priority queue with indices between {@code 0} and {@code N-1}

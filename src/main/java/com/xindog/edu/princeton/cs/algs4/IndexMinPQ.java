@@ -42,10 +42,10 @@ import java.util.NoSuchElementException;
  */
 public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer> {
     private final int maxN;        // maximum number of elements on PQ
-    private int n;           // number of elements on PQ
     private final int[] pq;        // binary heap using 1-based indexing
     private final int[] qp;        // inverse of pq - qp[pq[i]] = pq[qp[i]] = i
     private final Key[] keys;      // keys[i] = priority of i
+    private int n;           // number of elements on PQ
 
     /**
      * Initializes an empty indexed priority queue with indices between {@code 0}

@@ -38,8 +38,8 @@ package com.xindog.edu.princeton.cs.algs4;
  * @author Kevin Wayne
  */
 public class TopologicalX {
-    private Queue<Integer> order;     // vertices in topological order
     private final int[] ranks;              // ranks[v] = order where vertex v appers in order
+    private Queue<Integer> order;     // vertices in topological order
 
     /**
      * Determines whether the digraph {@code G} has a topological order and, if so,

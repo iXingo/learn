@@ -13,6 +13,14 @@ import java.lang.reflect.Proxy;
  */
 public class DynamicProxyTest {
 
+    public static void main(String[] args) {
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+//        IHello hello = (IHello) new DynamicProxy().bind(new Hello());
+        Hello h = new Hello();
+        IHello hello = (IHello) Proxy.newProxyInstance(h.getClass().getClassLoader(), h.getClass().getInterfaces(), new DynamicProxy(h));
+        hello.sayHello();
+    }
+
     interface IHello {
         void sayHello();
     }
@@ -28,7 +36,7 @@ public class DynamicProxyTest {
 
         Object originalObj;
 
-        DynamicProxy(Object target){
+        DynamicProxy(Object target) {
             originalObj = target;
         }
 
@@ -40,25 +48,16 @@ public class DynamicProxyTest {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             String sayHello = "sayHello";
-            if(sayHello.equals(method.getName())) {
+            if (sayHello.equals(method.getName())) {
                 System.out.println("--------pre method------------");
                 Object result = method.invoke(originalObj, args);
                 System.out.println(method.getName() + "()");
                 System.out.println("--------post method-----------");
                 return result;
-            }
-            else {
+            } else {
                 return method.invoke(originalObj, args);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
-//        IHello hello = (IHello) new DynamicProxy().bind(new Hello());
-        Hello h = new Hello();
-        IHello hello = (IHello) Proxy.newProxyInstance(h.getClass().getClassLoader(), h.getClass().getInterfaces(), new DynamicProxy(h));
-        hello.sayHello();
     }
 }
 

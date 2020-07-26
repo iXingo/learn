@@ -53,8 +53,8 @@ public class EdgeWeightedGraph {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;
-    private int E;
     private final Bag<Edge>[] adj;
+    private int E;
 
     /**
      * Initializes an empty edge-weighted graph with {@code V} vertices and 0 edges.

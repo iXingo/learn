@@ -70,11 +70,10 @@ package com.xindog.edu.princeton.cs.algs4;
  */
 public class LazyPrimMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
-
-    private double weight;       // total weight of MST
     private final Queue<Edge> mst;     // edges in the MST
     private final boolean[] marked;    // marked[v] = true iff v on tree
     private final MinPQ<Edge> pq;      // edges with one endpoint in tree
+    private double weight;       // total weight of MST
 
     /**
      * Compute a minimum spanning tree (or forest) of an edge-weighted graph.

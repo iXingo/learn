@@ -34,10 +34,9 @@ import java.awt.*;
  */
 public class CollisionSystem {
     private static final double HZ = 0.5;    // number of redraw events per clock tick
-
+    private final Particle[] particles;     // the array of particles
     private MinPQ<Event> pq;          // the priority queue
     private double t = 0.0;          // simulation clock time
-    private final Particle[] particles;     // the array of particles
 
     /**
      * Initializes a system with the specified collection of particles.

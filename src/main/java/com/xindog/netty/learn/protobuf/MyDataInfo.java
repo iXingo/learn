@@ -90,6 +90,7 @@ public final class MyDataInfo {
     getDescriptor() {
         return descriptor;
     }
+
     public interface MyMessageOrBuilder extends
             // @@protoc_insertion_point(interface_extends:com.xindog.bilibili.protobuf.MyMessage)
             com.google.protobuf.MessageOrBuilder {
@@ -151,6 +152,7 @@ public final class MyDataInfo {
 
         MyDataInfo.MyMessage.DataBodyCase getDataBodyCase();
     }
+
     public interface PersonOrBuilder extends
             // @@protoc_insertion_point(interface_extends:com.xindog.bilibili.protobuf.Person)
             com.google.protobuf.MessageOrBuilder {
@@ -197,6 +199,7 @@ public final class MyDataInfo {
         com.google.protobuf.ByteString
         getAddressBytes();
     }
+
     public interface DogOrBuilder extends
             // @@protoc_insertion_point(interface_extends:com.xindog.bilibili.protobuf.Dog)
             com.google.protobuf.MessageOrBuilder {
@@ -227,6 +230,7 @@ public final class MyDataInfo {
          */
         int getAge();
     }
+
     public interface CatOrBuilder extends
             // @@protoc_insertion_point(interface_extends:com.xindog.bilibili.protobuf.Cat)
             com.google.protobuf.MessageOrBuilder {
@@ -308,6 +312,7 @@ public final class MyDataInfo {
         private MyMessage() {
             dataType_ = 1;
         }
+
         private MyMessage(
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2527,6 +2532,7 @@ public final class MyDataInfo {
         private volatile java.lang.Object name_;
         private int age_;
         private byte memoizedIsInitialized = -1;
+
         // Use Dog.newBuilder() to construct.
         private Dog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
             super(builder);
@@ -3216,6 +3222,7 @@ public final class MyDataInfo {
         private volatile java.lang.Object name_;
         private volatile java.lang.Object city_;
         private byte memoizedIsInitialized = -1;
+
         // Use Cat.newBuilder() to construct.
         private Cat(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
             super(builder);

@@ -435,6 +435,7 @@ import java.util.TreeSet;
  * <em>Computer Science: An Interdisciplinary Approach</em>
  * by Robert Sedgewick and Kevin Wayne.
  * <p>
+ *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
@@ -545,6 +546,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static final double DEFAULT_YMAX = 1.0;
     // default font
     private static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN, 16);
+    // for synchronization
+    private static final Object mouseLock = new Object();
+    private static final Object keyLock = new Object();
+    // singleton for callbacks: avoids generation of extra .class files
+    private static final StdDraw std = new StdDraw();
+    // queue of typed key characters
+    private static final LinkedList<Character> keysTyped = new LinkedList<Character>();
+    // set of key codes currently pressed down
+    private static final TreeSet<Integer> keysDown = new TreeSet<Integer>();
     // current pen color
     private static Color penColor;
     private static int width = DEFAULT_SIZE;
@@ -554,32 +564,17 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     // show we draw immediately or wait until next show?
     private static boolean defer = false;
     private static double xmin, ymin, xmax, ymax;
-    // for synchronization
-    private static final Object mouseLock = new Object();
-    private static final Object keyLock = new Object();
     // current font
     private static Font font;
-
     // double buffered graphics
     private static BufferedImage offscreenImage, onscreenImage;
     private static Graphics2D offscreen, onscreen;
-
-    // singleton for callbacks: avoids generation of extra .class files
-    private static final StdDraw std = new StdDraw();
-
     // the frame for drawing to the screen
     private static JFrame frame;
-
     // mouse state
     private static boolean isMousePressed = false;
     private static double mouseX = 0;
     private static double mouseY = 0;
-
-    // queue of typed key characters
-    private static final LinkedList<Character> keysTyped = new LinkedList<Character>();
-
-    // set of key codes currently pressed down
-    private static final TreeSet<Integer> keysDown = new TreeSet<Integer>();
 
     // static initializer
     static {

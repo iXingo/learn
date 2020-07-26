@@ -37,11 +37,11 @@ public class AssignmentProblem {
 
     private final int n;              // number of rows and columns
     private final double[][] weight;  // the n-by-n cost matrix
-    private double minWeight;   // minimum value of any weight
     private final double[] px;        // px[i] = dual variable for row i
     private final double[] py;        // py[j] = dual variable for col j
     private final int[] xy;           // xy[i] = j means i-j is a match
     private final int[] yx;           // yx[j] = i means i-j is a match
+    private double minWeight;   // minimum value of any weight
 
     /**
      * Determines an optimal solution to the assignment problem.

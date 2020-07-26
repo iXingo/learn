@@ -59,16 +59,13 @@ package com.xindog.edu.princeton.cs.algs4;
  */
 public class GlobalMincut {
     private static final double FLOATING_POINT_EPSILON = 1E-11;
-
+    // number of vertices
+    private final int V;
     // the weight of the minimum cut
     private double weight = Double.POSITIVE_INFINITY;
-
     // cut[v] = true if v is on the first subset of vertices of the minimum cut;
     // or false if v is on the second subset
     private boolean[] cut;
-
-    // number of vertices
-    private final int V;
 
     /**
      * Computes a minimum cut of an edge-weighted graph.

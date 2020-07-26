@@ -4,13 +4,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 
-
 public class Test {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         // 任务 1：洗水壶 -> 烧开水
         CompletableFuture<Void> f1 =
-                CompletableFuture.runAsync(()->{
+                CompletableFuture.runAsync(() -> {
                     System.out.println("T1: 洗水壶...");
                     sleep(1, TimeUnit.SECONDS);
 
@@ -20,7 +19,7 @@ public class Test {
                 });
 // 任务 2：洗茶壶 -> 洗茶杯 -> 拿茶叶
         CompletableFuture<String> f2 =
-                CompletableFuture.supplyAsync(()->{
+                CompletableFuture.supplyAsync(() -> {
                     System.out.println("T2: 洗茶壶...");
                     sleep(1, TimeUnit.SECONDS);
 
@@ -33,7 +32,7 @@ public class Test {
                 });
 // 任务 3：任务 1 和任务 2 完成后执行：泡茶
         CompletableFuture<String> f3 =
-                f1.thenCombine(f2, (__, tf)->{
+                f1.thenCombine(f2, (__, tf) -> {
                     System.out.println("T1: 拿到茶叶:" + tf);
                     System.out.println("T1: 泡茶...");
                     return " 上茶:" + tf;
@@ -56,6 +55,7 @@ public class Test {
     static void sleep(int t, TimeUnit u) {
         try {
             u.sleep(t);
-        }catch(InterruptedException e){}
+        } catch (InterruptedException e) {
+        }
     }
 }

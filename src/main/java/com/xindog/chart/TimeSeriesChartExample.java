@@ -1,11 +1,5 @@
 package com.xindog.chart;
 
-import java.awt.Color;
-
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -15,9 +9,11 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * @author imssbora
- *
  */
 public class TimeSeriesChartExample extends JFrame {
 
@@ -35,11 +31,21 @@ public class TimeSeriesChartExample extends JFrame {
                 dataset);
 
         //Changes background color
-        XYPlot plot = (XYPlot)chart.getPlot();
-        plot.setBackgroundPaint(new Color(255,228,196));
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setBackgroundPaint(new Color(255, 228, 196));
 
         ChartPanel panel = new ChartPanel(chart);
         setContentPane(panel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            TimeSeriesChartExample example = new TimeSeriesChartExample("Time Series Chart");
+            example.setSize(800, 400);
+            example.setLocationRelativeTo(null);
+            example.setVisible(true);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        });
     }
 
     private XYDataset createDataset() {
@@ -84,15 +90,5 @@ public class TimeSeriesChartExample extends JFrame {
 
 
         return dataset;
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            TimeSeriesChartExample example = new TimeSeriesChartExample("Time Series Chart");
-            example.setSize(800, 400);
-            example.setLocationRelativeTo(null);
-            example.setVisible(true);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        });
     }
 }
