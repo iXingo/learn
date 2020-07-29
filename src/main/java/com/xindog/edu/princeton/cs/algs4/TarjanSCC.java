@@ -58,9 +58,9 @@ public class TarjanSCC {
     private final boolean[] marked;        // marked[v] = has v been visited?
     private final int[] id;                // id[v] = id of strong component containing v
     private final int[] low;               // low[v] = low number of v
+    private final Stack<Integer> stack;
     private int pre;                 // preorder number counter
     private int count;               // number of strongly-connected components
-    private final Stack<Integer> stack;
 
 
     /**

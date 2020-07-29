@@ -14,13 +14,11 @@ import java.util.concurrent.Semaphore;
 @NotThreadSafe
 public class HashSetExample {
 
+    private static final Set<Integer> set = new HashSet<>();
     // 请求总数
     public static int clientTotal = 5000;
-
     // 同时并发执行的线程数
     public static int threadTotal = 200;
-
-    private static final Set<Integer> set = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

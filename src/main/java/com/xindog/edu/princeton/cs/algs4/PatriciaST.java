@@ -442,8 +442,8 @@ public class PatriciaST<Value> {
      * The b value indicates the relevant bit position.
      */
     private class Node {
-        private Node left, right;
         private final String key;
+        private Node left, right;
         private Value val;
         private int b;
 

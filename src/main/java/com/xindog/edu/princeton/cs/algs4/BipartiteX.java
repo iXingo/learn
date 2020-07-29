@@ -40,11 +40,10 @@ package com.xindog.edu.princeton.cs.algs4;
 public class BipartiteX {
     private static final boolean WHITE = false;
     private static final boolean BLACK = true;
-
-    private boolean isBipartite;   // is the graph bipartite?
     private final boolean[] color;       // color[v] gives vertices on one side of bipartition
     private final boolean[] marked;      // marked[v] = true iff v has been visited in DFS
     private final int[] edgeTo;          // edgeTo[v] = last edge on path to v
+    private boolean isBipartite;   // is the graph bipartite?
     private Queue<Integer> cycle;  // odd-length cycle
 
     /**

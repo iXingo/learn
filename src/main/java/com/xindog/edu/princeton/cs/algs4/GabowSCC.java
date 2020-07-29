@@ -58,10 +58,10 @@ public class GabowSCC {
     private final boolean[] marked;        // marked[v] = has v been visited?
     private final int[] id;                // id[v] = id of strong component containing v
     private final int[] preorder;          // preorder[v] = preorder of v
-    private int pre;                 // preorder number counter
-    private int count;               // number of strongly-connected components
     private final Stack<Integer> stack1;
     private final Stack<Integer> stack2;
+    private int pre;                 // preorder number counter
+    private int count;               // number of strongly-connected components
 
 
     /**

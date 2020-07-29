@@ -20,6 +20,8 @@ public class Server implements Runnable {
     private final Integer port1 = 8099;
     //第二个端口
     private final Integer port2 = 9099;
+    //缓冲区
+    private final ByteBuffer buf = ByteBuffer.allocate(512);
     //第一个服务器通道 服务A
     private ServerSocketChannel serversocket1;
     //第二个服务器通道 服务B
@@ -28,12 +30,8 @@ public class Server implements Runnable {
     private SocketChannel clientchannel1;
     //连接2
     private SocketChannel clientchannel2;
-
     //选择器，主要用来监控各个通道的事件
     private Selector selector;
-
-    //缓冲区
-    private final ByteBuffer buf = ByteBuffer.allocate(512);
 
     public Server() {
         init();

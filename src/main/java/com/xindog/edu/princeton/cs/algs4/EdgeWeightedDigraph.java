@@ -39,9 +39,9 @@ public class EdgeWeightedDigraph {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;                // number of vertices in this digraph
-    private int E;                      // number of edges in this digraph
     private final Bag<DirectedEdge>[] adj;    // adj[v] = adjacency list for vertex v
     private final int[] indegree;             // indegree[v] = indegree of vertex v
+    private int E;                      // number of edges in this digraph
 
     /**
      * Initializes an empty edge-weighted digraph with {@code V} vertices and 0 edges.

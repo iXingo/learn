@@ -426,8 +426,8 @@ public class PatriciaSET implements Iterable<String> {
      * value indicates the relevant bit position.
      */
     private class Node {
-        private Node left, right;
         private final String key;
+        private Node left, right;
         private int b;
 
         public Node(String key, int b) {

@@ -65,9 +65,8 @@ package com.xindog.edu.princeton.cs.algs4;
  */
 public class KruskalMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
-
-    private double weight;                        // weight of MST
     private final Queue<Edge> mst = new Queue<Edge>();  // edges in MST
+    private double weight;                        // weight of MST
 
     /**
      * Compute a minimum spanning tree (or forest) of an edge-weighted graph.

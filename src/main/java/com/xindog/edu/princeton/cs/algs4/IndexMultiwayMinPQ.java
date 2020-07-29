@@ -40,11 +40,11 @@ import java.util.NoSuchElementException;
 public class IndexMultiwayMinPQ<Key> implements Iterable<Integer> {
     private final int d;                //Dimension of the heap
     private final Comparator<Key> comp; //Comparator over the keys
-    private int n;                        //Number of keys currently in the queue
     private final int nmax;                    //Maximum number of items in the queue
     private final int[] pq;                    //Multiway heap
     private final int[] qp;                    //Inverse of pq : qp[pq[i]] = pq[qp[i]] = i
     private final Key[] keys;                    //keys[i] = priority of i
+    private int n;                        //Number of keys currently in the queue
 
 
     /**

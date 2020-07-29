@@ -7,11 +7,6 @@ package com.xindog.chart;
  * Time:    11:14 AM
  * Project: learn
  */
-import java.awt.Color;
-
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -21,9 +16,11 @@ import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * @author imssbora
- *
  */
 public class XYStepChartExample extends JFrame {
 
@@ -42,11 +39,21 @@ public class XYStepChartExample extends JFrame {
                 dataset
         );
 
-        XYPlot plot=(XYPlot)chart.getPlot();
+        XYPlot plot = (XYPlot) chart.getPlot();
         plot.setBackgroundPaint(new Color(229, 150, 97, 60));
 
         ChartPanel panel = new ChartPanel(chart);
         setContentPane(panel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            XYStepChartExample example = new XYStepChartExample("XY Step Chart Example");
+            example.setSize(800, 400);
+//            example.setLocationRelativeTo(null);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            example.setVisible(true);
+        });
     }
 
     private IntervalXYDataset createDataset() {
@@ -86,15 +93,5 @@ public class XYStepChartExample extends JFrame {
         dataset.addSeries(series2);
         dataset.addSeries(series3);
         return dataset;
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            XYStepChartExample example = new XYStepChartExample("XY Step Chart Example");
-            example.setSize(800, 400);
-//            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            example.setVisible(true);
-        });
     }
 }

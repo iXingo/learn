@@ -13,11 +13,11 @@ import java.util.concurrent.Semaphore;
 @NotThreadSafe
 public class DateFormatExample1 {
 
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
     // 请求总数
     public static int clientTotal = 5000;
     // 同时并发执行的线程数
     public static int threadTotal = 200;
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();

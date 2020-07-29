@@ -310,8 +310,8 @@ public class TrieST<Value> {
 
     // R-way trie node
     private static class Node {
-        private Object val;
         private final Node[] next = new Node[R];
+        private Object val;
     }
 }
 

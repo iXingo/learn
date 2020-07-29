@@ -58,10 +58,10 @@ public class HopcroftKarp {
 
     private final int V;                 // number of vertices in the graph
     private final BipartiteX bipartition;      // the bipartition
-    private int cardinality;             // cardinality of current matching
     private final int[] mate;                  // mate[v] =  w if v-w is an edge in current matching
     //         = -1 if v is not in current matching
     private final boolean[] inMinVertexCover;  // inMinVertexCover[v] = true iff v is in min vertex cover
+    private int cardinality;             // cardinality of current matching
     private boolean[] marked;            // marked[v] = true iff v is reachable via alternating path
     private int[] distTo;                // distTo[v] = number of edges on shortest path to v
 

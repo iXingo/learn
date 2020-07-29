@@ -37,8 +37,8 @@ public class FlowNetwork {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;
-    private int E;
     private final Bag<FlowEdge>[] adj;
+    private int E;
 
     /**
      * Initializes an empty flow network with {@code V} vertices and 0 edges.
