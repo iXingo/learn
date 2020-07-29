@@ -23,7 +23,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class PictureUpload {
     public static void main(String[] args) {
         String token = getToken();
-        Path dir = Paths.get("/home/shawang/upload");
+        Path dir = Paths.get(System.getProperty("user.home")+ "/upload");
         System.out.println("=============Upload started.=============");
         try {
             Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
