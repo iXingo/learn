@@ -25,13 +25,24 @@ public class BootstrapNew {
         wrapper.addListener(System.out::println);
 
         CompletableFuture<Wrapper> future = CompletableFuture.supplyAsync(() -> {
-            System.out.println(Thread.currentThread().getName());
+            System.out.println(Thread.currentThread().getName() + "do work");
+            System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
             return bootstrap.doWork(wrapper);
         });
+
+//        try {
+//            System.out.println(Thread.currentThread() + "Future get");
+////            future.get(1200, TimeUnit.MILLISECONDS);
+//        } catch (InterruptedException | TimeoutException | ExecutionException e) {
+//            System.out.println("is Canceled?"+future.isCancelled());
+//            wrapper.getListener().result("time out exception");
+//        }
+        future.thenRun(()-> System.out.println("Future run again"+Thread.currentThread().getName()));
+
         try {
-            future.get(800, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException | TimeoutException | ExecutionException e) {
-            wrapper.getListener().result("time out exception");
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         System.out.println(Thread.currentThread());
 
@@ -39,8 +50,11 @@ public class BootstrapNew {
 
     private Wrapper doWork(Wrapper wrapper) {
         Task task = wrapper.getTask();
+        System.out.println(Thread.currentThread() + ",Task Start");
         String result = task.doTask(wrapper.getParam());
+        System.out.println(Thread.currentThread() + ",Task Finish, notify listener");
         wrapper.getListener().result(result);
+        System.out.println(Thread.currentThread() + ",Result noticed");
         return wrapper;
     }
 
