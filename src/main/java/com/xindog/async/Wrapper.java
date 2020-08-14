@@ -10,7 +10,7 @@ package com.xindog.async;
 public class Wrapper {
     private Object param;
     private Task task;
-    private Listener listener;
+    private Handler handler;
 
     public Object getParam() {
         return param;
@@ -28,11 +28,11 @@ public class Wrapper {
         this.task = task;
     }
 
-    public Listener getListener() {
-        return listener;
+    public Handler getHandler() {
+        return handler;
     }
 
-    public void addListener(Listener listener) {
-        this.listener = listener;
+    public void addHandler(Handler handler) {
+        this.handler = handler;
     }
 }

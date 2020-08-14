@@ -1,9 +1,6 @@
 package com.xindog.async;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Xindog.com(TM).
@@ -22,7 +19,7 @@ public class BootstrapNew {
         Wrapper wrapper = new Wrapper();
         wrapper.setTask(task);
         wrapper.setParam("hello");
-        wrapper.addListener(System.out::println);
+        wrapper.addHandler(System.out::println);
 
         CompletableFuture<Wrapper> future = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName() + "do work");
@@ -37,8 +34,10 @@ public class BootstrapNew {
 //            System.out.println("is Canceled?"+future.isCancelled());
 //            wrapper.getListener().result("time out exception");
 //        }
-        future.thenRun(()-> System.out.println("Future run again"+Thread.currentThread().getName()));
-
+        future.thenRun(()-> System.out.println("Future run again"+Thread.currentThread().getName())).whenComplete((wrapper2, throwable)-> {
+            System.out.println(wrapper2);
+        });
+        future.whenComplete((wrapper1, throwable) -> System.out.println(wrapper1.getHandler()));
         try {
             Thread.currentThread().join();
         } catch (InterruptedException e) {
@@ -53,7 +52,8 @@ public class BootstrapNew {
         System.out.println(Thread.currentThread() + ",Task Start");
         String result = task.doTask(wrapper.getParam());
         System.out.println(Thread.currentThread() + ",Task Finish, notify listener");
-        wrapper.getListener().result(result);
+        wrapper.getHandler().handle(result);
+        System.out.println(wrapper.getHandler());
         System.out.println(Thread.currentThread() + ",Result noticed");
         return wrapper;
     }

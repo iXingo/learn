@@ -17,7 +17,7 @@ public class Bootstrap {
         wrapper.setTask(task);
         wrapper.setParam("hello");
 
-        bootstrap.doWork(wrapper).addListener(result -> {
+        bootstrap.doWork(wrapper).addHandler(result -> {
             System.out.printf("[Thread-%s] Add Listener \n", Thread.currentThread().getName());
             System.out.println("[Start]: Add Listener " + System.currentTimeMillis());
             System.out.println(result);
@@ -34,7 +34,7 @@ public class Bootstrap {
             System.out.println("[start]: Do Work " + System.currentTimeMillis());
             Task task = wrapper.getTask();
             String result = task.doTask(wrapper.getParam());
-            wrapper.getListener().result(result);
+            wrapper.getHandler().handle(result);
             System.out.println("[Finish]: Do Work " + System.currentTimeMillis());
         }).start();
 
