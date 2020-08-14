@@ -13,7 +13,7 @@ public class Bootstrap {
 
         Task task = bootstrap.newTask();
 
-        Wrapper wrapper = new Wrapper();
+        Wrapper<String> wrapper = new Wrapper<>();
         wrapper.setTask(task);
         wrapper.setParam("hello");
 
@@ -28,7 +28,7 @@ public class Bootstrap {
 
     }
 
-    private Wrapper doWork(Wrapper wrapper) {
+    private Wrapper<String> doWork(Wrapper<String> wrapper) {
         new Thread(() -> {
             System.out.printf("[Thread-%s] Do Work\n",Thread.currentThread().getName());
             System.out.println("[start]: Do Work " + System.currentTimeMillis());

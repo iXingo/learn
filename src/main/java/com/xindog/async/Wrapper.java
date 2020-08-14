@@ -7,10 +7,10 @@ package com.xindog.async;
  * Time:    2:21 PM
  * Project: learn
  */
-public class Wrapper {
+public class Wrapper<T> {
     private Object param;
     private Task task;
-    private Handler handler;
+    private Handler<T> handler;
 
     public Object getParam() {
         return param;
@@ -28,11 +28,11 @@ public class Wrapper {
         this.task = task;
     }
 
-    public Handler getHandler() {
+    public Handler<T> getHandler() {
         return handler;
     }
 
-    public void addHandler(Handler handler) {
+    public void addHandler(Handler<T> handler) {
         this.handler = handler;
     }
 }

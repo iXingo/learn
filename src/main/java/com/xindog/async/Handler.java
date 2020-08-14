@@ -7,6 +7,6 @@ package com.xindog.async;
  * Time:    2:20 PM
  * Project: learn
  */
-public interface Handler {
-    void handle(Object result);
+public interface Handler<T> {
+    void handle(T result);
 }
