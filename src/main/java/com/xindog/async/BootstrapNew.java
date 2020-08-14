@@ -16,12 +16,12 @@ public class BootstrapNew {
 
         Task task = bootstrap.newTask();
 
-        Wrapper wrapper = new Wrapper();
+        Wrapper<String> wrapper = new Wrapper<>();
         wrapper.setTask(task);
         wrapper.setParam("hello");
         wrapper.addHandler(System.out::println);
 
-        CompletableFuture<Wrapper> future = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<Wrapper<String>> future = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName() + "do work");
             System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
             return bootstrap.doWork(wrapper);
@@ -47,7 +47,7 @@ public class BootstrapNew {
 
     }
 
-    private Wrapper doWork(Wrapper wrapper) {
+    private Wrapper<String> doWork(Wrapper<String> wrapper) {
         Task task = wrapper.getTask();
         System.out.println(Thread.currentThread() + ",Task Start");
         String result = task.doTask(wrapper.getParam());
