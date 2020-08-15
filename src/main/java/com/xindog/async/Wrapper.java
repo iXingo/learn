@@ -8,23 +8,23 @@ package com.xindog.async;
  * Project: learn
  */
 public class Wrapper<T> {
-    private Object param;
-    private Task task;
+    private T param;
+    private Task<T> task;
     private Handler<T> handler;
 
-    public Object getParam() {
+    public T getParam() {
         return param;
     }
 
-    public void setParam(Object param) {
+    public void setParam(T param) {
         this.param = param;
     }
 
-    public Task getTask() {
+    public Task<T> getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
+    public void setTask(Task<T> task) {
         this.task = task;
     }
 

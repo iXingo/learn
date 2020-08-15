@@ -14,7 +14,7 @@ public class BootstrapNew {
     public static void main(String[] args) {
         BootstrapNew bootstrap = new BootstrapNew();
 
-        Task task = bootstrap.newTask();
+        Task<String> task = bootstrap.newTask();
 
         Wrapper<String> wrapper = new Wrapper<>();
         wrapper.setTask(task);
@@ -48,7 +48,7 @@ public class BootstrapNew {
     }
 
     private Wrapper<String> doWork(Wrapper<String> wrapper) {
-        Task task = wrapper.getTask();
+        Task<String> task = wrapper.getTask();
         System.out.println(Thread.currentThread() + ",Task Start");
         String result = task.doTask(wrapper.getParam());
         System.out.println(Thread.currentThread() + ",Task Finish, notify listener");
@@ -58,7 +58,7 @@ public class BootstrapNew {
         return wrapper;
     }
 
-    private Task newTask() {
+    private Task<String> newTask() {
         return object -> {
             System.out.println(Thread.currentThread().getName());
             try {

@@ -7,6 +7,6 @@ package com.xindog.async;
  * Time:    2:20 PM
  * Project: learn
  */
-public interface Task {
-    String doTask(Object object);
+public interface Task<T> {
+    String doTask(T object);
 }

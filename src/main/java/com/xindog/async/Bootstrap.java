@@ -11,7 +11,7 @@ public class Bootstrap {
     public static void main(String[] args) {
         Bootstrap bootstrap = new Bootstrap();
 
-        Task task = bootstrap.newTask();
+        Task<String> task = bootstrap.newTask();
 
         Wrapper<String> wrapper = new Wrapper<>();
         wrapper.setTask(task);
@@ -32,7 +32,7 @@ public class Bootstrap {
         new Thread(() -> {
             System.out.printf("[Thread-%s] Do Work\n",Thread.currentThread().getName());
             System.out.println("[start]: Do Work " + System.currentTimeMillis());
-            Task task = wrapper.getTask();
+            Task<String> task = wrapper.getTask();
             String result = task.doTask(wrapper.getParam());
             wrapper.getHandler().handle(result);
             System.out.println("[Finish]: Do Work " + System.currentTimeMillis());
@@ -41,7 +41,7 @@ public class Bootstrap {
         return wrapper;
     }
 
-    private Task newTask() {
+    private Task<String> newTask() {
         return object -> {
             System.out.printf("[Thread-%s] Task Content\n",Thread.currentThread().getName());
             try {
