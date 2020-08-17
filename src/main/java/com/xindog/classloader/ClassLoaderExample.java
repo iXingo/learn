@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 /**
  * Created by Xindog.com(TM).
@@ -32,7 +33,7 @@ public class ClassLoaderExample {
         System.out.println(loader.getResourceAsStream("./Text"));
         System.out.println(Thread.currentThread().getContextClassLoader().getResourceAsStream("Text"));
 
-        InputStreamReader reader = new InputStreamReader(loader.getResourceAsStream("com/xindog/classloader/Text"));
+        InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(loader.getResourceAsStream("com/xindog/classloader/Text")));
         BufferedReader bufferedReader = new BufferedReader(reader);
         String line;
         try {

@@ -3,7 +3,7 @@ package com.xindog.consumer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Cosumer {
+public class Consumer {
 
     public static void main(String[] args) {
         ExecutorService executors = Executors.newCachedThreadPool();
