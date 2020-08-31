@@ -16,18 +16,18 @@ public class StreamTest1 {
 
         List<Student> students = Arrays.asList(student1, student2, student3, student4, student5);
 
-        List<Student> students1 = students.stream().collect(toList());
+        List<Student> students1 = new ArrayList<>(students);
         students1.forEach(System.out::println);
         System.out.println("------------");
 
-        System.out.println("count: " + students.stream().collect(counting()));
+        System.out.println("count: " + (Long) students.stream().count());
         System.out.println("count: " + students.stream().count());
         System.out.println("------------");
 
-        students.stream().collect(minBy(Comparator.comparingInt(Student::getScore))).ifPresent(System.out::println);
-        students.stream().collect(maxBy(Comparator.comparingInt(Student::getScore))).ifPresent(System.out::println);
+        students.stream().min(Comparator.comparingInt(Student::getScore)).ifPresent(System.out::println);
+        students.stream().max(Comparator.comparingInt(Student::getScore)).ifPresent(System.out::println);
         System.out.println(students.stream().collect(averagingInt(Student::getScore)));
-        System.out.println(students.stream().collect(summingInt(Student::getScore)));
+        System.out.println((Integer) students.stream().mapToInt(Student::getScore).sum());
         IntSummaryStatistics intSummaryStatistics = students.stream().collect(summarizingInt(Student::getScore));
         System.out.println(intSummaryStatistics);
         System.out.println("------------");

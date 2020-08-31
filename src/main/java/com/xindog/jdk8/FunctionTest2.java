@@ -17,7 +17,7 @@ public class FunctionTest2 {
 //        System.out.println(test.compute3(1, 2, (value1, value2) -> value1 * value2));
 //        System.out.println(test.compute3(1, 2, (value1, value2) -> value1 / value2));
 
-        System.out.println(test.compute4(2, 3, (value1, value2) -> value1 + value2, value -> value * value)); //25
+        System.out.println(test.compute4(2, 3, Integer::sum, value -> value * value)); //25
 
 
     }

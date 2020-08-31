@@ -18,7 +18,7 @@ public class OptionalDemo {
         System.out.println(s);
         String t = stringOptional.orElseGet(() -> "Hello");
         System.out.println(t);
-        String str = stringOptional.orElseThrow(() -> new NullPointerException());
+        String str = stringOptional.orElseThrow(NullPointerException::new);
 
 
         System.out.println(s);

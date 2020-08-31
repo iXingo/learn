@@ -17,8 +17,7 @@ public class MySetCollector2<T> implements Collector<T, Set<T>, Map<T, T>> {
         for (int i = 0; i < 1; ++i) {
 
             List<String> list = Arrays.asList("hello", "world", "welcome", "hello", "a", "b", "c", "d", "e", "f", "g");
-            Set<String> set = new HashSet<>();
-            set.addAll(list);
+            Set<String> set = new HashSet<>(list);
 
             System.out.println("set: " + set);
 

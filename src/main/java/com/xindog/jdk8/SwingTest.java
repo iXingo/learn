@@ -18,6 +18,6 @@ public class SwingTest {
         jframe.add(jButton);
         jframe.pack();
         jframe.setVisible(true);
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
