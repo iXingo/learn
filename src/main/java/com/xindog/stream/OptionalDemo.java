@@ -8,6 +8,7 @@ import java.util.Optional;
  * Date:    7/22/19
  * Time:    2:19 PM
  * Project: learn
+ * @author shawang
  */
 public class OptionalDemo {
 
@@ -16,11 +17,11 @@ public class OptionalDemo {
         stringOptional.ifPresent(System.out::println);
         String s = stringOptional.orElse("Hello World");
         System.out.println(s);
-        String t = stringOptional.orElseGet(() -> "Hello");
+        String t = stringOptional.orElse("Hello");
         System.out.println(t);
         String str = stringOptional.orElseThrow(NullPointerException::new);
 
 
-        System.out.println(s);
+        System.out.println(str);
     }
 }
