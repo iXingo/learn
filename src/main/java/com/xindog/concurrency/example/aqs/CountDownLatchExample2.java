@@ -14,6 +14,7 @@ public class CountDownLatchExample2 {
 
     public static void main(String[] args) throws Exception {
 
+
         ExecutorService exec = Executors.newCachedThreadPool();
 
         final CountDownLatch countDownLatch = new CountDownLatch(threadCount);

@@ -9,15 +9,15 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class CountDownLatchExample1 {
 
-    private final static int threadCount = 200;
+    private final static int THREAD_COUNT = 200;
 
     public static void main(String[] args) throws Exception {
 
         ExecutorService exec = Executors.newCachedThreadPool();
 
-        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        final CountDownLatch countDownLatch = new CountDownLatch(THREAD_COUNT);
 
-        for (int i = 0; i < threadCount; i++) {
+        for (int i = 0; i < THREAD_COUNT; i++) {
             final int threadNum = i;
             exec.execute(() -> {
                 try {

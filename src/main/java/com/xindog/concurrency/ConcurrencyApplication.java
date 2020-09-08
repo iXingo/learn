@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @author shawang
+ */
 @SpringBootApplication
 public class ConcurrencyApplication implements WebMvcConfigurer {
 

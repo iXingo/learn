@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class CyclicBarrierExample2 {
 
-    private static final CyclicBarrier barrier = new CyclicBarrier(5);
+    private static final CyclicBarrier BARRIER = new CyclicBarrier(5);
 
     public static void main(String[] args) throws Exception {
 
@@ -34,7 +34,7 @@ public class CyclicBarrierExample2 {
         Thread.sleep(1000);
         log.info("{} is ready", threadNum);
         try {
-            barrier.await(2000, TimeUnit.MILLISECONDS);
+            BARRIER.await(2000, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             log.warn("BarrierException", e);
         }
