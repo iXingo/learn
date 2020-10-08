@@ -34,7 +34,7 @@ public class BootstrapNew {
 //            System.out.println("is Canceled?"+future.isCancelled());
 //            wrapper.getListener().result("time out exception");
 //        }
-        future.thenRun(()-> System.out.println("Future run again"+Thread.currentThread().getName())).whenComplete((wrapper2, throwable)-> {
+        future.thenRun(() -> System.out.println("Future run again" + Thread.currentThread().getName())).whenComplete((wrapper2, throwable) -> {
             System.out.println(wrapper2);
         });
         future.whenComplete((wrapper1, throwable) -> System.out.println(wrapper1.getHandler()));

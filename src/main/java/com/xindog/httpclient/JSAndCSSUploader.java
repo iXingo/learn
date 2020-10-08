@@ -22,7 +22,7 @@ public class JSAndCSSUploader {
 
     public static void main(String[] args) {
         String token = getToken();
-        Path dir = Paths.get(System.getProperty("user.home")+"/Project/WebPageUI/build/static");
+        Path dir = Paths.get(System.getProperty("user.home") + "/Project/WebPageUI/build/static");
         System.out.println("=============Upload started.==============");
         try {
             Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
