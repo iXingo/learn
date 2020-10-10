@@ -7,11 +7,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Test {
-    private static Lock lock = new ReentrantLock();
-    private static Condition con = lock.newCondition();
+    private static final Lock lock = new ReentrantLock();
+    private static final Condition con = lock.newCondition();
     private static volatile int i = 0;
 
-    private static Runnable thread1 = ()->{
+    private static final Runnable thread1 = ()->{
         while(true){
             lock.lock();
             if(i == 100) break;
@@ -34,7 +34,7 @@ public class Test {
         }
     };
 
-    private static Runnable thread2 = ()->{
+    private static final Runnable thread2 = ()->{
         while(true){
             lock.lock();
             if(i == 100) break;
