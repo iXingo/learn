@@ -30,7 +30,7 @@ public class Bootstrap {
 
     private Wrapper<String> doWork(Wrapper<String> wrapper) {
         new Thread(() -> {
-            System.out.printf("[Thread-%s] Do Work\n",Thread.currentThread().getName());
+            System.out.printf("[Thread-%s] Do Work\n", Thread.currentThread().getName());
             System.out.println("[start]: Do Work " + System.currentTimeMillis());
             Task<String> task = wrapper.getTask();
             String result = task.doTask(wrapper.getParam());
@@ -43,7 +43,7 @@ public class Bootstrap {
 
     private Task<String> newTask() {
         return object -> {
-            System.out.printf("[Thread-%s] Task Content\n",Thread.currentThread().getName());
+            System.out.printf("[Thread-%s] Task Content\n", Thread.currentThread().getName());
             try {
                 System.out.println("[start]: do Task - Sleeping" + System.currentTimeMillis());
                 Thread.sleep(1000);
