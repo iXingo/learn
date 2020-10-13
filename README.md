@@ -1,4 +1,4 @@
-# Project `learn`
+# Project learn
 
 This project was created for shawn to learn new technology; Contains：
 
@@ -18,7 +18,7 @@ JUC package in JDK；
 General Computer Algorithm;
 
 ## Framework
-Springboot, etc...
+Springboot, kafka, etc...
 
 ## Library
 Charts, posts, etc...
