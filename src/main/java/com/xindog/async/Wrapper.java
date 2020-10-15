@@ -35,4 +35,13 @@ public class Wrapper<T> {
     public void addHandler(Handler<T> handler) {
         this.handler = handler;
     }
+
+    @Override
+    public String toString() {
+        return "Wrapper{" +
+                "param=" + param +
+                ", task=" + task +
+                ", handler=" + handler +
+                '}';
+    }
 }
