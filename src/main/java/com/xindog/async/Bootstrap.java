@@ -37,7 +37,8 @@ public class Bootstrap {
             wrapper.getHandler().handle(result);
             System.out.println("[Finish]: Do Work " + System.currentTimeMillis());
         }).start();
-
+        System.err.println(Thread.currentThread().getName());
+        System.out.println(wrapper);
         return wrapper;
     }
 
