@@ -1,11 +1,13 @@
 package com.xindog.netty.learn.chat;
 
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import io.netty.util.concurrent.ScheduledFuture;
@@ -27,13 +29,7 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
         channels.forEach(ch -> {
             if (channel != ch) {
                 pipline.writeAndFlush("[Mychat]" + channel.remoteAddress() + " 发送的消息" + msg);
-
             } else {
-                ScheduledFuture<?> future = ch.eventLoop().scheduleAtFixedRate(
-                        () -> {
-                            log.error("[Test] Schedule Task, {}", Thread.currentThread().getName());
-                            ch.writeAndFlush("Send" + System.currentTimeMillis()+ "\n");
-                        }, 0,10, TimeUnit.SECONDS);
                 pipline.writeAndFlush("[Mychat]" + "【自己】" + msg + "\n");
             }
         });
@@ -45,30 +41,31 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.error("[MyChatServer] Channel Active in, {}", Thread.currentThread().getName());
         Channel channel = ctx.channel();
-        System.out.println(channel.remoteAddress() + "上线");
+        channel.writeAndFlush("欢迎上线！"+ channel.remoteAddress()+channel.id());
+        log.info(channel.remoteAddress() + "上线");
+        channels.add(channel);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         log.error("[MyChatServer] Channel InActive in, {}", Thread.currentThread().getName());
         Channel channel = ctx.channel();
-        System.out.println(channel.remoteAddress() + "下线");
+        log.info(channel.remoteAddress() + "下线");
+        channels.remove(channel);
     }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         log.error("[MyChatServer] Handler Added in, {}, {}", Thread.currentThread().getName(), ctx.handler());
         Channel channel = ctx.channel();
-        channels.write("【服务器】 - " + channel.remoteAddress() + "加入\n");
-        channels.add(channel);
+        channels.writeAndFlush("【服务器】 - " + channel.remoteAddress() + "加入新处理器\n"+ctx.pipeline().get(MyChatServerHandler.class.getName()));
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         log.error("Handler Removed in, {}, {}", Thread.currentThread().getName(), ctx.handler());
         Channel channel = ctx.channel();
-        channels.write("【服务器】 - " + channel.remoteAddress() + "加入\n");
-        channels.remove(channel);
+        channels.writeAndFlush("【服务器】 - " + channel.remoteAddress() + "删除处理器\n");
     }
 
     @Override
