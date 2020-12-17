@@ -1,4 +1,4 @@
-package com.xindog.DesignPattern.InterceptingFilter;
+package com.xindog.designpattern.InterceptingFilter;
 
 public class InterceptingFilterDemo {
     public static void main(String[] args) {

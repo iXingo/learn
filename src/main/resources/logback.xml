@@ -3,7 +3,7 @@
   <property name="APP_NAME" value="Learn" />
   <property name="LOG_DIR" value="logs" />
   <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level [%thread] %logger{15} - %msg%n" />
-  <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %boldYellow([%thread]) %cyan(%logger{15}) %boldMagenta([%method:%L]) %highlight(%msg) %ex{full} %n"/>
+  <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %boldYellow([%thread]) %cyan(%logger{15}) %magenta([%method:%L]) %msg %ex{full} %n"/>
 
   <contextName>${APP_NAME}</contextName>
 

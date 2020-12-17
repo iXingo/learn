@@ -1,5 +1,7 @@
 package com.xindog.async;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by Xindog.com(TM).
  * Author:  Shawn.Wang / i.am@shawn.wang
@@ -7,6 +9,7 @@ package com.xindog.async;
  * Time:    2:21 PM
  * Project: learn
  */
+@Slf4j
 public class Wrapper<T> {
     private T param;
     private Task<T> task;
@@ -34,6 +37,7 @@ public class Wrapper<T> {
 
     public void addHandler(Handler<T> handler) {
         this.handler = handler;
+        log.error(handler.getClass().getName());
     }
 
     @Override

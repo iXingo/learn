@@ -1,4 +1,4 @@
-package com.xindog.DesignPattern.InterceptingFilter;
+package com.xindog.designpattern.InterceptingFilter;
 
 public class DebugFilter implements Filter {
     public void execute(String request){

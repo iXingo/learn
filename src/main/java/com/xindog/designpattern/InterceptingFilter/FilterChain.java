@@ -1,4 +1,4 @@
-package com.xindog.DesignPattern.InterceptingFilter;
+package com.xindog.designpattern.InterceptingFilter;
 
 import java.util.ArrayList;
 import java.util.List;

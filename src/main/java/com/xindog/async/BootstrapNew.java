@@ -1,5 +1,7 @@
 package com.xindog.async;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -12,6 +14,7 @@ import java.util.concurrent.TimeoutException;
  * Time:    3:09 PM
  * Project: learn
  */
+@Slf4j
 public class BootstrapNew {
 
     public static void main(String[] args) throws ExecutionException {
@@ -22,61 +25,53 @@ public class BootstrapNew {
         Wrapper<String> wrapper = new Wrapper<>();
         wrapper.setTask(task);
         wrapper.setParam("hello");
-        wrapper.addHandler(System.out::println);
+        wrapper.addHandler(log::error);
 
         CompletableFuture<Wrapper<String>> future = CompletableFuture.supplyAsync(() -> {
-            System.out.println(Thread.currentThread().getName() + "do work");
-            System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
+            log.info("Do work now");
             return bootstrap.doWork(wrapper);
         });
 
-//        try {
-//            System.out.println(Thread.currentThread() + "Future get");
-////            future.get(1200, TimeUnit.MILLISECONDS);
-//        } catch (InterruptedException | TimeoutException | ExecutionException e) {
-//            System.out.println("is Canceled?"+future.isCancelled());
-//            wrapper.getListener().result("time out exception");
-//        }
         future.thenRun(
-                () ->  System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon())
-        ).whenComplete(
-                (wrapper2, throwable) -> {
-                    System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                    System.out.println(wrapper2);
-        });
+                () -> {log.warn("Then Run");
+                System.exit(0);}
+        );
         future.whenComplete((wrapper1, throwable) -> {
-                System.out.println(wrapper1.getHandler());
-            System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
+                log.info(wrapper1.getHandler().toString());
+                log.warn("When Complete1, {}", wrapper1.toString());
         });
         try {
+            log.info("1 Finish, {}", Thread.currentThread());
             Thread.currentThread().join();
+            log.info("2 Finish, {}", Thread.currentThread());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread());
+        log.info("Exit");
 
 
     }
 
     private Wrapper<String> doWork(Wrapper<String> wrapper) {
         Task<String> task = wrapper.getTask();
-        System.out.println(Thread.currentThread() + ",Task Start");
+        log.info("Task Start");
         String result = task.doTask(wrapper.getParam());
-        System.out.println(Thread.currentThread() + ",Task Finish, notify listener");
+        log.info("Task Finish, notify listener");
         wrapper.getHandler().handle(result);
-        System.out.println(wrapper.getHandler());
-        System.out.println(Thread.currentThread() + ",Result noticed");
+        log.info(wrapper.getHandler().toString());
+        log.info("Result noticed");
         return wrapper;
     }
 
     private Task<String> newTask() {
         return object -> {
-            System.out.println(Thread.currentThread().getName());
+            log.info("This is Task Content");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            log.info("This is End of Task Content");
             return object + " world";
         };
     }
