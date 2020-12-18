@@ -1,8 +1,11 @@
 package com.xindog.consumer;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Slf4j
 public class Consumer {
 
     public static void main(String[] args) {
@@ -10,9 +13,9 @@ public class Consumer {
         executors.submit(() -> {
             System.out.println("Test1");
             try {
-                System.out.println("Test1" + System.currentTimeMillis());
+                log.warn("Test1" + System.currentTimeMillis());
                 Thread.sleep(2000);
-                System.out.println("Test1" + System.currentTimeMillis());
+                log.warn("Test1" + System.currentTimeMillis());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -20,13 +23,14 @@ public class Consumer {
         executors.submit(() -> {
             System.out.println("Test2");
             try {
-                System.out.println("Test2" + System.currentTimeMillis());
+                log.warn("Test2" + System.currentTimeMillis());
                 Thread.sleep(2000);
-                System.out.println("Test2" + System.currentTimeMillis());
+                log.warn("Test2" + System.currentTimeMillis());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
         executors.shutdown();
+        log.error("shundown");
     }
 }

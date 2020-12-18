@@ -52,7 +52,7 @@ public class ClassLoaderExample {
         try {
             while ((temp = in.read()) != -1) {
                 b[len] = (byte) temp;
-                System.out.println((char) temp);
+                System.out.print((char) temp);
                 len++;
             }
             in.close();
@@ -64,6 +64,7 @@ public class ClassLoaderExample {
 
         try {
             Class<HttpMessageConverterExtractor> extractor = (Class<HttpMessageConverterExtractor>) loader.loadClass("org.springframework.web.client.HttpMessageConverterExtractor");
+            System.out.println(extractor.getResource(""));
             for (Method method : extractor.getDeclaredMethods()) {
                 System.out.println(method.getName());
             }

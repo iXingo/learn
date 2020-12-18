@@ -1,5 +1,7 @@
 package com.xindog.concurrency.threadlocal;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by Xindog.com(TM).
  * Author:  Shawn.Wang / i.am@shawn.wang
@@ -7,6 +9,7 @@ package com.xindog.concurrency.threadlocal;
  * Time:    5:38 PM
  * Project: learn
  */
+@Slf4j
 public class Demo {
 
 
@@ -16,11 +19,15 @@ public class Demo {
         Demo demo = new Demo();
 
         Runnable runnable1 = () -> {
-            System.out.println(demo.name);
+            demo.name.set("1");
+            Thread t = Thread.currentThread();
+            log.warn(demo.name.get());
         };
 
         Runnable runnable2 = () -> {
-            System.out.println(demo.name);
+            demo.name.set("2");
+            Thread t = Thread.currentThread();
+            log.warn(demo.name.get());
         };
 
         Thread thread1 = new Thread(runnable1);
