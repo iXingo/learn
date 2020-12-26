@@ -19,13 +19,11 @@ public class VoidMethodTest {
     @Test
     public void testHelloWorld() {
         People  mockPeople =Mockito.mock(People.class);
-        Mockito.doAnswer(new Answer<Object>() {
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                invocation.callRealMethod();
-                System.out.println("success");
-                return "success";
-            }
+        Mockito.doAnswer((Answer<Object>) invocation -> {
+            Object[] args = invocation.getArguments();
+            invocation.callRealMethod();
+            System.out.println("success");
+            return "success";
         }).when(mockPeople).sayHello("h");
         mockPeople.sayHello("h");
     }
