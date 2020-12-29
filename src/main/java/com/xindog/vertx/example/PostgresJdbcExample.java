@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Xindog.com(TM).
@@ -29,17 +28,13 @@ public class PostgresJdbcExample {
                 }
                 rs.close();
                 st.close();
-                Thread.sleep(10000);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
         };
 
-        try {
-            CompletableFuture.runAsync(run).get();
-            CompletableFuture.runAsync(run).get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+        CompletableFuture.runAsync(run).join();
+        CompletableFuture.runAsync(run).join();
+
     }
 }
