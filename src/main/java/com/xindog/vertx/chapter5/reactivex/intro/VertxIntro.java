@@ -5,16 +5,18 @@ import io.reactivex.Observable;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.core.RxHelper;
 import io.vertx.reactivex.core.AbstractVerticle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class VertxIntro extends AbstractVerticle {
 
   @Override
   public Completable rxStart() {
     Observable
       .interval(1, TimeUnit.SECONDS, RxHelper.scheduler(vertx))
-      .subscribe(n -> System.out.println("tick"));
+      .subscribe(n -> log.info("tick"));
 
     return vertx.createHttpServer()
       .requestHandler(r -> r.response().end("Ok"))

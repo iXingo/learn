@@ -3,10 +3,12 @@ package com.xindog.vertx.chapter5.future;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+@Slf4j
 public class Intro {
 
   public static void main(String[] args) {
@@ -14,7 +16,7 @@ public class Intro {
 
     Promise<String> promise = Promise.promise();
 
-    System.out.println("Waiting...");
+    log.debug("Waiting...");
     vertx.setTimer(5000, id -> {
       if (System.currentTimeMillis() % 2L == 0L) {
         promise.complete("Ok!");
@@ -44,9 +46,9 @@ public class Intro {
       .thenApply(str -> "~~~ " + str)
       .whenComplete((str, err) -> {
         if (err == null) {
-          System.out.println(str);
+          log.warn(str);
         } else {
-          System.out.println("Oh... " + err.getMessage());
+          log.warn("Oh... " + err.getMessage());
         }
       });
 
@@ -61,7 +63,7 @@ public class Intro {
 
     Future
       .fromCompletionStage(cf, vertx.getOrCreateContext())
-      .onSuccess(System.out::println)
+      .onSuccess(log::info)
       .onFailure(Throwable::printStackTrace);
   }
 }

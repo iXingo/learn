@@ -29,6 +29,7 @@ public final class EventLoop {
   }
 
   public void dispatch(Event event) {
+    log.warn("Dispatch an event: {}=> {}", event.key, event.data);
     events.add(event);
   }
 

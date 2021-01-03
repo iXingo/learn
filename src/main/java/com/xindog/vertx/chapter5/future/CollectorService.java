@@ -11,11 +11,13 @@ import io.vertx.ext.web.client.HttpResponse;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.codec.BodyCodec;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+@Slf4j
 public class CollectorService extends AbstractVerticle {
 
   private final Logger logger = LoggerFactory.getLogger(CollectorService.class);
@@ -29,7 +31,7 @@ public class CollectorService extends AbstractVerticle {
       .listen(8080)
       .onFailure(promise::fail)
       .onSuccess(ok -> {
-        System.out.println("http://localhost:8080/");
+        log.info("http://localhost:8080/");
         promise.complete();
       });
   }
