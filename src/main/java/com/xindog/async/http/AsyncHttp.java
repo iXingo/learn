@@ -1,6 +1,7 @@
 package com.xindog.async.http;
 
 import io.netty.handler.codec.http.HttpHeaders;
+import lombok.extern.slf4j.Slf4j;
 import org.asynchttpclient.*;
 
 /**
@@ -10,81 +11,73 @@ import org.asynchttpclient.*;
  * Time:    2:47 PM
  * Project: learn
  */
+@Slf4j
 public class AsyncHttp {
     public static void main(String[] args) {
         DefaultAsyncHttpClientConfig.Builder clientBuilder =
                 Dsl.config().setConnectTimeout(500).setIoThreadsCount(1).setThreadPoolName("Shawn Wang");
         AsyncHttpClient client = Dsl.asyncHttpClient(clientBuilder);
-        BoundRequestBuilder getRequest = client.prepareGet("http://www.ixingo.com.cn");
-        getRequest.execute(new AsyncHandler<Object>() {
+        client.prepareGet("http://www.ixingo.com.cn").execute(new AsyncHandler<Object>() {
             @Override
-            public State onStatusReceived(HttpResponseStatus httpResponseStatus) throws Exception {
-
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Status:"+httpResponseStatus);
+            public State onStatusReceived(HttpResponseStatus httpResponseStatus) {
+                log.info("Status:" + httpResponseStatus);
                 return null;
             }
 
             @Override
-            public State onHeadersReceived(HttpHeaders httpHeaders) throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Status:"+httpHeaders);
+            public State onHeadersReceived(HttpHeaders httpHeaders) {
+                log.info("Status:" + httpHeaders);
                 return null;
             }
 
             @Override
-            public State onBodyPartReceived(HttpResponseBodyPart httpResponseBodyPart) throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Status:"+httpResponseBodyPart);
+            public State onBodyPartReceived(HttpResponseBodyPart httpResponseBodyPart) {
+                log.info("Status:" + httpResponseBodyPart);
                 return null;
             }
 
             @Override
             public void onThrowable(Throwable throwable) {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
+                log.info("Throwable => {}", throwable.getMessage());
 
             }
 
             @Override
-            public Object onCompleted() throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Finished");
+            public Object onCompleted() {
+                log.info("Completed");
                 return null;
             }
+
         });
-        BoundRequestBuilder getRequest2 = client.prepareGet("http://www.xindog.com");
-        getRequest2.execute(new AsyncHandler<Object>() {
+
+
+        client.prepareGet("http://www.xindog.com").execute(new AsyncHandler<Object>() {
             @Override
             public State onStatusReceived(HttpResponseStatus httpResponseStatus) throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Status:"+httpResponseStatus);
+                log.info("Status:" + httpResponseStatus);
                 return null;
             }
 
             @Override
             public State onHeadersReceived(HttpHeaders httpHeaders) throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Status:"+httpHeaders);
+                log.info("Status:"+httpHeaders);
                 return null;
             }
 
             @Override
             public State onBodyPartReceived(HttpResponseBodyPart httpResponseBodyPart) throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Status:"+httpResponseBodyPart);
+                log.info("Status:"+httpResponseBodyPart);
                 return null;
             }
 
             @Override
             public void onThrowable(Throwable throwable) {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-
+                log.info("Throwable => {}", throwable.getMessage());
             }
 
             @Override
             public Object onCompleted() throws Exception {
-                System.out.printf("Thread_Name: %s, Daemon: %s%n", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
-                System.out.println("Finished");
+                log.info("Finished");
                 return null;
             }
         });
