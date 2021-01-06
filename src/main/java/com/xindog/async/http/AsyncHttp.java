@@ -60,13 +60,13 @@ public class AsyncHttp {
 
             @Override
             public State onHeadersReceived(HttpHeaders httpHeaders) throws Exception {
-                log.info("Status:"+httpHeaders);
+                log.info("Status:" + httpHeaders);
                 return null;
             }
 
             @Override
             public State onBodyPartReceived(HttpResponseBodyPart httpResponseBodyPart) throws Exception {
-                log.info("Status:"+httpResponseBodyPart);
+                log.info("Status:" + httpResponseBodyPart);
                 return null;
             }
 

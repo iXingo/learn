@@ -1,7 +1,6 @@
 package com.xindog.netty.order;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
@@ -21,7 +20,7 @@ public class EchoOutboundHandler1 extends ChannelOutboundHandlerAdapter {
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         log.info("write");
-        String data = ((ByteBuf)msg).toString(CharsetUtil.UTF_8);
+        String data = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
         log.warn("[Out 1] Data：" + data);
         ctx.write(msg);
         log.info("Exit write");

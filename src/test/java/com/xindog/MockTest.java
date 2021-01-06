@@ -27,7 +27,7 @@ public class MockTest {
     }
 
     @Test
-    public void classLocaderTest(){
+    public void classLocaderTest() {
         ClassLoader loader = MockTest.class.getClassLoader();
         while (loader != null) {
             System.out.println(loader.toString());
@@ -49,17 +49,17 @@ public class MockTest {
     }
 
     @Test
-    public void bitTest(){
-        System.out.println(3<<3);
-        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE) );
-        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE + 1) );
+    public void bitTest() {
+        System.out.println(3 << 3);
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE + 1));
         System.out.println(Integer.MAX_VALUE);
-        System.out.println(Integer.toString(8,2));
+        System.out.println(Integer.toString(8, 2));
         System.out.println();
     }
 
     @Test
-    public void charTest(){
+    public void charTest() {
         String c = "字";
         try {
             System.out.println(c.getBytes("GBK").length);
@@ -73,12 +73,12 @@ public class MockTest {
             System.out.println(Integer.toHexString(ch1));
 //            49 20 61 6d 20 541b 5c71
         }
-        byte  b = -128;
+        byte b = -128;
 
     }
 
     @Test
-    public void floatTest(){
+    public void floatTest() {
         float flt = 0.1f;
         for (int i = 0; i < 100; i++) {
             flt += 0.1f;

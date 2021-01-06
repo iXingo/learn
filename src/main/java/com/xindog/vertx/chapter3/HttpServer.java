@@ -11,49 +11,49 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HttpServer extends AbstractVerticle {
 
-  @Override
-  public void start() {
-    vertx.createHttpServer()
-      .requestHandler(this::handler)
-      .listen(config().getInteger("port", 9000));
-  }
-
-  private void handler(HttpServerRequest request) {
-    if ("/".equals(request.path())) {
-      log.warn("Requests come in");
-      request.response().sendFile("package3/local/index.html");
-    } else if ("/sse".equals(request.path())) {
-      sse(request);
-    } else {
-      request.response().setStatusCode(404);
+    @Override
+    public void start() {
+        vertx.createHttpServer()
+                .requestHandler(this::handler)
+                .listen(config().getInteger("port", 9000));
     }
-  }
 
-  private void sse(HttpServerRequest request) {
-    HttpServerResponse response = request.response();
-    response
-      .putHeader("Content-Type", "text/event-stream")
-      .putHeader("Cache-Control", "no-cache")
-      .setChunked(true);
+    private void handler(HttpServerRequest request) {
+        if ("/".equals(request.path())) {
+            log.warn("Requests come in");
+            request.response().sendFile("package3/local/index.html");
+        } else if ("/sse".equals(request.path())) {
+            sse(request);
+        } else {
+            request.response().setStatusCode(404);
+        }
+    }
 
-    MessageConsumer<JsonObject> consumer = vertx.eventBus().consumer("sensor.updates");
-    consumer.handler(msg -> {
-      response.write("event: update\n");
-      response.write("data: " + msg.body().encode() + "\n\n");
-    });
+    private void sse(HttpServerRequest request) {
+        HttpServerResponse response = request.response();
+        response
+                .putHeader("Content-Type", "text/event-stream")
+                .putHeader("Cache-Control", "no-cache")
+                .setChunked(true);
+
+        MessageConsumer<JsonObject> consumer = vertx.eventBus().consumer("sensor.updates");
+        consumer.handler(msg -> {
+            response.write("event: update\n");
+            response.write("data: " + msg.body().encode() + "\n\n");
+        });
 
 
-    TimeoutStream ticks = vertx.periodicStream(1000);
-    ticks.handler(id -> vertx.eventBus().<JsonObject>request("sensor.average", "", reply -> {
-      if (reply.succeeded()) {
-        response.write("event: average\n");
-        response.write("data: " + reply.result().body().encode() + "\n\n");
-      }
-    }));
+        TimeoutStream ticks = vertx.periodicStream(1000);
+        ticks.handler(id -> vertx.eventBus().<JsonObject>request("sensor.average", "", reply -> {
+            if (reply.succeeded()) {
+                response.write("event: average\n");
+                response.write("data: " + reply.result().body().encode() + "\n\n");
+            }
+        }));
 
-    response.endHandler(v -> {
-      consumer.unregister();
-      ticks.cancel();
-    });
-  }
+        response.endHandler(v -> {
+            consumer.unregister();
+            ticks.cancel();
+        });
+    }
 }

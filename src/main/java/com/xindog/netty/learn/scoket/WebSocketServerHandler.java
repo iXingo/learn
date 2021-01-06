@@ -16,35 +16,35 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<TextWebS
         log.info("收到消息" + msg.text());
         String data = msg.text();
         ChannelFuture future;
-        if(data.equalsIgnoreCase("close")){
+        if (data.equalsIgnoreCase("close")) {
             future = ctx.channel().closeFuture();
             future.addListener((ChannelFutureListener) channelFuture -> log.error("Closed， {}", channelFuture));
         }
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("["+Thread.currentThread().getName()+"] 服务器时间:" + LocalDateTime.now()));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("[" + Thread.currentThread().getName() + "] 服务器时间:" + LocalDateTime.now()));
     }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
         log.info("Handler Added" + ctx.channel().id().asLongText());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("["+Thread.currentThread().getName()+"] 添加Handler:" + LocalDateTime.now()));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("[" + Thread.currentThread().getName() + "] 添加Handler:" + LocalDateTime.now()));
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
         log.info("Handler Removed" + ctx.channel().id().asLongText());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("["+Thread.currentThread().getName()+"] 添加Handler:" + LocalDateTime.now()));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("[" + Thread.currentThread().getName() + "] 添加Handler:" + LocalDateTime.now()));
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("连接开启" + ctx.channel().id().asLongText());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("["+Thread.currentThread().getName()+"] 连接开启:" + LocalDateTime.now()));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("[" + Thread.currentThread().getName() + "] 连接开启:" + LocalDateTime.now()));
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
         System.out.println("连接关闭:" + ctx.channel().id().asLongText());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("["+Thread.currentThread().getName()+"] 连接关闭" + LocalDateTime.now()));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("[" + Thread.currentThread().getName() + "] 连接关闭" + LocalDateTime.now()));
     }
 
     @Override

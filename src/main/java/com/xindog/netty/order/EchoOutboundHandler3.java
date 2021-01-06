@@ -21,7 +21,7 @@ public class EchoOutboundHandler3 extends ChannelOutboundHandlerAdapter {
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         log.info("write");
-        String data = ((ByteBuf)msg).toString(CharsetUtil.UTF_8);
+        String data = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
         log.warn("[Out 3] Data：" + data);
         ctx.write(msg);
         log.info("Exit write");
