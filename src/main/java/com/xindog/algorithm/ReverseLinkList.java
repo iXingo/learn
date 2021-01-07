@@ -30,11 +30,14 @@ public class ReverseLinkList {
 
 
     public static void recursiveReverse(LinkList list){
-        if (list.getNext() != null) {
+        if (list.getNext() == null) {
             log.info("Reverse Call => LinkList={}", list.getValue());
-            recursiveReverse(list.getNext());
+            log.warn("Here I get the value => {}",list.getValue());
+            return;
         }
-        System.out.println(list.getValue());
+        log.info("Reverse Call => LinkList={}", list.getValue());
+        recursiveReverse(list.getNext());
+        log.warn("Here I get the value => {}",list.getValue());
     }
 }
 
