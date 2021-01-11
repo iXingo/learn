@@ -30,6 +30,7 @@ public class AsynchronousEcho {
       Iterator<SelectionKey> it = selector.selectedKeys().iterator();
       while (it.hasNext()) {
         SelectionKey key = it.next();
+        System.out.println(key.isWritable());
         if (key.isAcceptable()) {
           newConnection(selector, key);
         } else if (key.isReadable()) {
@@ -51,17 +52,20 @@ public class AsynchronousEcho {
   private static final HashMap<SocketChannel, Context> contexts = new HashMap<>();
 
   private static void newConnection(Selector selector, SelectionKey key) throws IOException {
+    log.info("Connection Start");
     ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
     SocketChannel socketChannel = serverSocketChannel.accept();
     socketChannel
       .configureBlocking(false)
       .register(selector, SelectionKey.OP_READ);
     contexts.put(socketChannel, new Context());
+    log.info("Connection End");
   }
 
   private static final Pattern QUIT = Pattern.compile("(\\r)?(\\n)?/quit$");
 
   private static void echo(SelectionKey key) throws IOException {
+    log.info("Read Start");
     SocketChannel socketChannel = (SocketChannel) key.channel();
     Context context = contexts.get(socketChannel);
     try {
@@ -84,9 +88,11 @@ public class AsynchronousEcho {
           cleanup(socketChannel);
         }
       }
+      log.info("Read End");
     } catch (IOException err) {
       err.printStackTrace();
       cleanup(socketChannel);
+      log.info("Read End");
     }
   }
 
@@ -96,6 +102,7 @@ public class AsynchronousEcho {
   }
 
   private static void continueEcho(Selector selector, SelectionKey key) throws IOException {
+    log.info("Write Start");
     SocketChannel socketChannel = (SocketChannel) key.channel();
     Context context = contexts.get(socketChannel);
     try {
@@ -110,9 +117,11 @@ public class AsynchronousEcho {
           socketChannel.register(selector, SelectionKey.OP_READ);
         }
       }
+      log.info("Write End");
     } catch (IOException err) {
       err.printStackTrace();
       cleanup(socketChannel);
+      log.info("Write End");
     }
   }
 }

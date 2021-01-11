@@ -15,6 +15,7 @@ public class SynchronousEcho {
     server.bind(new InetSocketAddress(3000));
     while (true) {   // <1>
       Socket socket = server.accept();
+      System.out.println(socket);
       new Thread(clientHandler(socket)).start();
     }
   }

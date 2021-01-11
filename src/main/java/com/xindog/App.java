@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * This is a project for Socket, NIO, Concurrent and Multi-Thread, and Java8 stream ,new Date/time API
  */
 public class App {
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        double num1 = 0.719;
 //        System.out.println(num1 * 128);
 //        System.out.println((num1 * 128) + 0.1);
@@ -45,7 +45,7 @@ public class App {
     public static void main(String[] args) {
         char[] s = {'1', '2', '2', '4', '5', '5'};
         permutation(s, 0, 5);
-        list.stream().filter(x->x>300000).forEach(System.out::println);
+        list.stream().filter(x -> x > 300000).forEach(System.out::println);
     }
 
 
