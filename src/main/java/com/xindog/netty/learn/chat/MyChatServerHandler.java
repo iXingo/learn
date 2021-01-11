@@ -35,7 +35,7 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.error("[MyChatServer] Channel Active in, {}", Thread.currentThread().getName());
         Channel channel = ctx.channel();
-        channel.writeAndFlush("欢迎上线！"+ channel.remoteAddress()+channel.id());
+        channel.writeAndFlush("欢迎上线！" + channel.remoteAddress() + channel.id());
         log.info(channel.remoteAddress() + "上线");
         channels.add(channel);
     }
@@ -52,7 +52,7 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         log.error("[MyChatServer] Handler Added in, {}, {}", Thread.currentThread().getName(), ctx.handler());
         Channel channel = ctx.channel();
-        channels.writeAndFlush("【服务器】 - " + channel.remoteAddress() + "加入新处理器\n"+ctx.pipeline().get(MyChatServerHandler.class.getName()));
+        channels.writeAndFlush("【服务器】 - " + channel.remoteAddress() + "加入新处理器\n" + ctx.pipeline().get(MyChatServerHandler.class.getName()));
     }
 
     @Override

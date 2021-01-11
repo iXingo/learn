@@ -1,7 +1,7 @@
 package com.xindog.designpattern.InterceptingFilter;
 
 public class Target {
-    public void execute(String request){
+    public void execute(String request) {
         System.out.println("Executing request: " + request);
     }
 }

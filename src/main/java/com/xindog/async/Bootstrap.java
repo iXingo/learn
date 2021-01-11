@@ -1,5 +1,7 @@
 package com.xindog.async;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by Xindog.com(TM).
  * Author:  Shawn.Wang / i.am@shawn.wang
@@ -7,6 +9,7 @@ package com.xindog.async;
  * Time:    2:21 PM
  * Project: learn
  */
+@Slf4j
 public class Bootstrap {
     public static void main(String[] args) {
         Bootstrap bootstrap = new Bootstrap();
@@ -18,42 +21,39 @@ public class Bootstrap {
         wrapper.setParam("hello");
 
         bootstrap.doWork(wrapper).addHandler(result -> {
-            System.out.printf("[Thread-%s] Add Listener \n", Thread.currentThread().getName());
-            System.out.println("[Start]: Add Listener " + System.currentTimeMillis());
-            System.out.println(result);
-            System.out.println("[Finish]: Add Listener " + System.currentTimeMillis());
+            log.info("[Start]: Add Listener " + System.currentTimeMillis());
+            log.info(result);
+            log.info("[Finish]: Add Listener " + System.currentTimeMillis());
         });
 
-        System.err.println(Thread.currentThread().getName()+wrapper);
-        System.err.println("End" + Thread.currentThread().getName());
+        log.error(String.valueOf(wrapper));
+        log.error("End");
 
     }
 
     private Wrapper<String> doWork(Wrapper<String> wrapper) {
         new Thread(() -> {
-            System.out.printf("[Thread-%s] Do Work\n", Thread.currentThread().getName());
-            System.out.println("[start]: Do Work " + System.currentTimeMillis());
+            log.info("[start]: Do Work " + System.currentTimeMillis());
             Task<String> task = wrapper.getTask();
             String result = task.doTask(wrapper.getParam());
             wrapper.getHandler().handle(result);
-            System.out.println("[Finish]: Do Work " + System.currentTimeMillis());
+            log.info("[Finish]: Do Work ");
         }).start();
-        System.err.println(Thread.currentThread().getName());
-        System.out.println(wrapper);
+        log.error(String.valueOf(wrapper));
         return wrapper;
     }
 
     private Task<String> newTask() {
         return object -> {
-            System.out.printf("[Thread-%s] Task Content\n", Thread.currentThread().getName());
+            log.info("This is task Content");
             try {
-                System.out.println("[start]: do Task - Sleeping" + System.currentTimeMillis());
+                log.info("[start]: do Task - Sleeping" + System.currentTimeMillis());
                 Thread.sleep(1000);
-                System.out.println("[Finish]: do Task - Waking" + System.currentTimeMillis());
+                log.info("[Finish]: do Task - Waking" + System.currentTimeMillis());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("new Task Result " + System.currentTimeMillis());
+            log.info("new Task Result " + System.currentTimeMillis());
             return object + " world";
         };
     }

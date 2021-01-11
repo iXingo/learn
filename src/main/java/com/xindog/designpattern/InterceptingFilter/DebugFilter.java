@@ -1,7 +1,7 @@
 package com.xindog.designpattern.InterceptingFilter;
 
 public class DebugFilter implements Filter {
-    public void execute(String request){
+    public void execute(String request) {
         System.out.println("request log: " + request);
     }
 }

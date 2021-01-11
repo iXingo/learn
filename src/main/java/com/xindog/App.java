@@ -25,8 +25,8 @@ public class App {
             return;
         if (from == to) {
 //            System.out.println(s);
-            Integer intg = Integer.parseInt(String.valueOf(s));
-            list.add(intg);
+            Integer integer = Integer.parseInt(String.valueOf(s));
+            list.add(integer);
         } else {
             for (int i = from; i <= to; i++) {
                 swap(s, i, from);

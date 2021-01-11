@@ -21,7 +21,7 @@ public class EchoInboundHandler3 extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         log.info("channelRead");
 
-        String data = ((ByteBuf)msg).toString(CharsetUtil.UTF_8);
+        String data = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
         log.warn("channelRead Data：" + data);
         ctx.writeAndFlush(Unpooled.copiedBuffer("[In 3] " + data, CharsetUtil.UTF_8));
         log.info("Exit channelRead");
