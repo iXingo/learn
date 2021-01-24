@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Xindog.com(TM).
@@ -33,12 +31,14 @@ public class BootstrapNew {
         });
 
         future.thenRun(
-                () -> {log.warn("Then Run");
-                System.exit(0);}
+                () -> {
+                    log.warn("Then Run");
+                    System.exit(0);
+                }
         );
         future.whenComplete((wrapper1, throwable) -> {
-                log.info(wrapper1.getHandler().toString());
-                log.warn("When Complete1, {}", wrapper1.toString());
+            log.info(wrapper1.getHandler().toString());
+            log.warn("When Complete1, {}", wrapper1.toString());
         });
         try {
             log.info("1 Finish, {}", Thread.currentThread());

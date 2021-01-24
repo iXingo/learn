@@ -2,7 +2,6 @@ package com.xindog;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 
@@ -18,7 +17,7 @@ public class VoidMethodTest {
 
     @Test
     public void testHelloWorld() {
-        People  mockPeople =Mockito.mock(People.class);
+        People mockPeople = Mockito.mock(People.class);
         Mockito.doAnswer((Answer<Object>) invocation -> {
             Object[] args = invocation.getArguments();
             invocation.callRealMethod();
@@ -31,7 +30,7 @@ public class VoidMethodTest {
 
 
 //Inner class
-class People{
+class People {
     public void sayHello(String str) {
         System.out.println(str);
     }

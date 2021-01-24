@@ -1,33 +1,29 @@
 package com.xindog;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import java.io.*;
-import java.time.Instant;
-import java.util.Date;
 import java.util.Objects;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest implements Serializable
-{
+public class AppTest implements Serializable {
     private static final long serialVersionUID = 4298267169635650739L;
 
     /**
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void shouldAnswerWithTrue() {
+        assertTrue(true);
     }
 
 
     @Test
-    public void Test(){
+    public void Test() {
 
         System.out.println(Integer.MAX_VALUE);
         System.out.println(Integer.MIN_VALUE);
@@ -38,26 +34,26 @@ public class AppTest implements Serializable
         StringBuilder sb = new StringBuilder();
         sb.append("4").append("3").append("2");
         char[] ch = new char[sb.length()];
-        for (int i = sb.length()-1; i >= 0; i--) {
-            ch[sb.length()-1-i] = sb.charAt(i);
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            ch[sb.length() - 1 - i] = sb.charAt(i);
         }
         System.out.println(Integer.parseInt(String.valueOf(ch)));
 
         String c = String.valueOf(807);
-        for (int i = c.length()-1; i >= 0; i--) {
+        for (int i = c.length() - 1; i >= 0; i--) {
             System.out.println(Long.parseLong(String.valueOf(c.charAt(i))));
         }
 
     }
 
     @Test
-    public void Test1(){
+    public void Test1() {
         System.out.println(String.valueOf(Integer.MAX_VALUE).length());
     }
 
     @Test
-    public void Test2(){
-        long redisCacheTTL = 60*60*24*60*1000L;
+    public void Test2() {
+        long redisCacheTTL = 60 * 60 * 24 * 60 * 1000L;
         System.out.println(redisCacheTTL);
     }
 
@@ -74,7 +70,7 @@ public class AppTest implements Serializable
 
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("out"));
         AppTest object = (AppTest) inputStream.readObject();
-        System.out.println(Objects.equals(o,object));
+        System.out.println(Objects.equals(o, object));
 
         output.close();
         outputStream.close();
@@ -83,7 +79,7 @@ public class AppTest implements Serializable
     }
 
     @Test
-    public void testSplitter(){
+    public void testSplitter() {
         System.out.println(File.separator);
     }
 }

@@ -9,18 +9,17 @@ option java_package = "com.xindog.bilibili.protobuf";
 option java_outer_classname = "MyDataInfo";
 
 
-
 message MyMessage {
 
-    enum DataType{
+    enum DataType {
         PersonType = 1;
         DogType = 2;
         CatType = 3;
     }
 
-    required DataType data_type =1;
+    required DataType data_type = 1;
 
-    oneof dataBody{
+    oneof dataBody {
         Person person = 2;
         Dog dog = 3;
         Cat cat = 4;
@@ -32,12 +31,12 @@ message Person {
     optional string address = 3;
 }
 
-message Dog{
-    optional string name =1;
+message Dog {
+    optional string name = 1;
     optional int32 age = 21;
 }
 
-message Cat{
+message Cat {
     optional string name = 1;
     optional string city = 2;
 }

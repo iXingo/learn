@@ -11,11 +11,11 @@ public class Test {
     private static final Condition con = lock.newCondition();
     private static volatile int i = 0;
 
-    private static final Runnable thread1 = ()->{
-        while(true){
+    private static final Runnable thread1 = () -> {
+        while (true) {
             lock.lock();
-            if(i == 100) break;
-            while(i % 2 == 0){
+            if (i == 100) break;
+            while (i % 2 == 0) {
                 try {
                     con.await();
                 } catch (InterruptedException e) {
@@ -23,7 +23,7 @@ public class Test {
                 }
             }
             i += 1;
-            System.out.println("线程1:"+i);
+            System.out.println("线程1:" + i);
 /*            try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -34,11 +34,11 @@ public class Test {
         }
     };
 
-    private static final Runnable thread2 = ()->{
-        while(true){
+    private static final Runnable thread2 = () -> {
+        while (true) {
             lock.lock();
-            if(i == 100) break;
-            while(i % 2 == 1){
+            if (i == 100) break;
+            while (i % 2 == 1) {
                 try {
                     con.await();
                 } catch (InterruptedException e) {
@@ -46,7 +46,7 @@ public class Test {
                 }
             }
             i += 1;
-            System.out.println("线程2:"+i);
+            System.out.println("线程2:" + i);
 /*            try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -62,4 +62,6 @@ public class Test {
         executorService.execute(thread1);
         executorService.execute(thread2);
     }
+
+
 }

@@ -12,3 +12,4 @@ lib/
 target/
 **.idea/
 **.idea/libraries
+logs/
