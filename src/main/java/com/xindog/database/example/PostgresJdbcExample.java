@@ -1,4 +1,4 @@
-package com.xindog.vertx.example;
+package com.xindog.database.example;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.xindog.vertx.example;
+package com.xindog.database.example;
 
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
