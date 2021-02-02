@@ -28,6 +28,6 @@ public class HttpFilter implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("Destory");
+        System.out.println("Destroy");
     }
 }
