@@ -28,6 +28,7 @@ public class ClassLoaderExample {
         System.out.println(loader.getParent());
         System.out.println(loader.getParent().getParent());
 
+        System.out.println(loader.getResourceAsStream(""));
         System.out.println(loader.getResourceAsStream("com/xindog/classloader/Text"));
         System.out.println(loader.getResourceAsStream("Text"));
         System.out.println(loader.getResourceAsStream("./Text"));
