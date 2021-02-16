@@ -77,7 +77,7 @@ public class Java8TimeTest {
                 addAll(set);
             }
         };
-        treeSet.stream().forEach(System.out::println);
+        treeSet.forEach(System.out::println);
 
         log.info("-------");
 
