@@ -25,8 +25,8 @@ public class VoidMethodTest {
             invocation.callRealMethod();
             log.info("success");
             return "success";
-        }).when(mockPeople).sayHello("h");
-        mockPeople.sayHello("h");
+        }).when(mockPeople).sayHello("hi");
+        mockPeople.sayHello("hi");
     }
 }
 
