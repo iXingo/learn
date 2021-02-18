@@ -37,7 +37,7 @@ public class MyComparatorTest {
 //                thenComparing(Comparator.comparing(String::toLowerCase, Comparator.reverseOrder())));
 
         Collections.sort(list, Comparator.comparingInt(String::length).reversed().
-                thenComparing(Comparator.comparing(String::toLowerCase, Comparator.reverseOrder())).
+                thenComparing(String::toLowerCase, Comparator.reverseOrder()).
                 thenComparing(Comparator.reverseOrder()));
 
         System.out.println(list);

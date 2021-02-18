@@ -24,17 +24,13 @@ public class PersonTest {
 //        List<Person> personResult = test.getPersonsByAge(20, persons);
 //        personResult.forEach(person -> System.out.println(person.getAge()));
 
-        List<Person> personResult = test.getPersonsByAge2(20, persons, (age, personList) -> {
-            return personList.stream().filter(person -> person.getAge() > age).collect(Collectors.toList());
-        });
+        List<Person> personResult = test.getPersonsByAge2(20, persons, (age, personList) -> personList.stream().filter(person -> person.getAge() > age).collect(Collectors.toList()));
 
         personResult.forEach(person -> System.out.println(person.getAge()));
 
         System.out.println("--------------------");
 
-        List<Person> personResult2 = test.getPersonsByAge2(20, persons, (age, personList) -> {
-            return personList.stream().filter(person -> person.getAge() <= age).collect(Collectors.toList());
-        });
+        List<Person> personResult2 = test.getPersonsByAge2(20, persons, (age, personList) -> personList.stream().filter(person -> person.getAge() <= age).collect(Collectors.toList()));
 
         personResult2.forEach(person -> System.out.println(person.getAge()));
 
@@ -48,9 +44,7 @@ public class PersonTest {
     }
 
     public List<Person> getPersonsByAge(int age, List<Person> persons) {
-        BiFunction<Integer, List<Person>, List<Person>> biFunction = (ageOfPerson, personList) -> {
-            return personList.stream().filter(person -> person.getAge() > ageOfPerson).collect(Collectors.toList());
-        };
+        BiFunction<Integer, List<Person>, List<Person>> biFunction = (ageOfPerson, personList) -> personList.stream().filter(person -> person.getAge() > ageOfPerson).collect(Collectors.toList());
 
         return biFunction.apply(age, persons);
     }

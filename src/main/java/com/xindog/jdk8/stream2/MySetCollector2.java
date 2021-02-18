@@ -82,7 +82,7 @@ public class MySetCollector2<T> implements Collector<T, Set<T>, Map<T, T>> {
 
         return set -> {
             Map<T, T> map = new TreeMap<>();
-            set.stream().forEach(item -> map.put(item, item));
+            set.forEach(item -> map.put(item, item));
             return map;
         };
     }

@@ -2,6 +2,8 @@ package com.xindog.jdk8.stream2;
 
 
 import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import static java.util.stream.Collectors.*;
 
@@ -58,8 +60,7 @@ public class StreamTest1 {
         System.out.println("------------");
 
         Map<String, Student> map5 = students.stream().
-                collect(groupingBy(Student::getName, collectingAndThen(minBy(Comparator.comparingInt(Student::getScore)),
-                        Optional::get)));
+                collect(toMap(Student::getName, Function.identity(), BinaryOperator.minBy(Comparator.comparingInt(Student::getScore))));
         System.out.println(map5);
     }
 }
