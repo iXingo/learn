@@ -1,5 +1,6 @@
 package com.xindog.classloader;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.client.HttpMessageConverterExtractor;
 
 import java.io.BufferedReader;
@@ -17,29 +18,30 @@ import java.util.Objects;
  *
  * @author shawang
  */
+@Slf4j
 public class ClassLoaderExample {
 
 
     public static void main(String[] args) {
         Class<ClassLoaderExample> clazz = ClassLoaderExample.class;
-        System.out.println(clazz.getName());
+        log.info(clazz.getName());
         ClassLoader loader = clazz.getClassLoader();
-        System.out.println(loader);
-        System.out.println(loader.getParent());
-        System.out.println(loader.getParent().getParent());
+        log.info(String.valueOf(loader));
+        log.info(String.valueOf(loader.getParent()));
+        log.info(String.valueOf(loader.getParent().getParent()));
 
-        System.out.println(loader.getResourceAsStream(""));
-        System.out.println(loader.getResourceAsStream("com/xindog/classloader/Text"));
-        System.out.println(loader.getResourceAsStream("Text"));
-        System.out.println(loader.getResourceAsStream("./Text"));
-        System.out.println(Thread.currentThread().getContextClassLoader().getResourceAsStream("Text"));
+        log.info(String.valueOf(loader.getResourceAsStream("")));
+        log.info(String.valueOf(loader.getResourceAsStream("com/xindog/classloader/Text")));
+        log.info(String.valueOf(loader.getResourceAsStream("Text")));
+        log.info(String.valueOf(loader.getResourceAsStream("./Text")));
+        log.info(String.valueOf(Thread.currentThread().getContextClassLoader().getResourceAsStream("Text")));
 
         InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(loader.getResourceAsStream("com/xindog/classloader/Text")));
         BufferedReader bufferedReader = new BufferedReader(reader);
         String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                log.info(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +59,7 @@ public class ClassLoaderExample {
                 len++;
             }
             in.close();
-            System.out.println(new String(b, 0, len));
+            log.info(new String(b, 0, len));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,9 +67,9 @@ public class ClassLoaderExample {
 
         try {
             Class<HttpMessageConverterExtractor> extractor = (Class<HttpMessageConverterExtractor>) loader.loadClass("org.springframework.web.client.HttpMessageConverterExtractor");
-            System.out.println(extractor.getResource(""));
+            log.info(String.valueOf(extractor.getResource("")));
             for (Method method : extractor.getDeclaredMethods()) {
-                System.out.println(method.getName());
+                log.info(method.getName());
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
