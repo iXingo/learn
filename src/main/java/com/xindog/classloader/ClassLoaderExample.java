@@ -53,7 +53,9 @@ public class ClassLoaderExample {
         int len = 0;
         int temp = 0;
         try {
-            while ((temp = in.read()) != -1) {
+            while (true) {
+                assert in != null;
+                if ((temp = in.read()) == -1) break;
                 b[len] = (byte) temp;
                 System.out.print((char) temp);
                 len++;

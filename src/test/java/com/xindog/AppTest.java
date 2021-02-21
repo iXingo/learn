@@ -59,8 +59,6 @@ public class AppTest implements Serializable {
 
     @Test
     public void Test3() throws IOException, ClassNotFoundException {
-        Object o1 = null;
-        Object o2 = null;
 
         FileOutputStream output = new FileOutputStream("out");
         ObjectOutputStream outputStream = new ObjectOutputStream(output);
