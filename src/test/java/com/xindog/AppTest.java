@@ -1,5 +1,6 @@
 package com.xindog;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.io.*;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Unit test for simple App.
  */
+@Slf4j
 public class AppTest implements Serializable {
     private static final long serialVersionUID = 4298267169635650739L;
 
@@ -25,10 +27,10 @@ public class AppTest implements Serializable {
     @Test
     public void Test() {
 
-        System.out.println(Integer.MAX_VALUE);
-        System.out.println(Integer.MIN_VALUE);
+        log.info(String.valueOf(Integer.MAX_VALUE));
+        log.info(String.valueOf(Integer.MIN_VALUE));
         Integer x = Integer.MAX_VALUE;
-        System.out.println(x);
+        log.info(String.valueOf(x));
 
 
         StringBuilder sb = new StringBuilder();
@@ -37,24 +39,24 @@ public class AppTest implements Serializable {
         for (int i = sb.length() - 1; i >= 0; i--) {
             ch[sb.length() - 1 - i] = sb.charAt(i);
         }
-        System.out.println(Integer.parseInt(String.valueOf(ch)));
+        log.info(String.valueOf(Integer.parseInt(String.valueOf(ch))));
 
         String c = String.valueOf(807);
         for (int i = c.length() - 1; i >= 0; i--) {
-            System.out.println(Long.parseLong(String.valueOf(c.charAt(i))));
+            log.info(String.valueOf(Long.parseLong(String.valueOf(c.charAt(i)))));
         }
 
     }
 
     @Test
     public void Test1() {
-        System.out.println(String.valueOf(Integer.MAX_VALUE).length());
+        log.info(String.valueOf(String.valueOf(Integer.MAX_VALUE).length()));
     }
 
     @Test
     public void Test2() {
         long redisCacheTTL = 60 * 60 * 24 * 60 * 1000L;
-        System.out.println(redisCacheTTL);
+        log.info(String.valueOf(redisCacheTTL));
     }
 
     @Test
@@ -68,7 +70,7 @@ public class AppTest implements Serializable {
 
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("out"));
         AppTest object = (AppTest) inputStream.readObject();
-        System.out.println(Objects.equals(o, object));
+        log.info(String.valueOf(Objects.equals(o, object)));
 
         output.close();
         outputStream.close();
@@ -78,6 +80,6 @@ public class AppTest implements Serializable {
 
     @Test
     public void testSplitter() {
-        System.out.println(File.separator);
+        log.info(File.separator);
     }
 }
