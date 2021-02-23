@@ -19,6 +19,7 @@ public class DynamicProxyTest {
         Hello h = new Hello();
         IHello hello = (IHello) Proxy.newProxyInstance(h.getClass().getClassLoader(), h.getClass().getInterfaces(), new DynamicProxy(h));
         hello.sayHello();
+        hello.toString();
     }
 
     interface IHello {
@@ -48,11 +49,19 @@ public class DynamicProxyTest {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             String sayHello = "sayHello";
+            String toString = "toString";
             if (sayHello.equals(method.getName())) {
                 System.out.println("--------pre method------------");
                 Object result = method.invoke(originalObj, args);
                 System.out.println(method.getName() + "()");
                 System.out.println("--------post method-----------");
+                return result;
+            }
+            else if (toString.equals(method.getName())) {
+                System.out.println("--------tpre to String method------------");
+                Object result = method.invoke(originalObj, args);
+                System.out.println(method.getName() + "()");
+                System.out.println("--------post to String method-----------");
                 return result;
             } else {
                 return method.invoke(originalObj, args);

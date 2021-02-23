@@ -1,7 +1,7 @@
 package com.xindog.jdk8.stream;
 
 
-public class Student {
+public class UniversityStudent {
 
     private String name;
 
@@ -9,7 +9,7 @@ public class Student {
 
     private int age;
 
-    public Student(String name, int score, int age) {
+    public UniversityStudent(String name, int score, int age) {
         this.name = name;
         this.score = score;
         this.age = age;
