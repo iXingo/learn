@@ -1,11 +1,15 @@
 package com.xindog;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+
+@Slf4j
 public class Test {
     private static final Lock lock = new ReentrantLock();
     private static final Condition con = lock.newCondition();
@@ -14,16 +18,19 @@ public class Test {
     private static final Runnable thread1 = () -> {
         while (true) {
             lock.lock();
-            if (i == 100) break;
-            while (i % 2 == 0) {
+
+            while (i % 2 == 1) {
                 try {
                     con.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            i += 1;
-            System.out.println("线程1:" + i);
+            if (i == 100) {
+                log.info("线程1: {}", i);
+                break;
+            }
+            log.info("线程1: {}", i++);
 /*            try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -37,16 +44,18 @@ public class Test {
     private static final Runnable thread2 = () -> {
         while (true) {
             lock.lock();
-            if (i == 100) break;
-            while (i % 2 == 1) {
+            while (i % 2 == 0) {
                 try {
                     con.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            i += 1;
-            System.out.println("线程2:" + i);
+            if (i == 100) {
+                log.info("线程2: {}", i);
+                break;
+            }
+            log.info("线程2: {}", i++);
 /*            try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
