@@ -5,6 +5,8 @@ import io.vertx.core.file.AsyncFile;
 import io.vertx.core.file.OpenOptions;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+
 
 @Slf4j
 public class VertxStreams {
@@ -14,17 +16,18 @@ public class VertxStreams {
         OpenOptions opts = new OpenOptions().setRead(true);
         vertx.fileSystem().open("build.gradle.kts", opts, ar -> {
             if (ar.succeeded()) {
+                log.info(String.valueOf(ar.getClass()));
                 AsyncFile file = ar.result();
-                log.warn(String.valueOf(file.toString()));
-                file.handler(System.out::println)
+                file.handler(buffer -> log.info(buffer.toString()))
                         .exceptionHandler(Throwable::printStackTrace)
                         .endHandler(done -> {
-                            System.out.println("\n--- DONE");
+                            log.warn("DONE");
                             vertx.close();
                         });
             } else {
                 ar.cause().printStackTrace();
             }
         });
+        log.warn("Main Thread Finished");
     }
 }

@@ -23,7 +23,7 @@ public class VertxEcho {
                 .requestHandler(request -> request.response().end(howMany()))
                 .listen(8080);
 
-        log.error("Main Thread Fininshed");
+        log.error("Main Thread Finished");
         while (true) {
             log.error("I am still alive");
             try {
