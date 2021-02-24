@@ -1,4 +1,4 @@
-package com.xindog.httpclient;
+package com.xindog.applications.httpclient;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
