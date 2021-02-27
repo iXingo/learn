@@ -1,4 +1,4 @@
-package com.xindog.database.example;
+package com.xindog.database.postsql;
 
 import lombok.extern.slf4j.Slf4j;
 
