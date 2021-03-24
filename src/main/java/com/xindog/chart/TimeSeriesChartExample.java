@@ -25,7 +25,7 @@ public class TimeSeriesChartExample extends JFrame {
         XYDataset dataset = createDataset();
         // Create chart
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                "Time Series Chart Example | WWW.BORAJI.COM", // Chart
+                "Time Series Chart Example", // Chart
                 "Date", // X-Axis Label
                 "Number", // Y-Axis Label
                 dataset);
