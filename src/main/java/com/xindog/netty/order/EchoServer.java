@@ -42,6 +42,7 @@ public class EchoServer {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             //outboundhandler一定要放在最后一个inboundhandler之前
                             //否则outboundhandler将不会执行到
+                            log.warn("Add hander in pipline");
                             socketChannel.pipeline().addLast(new EchoOutboundHandler3());
                             socketChannel.pipeline().addLast(new EchoOutboundHandler2());
                             socketChannel.pipeline().addLast(new EchoOutboundHandler1());
@@ -50,6 +51,7 @@ public class EchoServer {
                             socketChannel.pipeline().addLast(new EchoInboundHandler2());
                             socketChannel.pipeline().addLast(new EchoInboundHandler3());
                             socketChannel.pipeline().addLast("logging", new LoggingHandler(LogLevel.DEBUG));
+
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 10000)

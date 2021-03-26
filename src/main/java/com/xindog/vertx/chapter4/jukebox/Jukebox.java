@@ -10,20 +10,20 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+@Slf4j
 public class Jukebox extends AbstractVerticle {
 
-    private final Logger logger = LoggerFactory.getLogger(Jukebox.class);
 
     @Override
     public void start() {
-        logger.info("Start");
+        log.info("Start");
 
         EventBus eventBus = vertx.eventBus();
         eventBus.consumer("jukebox.list", this::list);
@@ -59,7 +59,7 @@ public class Jukebox extends AbstractVerticle {
                 JsonObject json = new JsonObject().put("files", new JsonArray(files));
                 request.reply(json);
             } else {
-                logger.error("readDir failed", ar.cause());
+                log.error("readDir failed", ar.cause());
                 request.fail(500, ar.cause().getMessage());
             }
         });
@@ -68,18 +68,18 @@ public class Jukebox extends AbstractVerticle {
     // --------------------------------------------------------------------------------- //
 
     private void play(Message<?> request) {
-        logger.info("Play");
+        log.info("Play");
         currentMode = State.PLAYING;
     }
 
     private void pause(Message<?> request) {
-        logger.info("Pause");
+        log.info("Pause");
         currentMode = State.PAUSED;
     }
 
     private void schedule(Message<JsonObject> request) {
         String file = request.body().getString("file");
-        logger.info("Scheduling {}", file);
+        log.info("Scheduling {}", file);
         if (playlist.isEmpty() && currentMode == State.PAUSED) {
             currentMode = State.PLAYING;
         }
@@ -89,7 +89,7 @@ public class Jukebox extends AbstractVerticle {
     // --------------------------------------------------------------------------------- //
 
     private void httpHandler(HttpServerRequest request) {
-        logger.info("{} '{}' {}", request.method(), request.path(), request.remoteAddress());
+        log.info("{} '{}' {}", request.method(), request.path(), request.remoteAddress());
         if ("/".equals(request.path())) {
             openAudioStream(request);
             return;
@@ -107,14 +107,14 @@ public class Jukebox extends AbstractVerticle {
     private final Set<HttpServerResponse> streamers = new HashSet<>();
 
     private void openAudioStream(HttpServerRequest request) {
-        logger.info("New streamer");
+        log.info("New streamer");
         HttpServerResponse response = request.response()
                 .putHeader("Content-Type", "audio/mpeg")
                 .setChunked(true);
         streamers.add(response);
         response.endHandler(v -> {
             streamers.remove(response);
-            logger.info("A streamer left");
+            log.info("A streamer left");
         });
     }
 
@@ -131,7 +131,7 @@ public class Jukebox extends AbstractVerticle {
             if (ar.succeeded()) {
                 downloadFile(ar.result(), request);
             } else {
-                logger.error("Read failed", ar.cause());
+                log.error("Read failed", ar.cause());
                 request.response().setStatusCode(500).end();
             }
         });
@@ -182,7 +182,7 @@ public class Jukebox extends AbstractVerticle {
             if (ar.succeeded()) {
                 processReadBuffer(ar.result());
             } else {
-                logger.error("Read failed", ar.cause());
+                log.error("Read failed", ar.cause());
                 closeCurrentFile();
             }
         });
@@ -191,7 +191,7 @@ public class Jukebox extends AbstractVerticle {
     // --------------------------------------------------------------------------------- //
 
     private void openNextFile() {
-        logger.info("Opening {}", playlist.peek());
+        log.info("Opening {}", playlist.peek());
         OpenOptions opts = new OpenOptions().setRead(true);
         currentFile = vertx.fileSystem()
                 .openBlocking("tracks/" + playlist.poll(), opts);
@@ -199,7 +199,7 @@ public class Jukebox extends AbstractVerticle {
     }
 
     private void closeCurrentFile() {
-        logger.info("Closing file");
+        log.info("Closing file");
         positionInFile = 0;
         currentFile.close();
         currentFile = null;
@@ -208,7 +208,7 @@ public class Jukebox extends AbstractVerticle {
     // --------------------------------------------------------------------------------- //
 
     private void processReadBuffer(Buffer buffer) {
-        logger.info("Read {} bytes from pos {}", buffer.length(), positionInFile);
+        log.info("Read {} bytes from pos {}", buffer.length(), positionInFile);
         positionInFile += buffer.length();
         if (buffer.length() == 0) {
             closeCurrentFile();
