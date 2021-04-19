@@ -9,7 +9,7 @@ Including Thread pool and Multi-thread;
 Non-blocking IO / Netty;
 
 ## Socket
-Netty framework;
+The netty framework;
 
 ##  Concurrent 
 JUC package in JDK；
