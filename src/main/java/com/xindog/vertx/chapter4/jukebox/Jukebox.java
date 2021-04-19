@@ -21,6 +21,18 @@ import java.util.stream.Collectors;
 public class Jukebox extends AbstractVerticle {
 
 
+    private final Queue<String> playlist = new ArrayDeque<>();
+
+    // --------------------------------------------------------------------------------- //
+    private final Set<HttpServerResponse> streamers = new HashSet<>();
+    private State currentMode = State.PAUSED;
+    private AsyncFile currentFile;
+
+    // --------------------------------------------------------------------------------- //
+    private long positionInFile;
+
+    // --------------------------------------------------------------------------------- //
+
     @Override
     public void start() {
         log.info("Start");
@@ -37,16 +49,6 @@ public class Jukebox extends AbstractVerticle {
 
         vertx.setPeriodic(100, this::streamAudioChunk);
     }
-
-    // --------------------------------------------------------------------------------- //
-
-    private enum State {PLAYING, PAUSED}
-
-    private State currentMode = State.PAUSED;
-
-    private final Queue<String> playlist = new ArrayDeque<>();
-
-    // --------------------------------------------------------------------------------- //
 
     private void list(Message<?> request) {
         vertx.fileSystem().readDir("tracks", ".*mp3$", ar -> {
@@ -65,17 +67,19 @@ public class Jukebox extends AbstractVerticle {
         });
     }
 
-    // --------------------------------------------------------------------------------- //
-
     private void play(Message<?> request) {
         log.info("Play");
         currentMode = State.PLAYING;
     }
 
+    // --------------------------------------------------------------------------------- //
+
     private void pause(Message<?> request) {
         log.info("Pause");
         currentMode = State.PAUSED;
     }
+
+    // --------------------------------------------------------------------------------- //
 
     private void schedule(Message<JsonObject> request) {
         String file = request.body().getString("file");
@@ -85,8 +89,6 @@ public class Jukebox extends AbstractVerticle {
         }
         playlist.offer(file);
     }
-
-    // --------------------------------------------------------------------------------- //
 
     private void httpHandler(HttpServerRequest request) {
         log.info("{} '{}' {}", request.method(), request.path(), request.remoteAddress());
@@ -104,8 +106,6 @@ public class Jukebox extends AbstractVerticle {
 
     // --------------------------------------------------------------------------------- //
 
-    private final Set<HttpServerResponse> streamers = new HashSet<>();
-
     private void openAudioStream(HttpServerRequest request) {
         log.info("New streamer");
         HttpServerResponse response = request.response()
@@ -117,8 +117,6 @@ public class Jukebox extends AbstractVerticle {
             log.info("A streamer left");
         });
     }
-
-    // --------------------------------------------------------------------------------- //
 
     private void download(String path, HttpServerRequest request) {
         String file = "tracks/" + path;
@@ -154,6 +152,8 @@ public class Jukebox extends AbstractVerticle {
         file.endHandler(v -> response.end());
     }
 
+    // --------------------------------------------------------------------------------- //
+
     private void downloadFilePipe(AsyncFile file, HttpServerRequest request) {
         HttpServerResponse response = request.response();
         response.setStatusCode(200)
@@ -161,11 +161,6 @@ public class Jukebox extends AbstractVerticle {
                 .setChunked(true);
         file.pipeTo(response);
     }
-
-    // --------------------------------------------------------------------------------- //
-
-    private AsyncFile currentFile;
-    private long positionInFile;
 
     private void streamAudioChunk(long id) {
         if (currentMode == State.PAUSED) {
@@ -188,8 +183,6 @@ public class Jukebox extends AbstractVerticle {
         });
     }
 
-    // --------------------------------------------------------------------------------- //
-
     private void openNextFile() {
         log.info("Opening {}", playlist.peek());
         OpenOptions opts = new OpenOptions().setRead(true);
@@ -198,14 +191,14 @@ public class Jukebox extends AbstractVerticle {
         positionInFile = 0;
     }
 
+    // --------------------------------------------------------------------------------- //
+
     private void closeCurrentFile() {
         log.info("Closing file");
         positionInFile = 0;
         currentFile.close();
         currentFile = null;
     }
-
-    // --------------------------------------------------------------------------------- //
 
     private void processReadBuffer(Buffer buffer) {
         log.info("Read {} bytes from pos {}", buffer.length(), positionInFile);
@@ -220,4 +213,8 @@ public class Jukebox extends AbstractVerticle {
             }
         }
     }
+
+    // --------------------------------------------------------------------------------- //
+
+    private enum State {PLAYING, PAUSED}
 }

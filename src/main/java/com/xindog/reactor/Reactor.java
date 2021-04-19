@@ -25,21 +25,9 @@ import java.util.Set;
  */
 @Slf4j
 public class Reactor implements Runnable {
-    public static void main(String[] args) {
-        try {
-            Thread th = new Thread(new Reactor(10393));
-            th.setName("Reactor");
-            th.start();
-            th.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     // 选择器，通知通道就绪的事件
     final Selector selector;
     final ServerSocketChannel serverSocket;
-
     public Reactor(int port) throws IOException {
         selector = Selector.open();
         serverSocket = ServerSocketChannel.open();
@@ -51,6 +39,17 @@ public class Reactor implements Runnable {
         sk.attach(new Acceptor());
 
         log.debug("Listening on port " + port);
+    }
+
+    public static void main(String[] args) {
+        try {
+            Thread th = new Thread(new Reactor(10393));
+            th.setName("Reactor");
+            th.start();
+            th.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

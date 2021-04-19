@@ -29,6 +29,20 @@ public class EchoServer {
         this.port = port;
     }
 
+    public static void main(String[] args) {
+        int port = 9099;
+        if (args != null && args.length > 0) {
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        EchoServer server = new EchoServer(port);
+        server.run();
+    }
+
     private void run() {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
@@ -69,19 +83,5 @@ public class EchoServer {
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
         }
-    }
-
-    public static void main(String[] args) {
-        int port = 9099;
-        if (args != null && args.length > 0) {
-            try {
-                port = Integer.parseInt(args[0]);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        EchoServer server = new EchoServer(port);
-        server.run();
     }
 }

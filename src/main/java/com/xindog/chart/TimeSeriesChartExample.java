@@ -89,7 +89,6 @@ public class TimeSeriesChartExample extends JFrame {
         dataset.addSeries(series2);
 
 
-
         TimeSeries series3 = new TimeSeries("Series3");
         series3.add(new Day(1, 1, 2017), 40);
         series3.add(new Day(2, 1, 2017), 35);
@@ -107,7 +106,6 @@ public class TimeSeriesChartExample extends JFrame {
         series3.add(new Day(14, 1, 2017), 25);
         series3.add(new Day(15, 1, 2017), 15);
         dataset.addSeries(series3);
-
 
 
         return dataset;

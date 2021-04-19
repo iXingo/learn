@@ -12,6 +12,11 @@ public class MixedThreading extends AbstractVerticle {
 
     private final Logger logger = LoggerFactory.getLogger(MixedThreading.class);
 
+    public static void main(String[] args) {
+        Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new MixedThreading());
+    }
+
     @Override
     public void start() {
         Context context = vertx.getOrCreateContext();
@@ -37,10 +42,5 @@ public class MixedThreading extends AbstractVerticle {
         logger.info("Waiting on the countdown latch...");
         latch.await();
         logger.info("Bye!");
-    }
-
-    public static void main(String[] args) {
-        Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new MixedThreading());
     }
 }

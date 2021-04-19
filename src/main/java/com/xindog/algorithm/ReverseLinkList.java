@@ -29,20 +29,20 @@ public class ReverseLinkList {
     }
 
 
-    public static void recursiveReverse(LinkList list){
+    public static void recursiveReverse(LinkList list) {
         if (list.getNext() == null) {
             log.info("Reverse Call => LinkList={}", list.getValue());
-            log.warn("Here I get the value => {}",list.getValue());
+            log.warn("Here I get the value => {}", list.getValue());
             return;
         }
         log.info("Reverse Call => LinkList={}", list.getValue());
         recursiveReverse(list.getNext());
-        log.warn("Here I get the value => {}",list.getValue());
+        log.warn("Here I get the value => {}", list.getValue());
     }
 }
 
 
-class LinkList{
+class LinkList {
 
     LinkList next;
     Integer value;

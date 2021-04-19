@@ -56,8 +56,7 @@ public class DynamicProxyTest {
                 System.out.println(method.getName() + "()");
                 System.out.println("--------post method-----------");
                 return result;
-            }
-            else if (toString.equals(method.getName())) {
+            } else if (toString.equals(method.getName())) {
                 System.out.println("--------tpre to String method------------");
                 Object result = method.invoke(originalObj, args);
                 System.out.println(method.getName() + "()");

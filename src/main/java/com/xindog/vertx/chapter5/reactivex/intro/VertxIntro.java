@@ -12,6 +12,10 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class VertxIntro extends AbstractVerticle {
 
+    public static void main(String[] args) {
+        Vertx.vertx().deployVerticle(new VertxIntro());
+    }
+
     @Override
     public Completable rxStart() {
         Observable
@@ -22,9 +26,5 @@ public class VertxIntro extends AbstractVerticle {
                 .requestHandler(r -> r.response().end("Ok"))
                 .rxListen(8080)
                 .ignoreElement();
-    }
-
-    public static void main(String[] args) {
-        Vertx.vertx().deployVerticle(new VertxIntro());
     }
 }

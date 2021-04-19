@@ -17,8 +17,8 @@ import java.util.concurrent.Executors;
  */
 public class MultithreadHandler extends BasicHandler {
 
-    static Executor workPool = Executors.newFixedThreadPool(5);
     static final int PROCESSING = 4;
+    static Executor workPool = Executors.newFixedThreadPool(5);
     private final Object lock = new Object();
 
     public MultithreadHandler(Selector sel, SocketChannel sc) throws IOException {
