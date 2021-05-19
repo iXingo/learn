@@ -18,7 +18,7 @@ JUC package in JDK；
 General Computer Algorithm;
 
 ## Framework
-Springboot, kafka, etc...
+Springboot, kafka, etc;
 
 ## Library
 Charts, posts, etc...
