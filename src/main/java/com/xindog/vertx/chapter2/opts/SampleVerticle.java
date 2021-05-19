@@ -13,11 +13,6 @@ public class SampleVerticle extends AbstractVerticle {
 
     private final Logger logger = LoggerFactory.getLogger(SampleVerticle.class);
 
-    @Override
-    public void start() {
-        logger.info("n = {}", config().getInteger("n", -1));
-    }
-
     public static void main(String[] args) {
         Vertx vertx = Vertx.vertx();
         for (int n = 0; n < 4; n++) {
@@ -37,5 +32,10 @@ public class SampleVerticle extends AbstractVerticle {
                 }
             });
         }
+    }
+
+    @Override
+    public void start() {
+        logger.info("n = {}", config().getInteger("n", -1));
     }
 }

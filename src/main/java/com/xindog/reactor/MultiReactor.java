@@ -24,22 +24,15 @@ import java.util.concurrent.Executors;
  * @see Reactor
  */
 public class MultiReactor {
-    public static void main(String[] args) throws IOException {
-        MultiReactor mr = new MultiReactor(10393);
-        mr.start();
-    }
-
     private static final int POOL_SIZE = 3;
-
     // Reactor（Selector） 线程池，其中一个线程被 mainReactor 使用，剩余线程都被 subReactor 使用
     static Executor selectorPool = Executors.newFixedThreadPool(POOL_SIZE);
-
-    // 主 Reactor，接收连接，把 SocketChannel 注册到从 Reactor 上
-    private Reactor mainReactor;
-
     // 从 Reactors，用于处理 I/O，可使用 BasicHandler 和  MultithreadHandler 两种处理方式
     private final Reactor[] subReactors = new Reactor[POOL_SIZE - 1];
     int next = 0;
+    // 主 Reactor，接收连接，把 SocketChannel 注册到从 Reactor 上
+    private Reactor mainReactor;
+    private int port;
 
     public MultiReactor(int port) {
         try {
@@ -54,7 +47,10 @@ public class MultiReactor {
         }
     }
 
-    private int port;
+    public static void main(String[] args) throws IOException {
+        MultiReactor mr = new MultiReactor(10393);
+        mr.start();
+    }
 
     /**
      * 启动主从 Reactor，初始化并注册 Acceptor 到主 Reactor
@@ -71,6 +67,56 @@ public class MultiReactor {
             srThread.setName("subReactor-" + i);
             selectorPool.execute(srThread);
         }
+    }
+
+    static class Reactor implements Runnable {
+        final Selector selector;
+        private final ConcurrentLinkedQueue<BasicHandler> events = new ConcurrentLinkedQueue<>();
+
+        public Reactor() throws IOException {
+            selector = Selector.open();
+        }
+
+        public Selector getSelector() {
+            return selector;
+        }
+
+        @Override
+        public void run() { // normally in a new Thread
+            try {
+                while (!Thread.interrupted()) { // 死循环
+                    BasicHandler handler = null;
+                    while ((handler = events.poll()) != null) {
+                        handler.socket.configureBlocking(false); // 设置非阻塞
+                        // Optionally try first read now
+                        handler.sk = handler.socket.register(selector, SelectionKey.OP_READ); // 注册通道
+                        handler.sk.attach(handler); // 管理事件的处理程序
+                    }
+
+                    selector.select(); // 阻塞，直到有通道事件就绪
+                    Set<SelectionKey> selected = selector.selectedKeys(); // 拿到就绪通道 SelectionKey 的集合
+                    Iterator<SelectionKey> it = selected.iterator();
+                    while (it.hasNext()) {
+                        SelectionKey skTmp = it.next();
+                        dispatch(skTmp); // 根据 key 的事件类型进行分发
+                    }
+                    selected.clear(); // 清空就绪通道的 key
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        void dispatch(SelectionKey k) {
+            Runnable r = (Runnable) (k.attachment()); // 拿到通道注册时附加的对象
+            if (r != null) r.run();
+        }
+
+        void reigster(BasicHandler basicHandler) {
+            events.offer(basicHandler);
+            selector.wakeup();
+        }
+
     }
 
     /**
@@ -117,55 +163,5 @@ public class MultiReactor {
                 ex.printStackTrace();
             }
         }
-    }
-
-    static class Reactor implements Runnable {
-        private final ConcurrentLinkedQueue<BasicHandler> events = new ConcurrentLinkedQueue<>();
-        final Selector selector;
-
-        public Reactor() throws IOException {
-            selector = Selector.open();
-        }
-
-        public Selector getSelector() {
-            return selector;
-        }
-
-        @Override
-        public void run() { // normally in a new Thread
-            try {
-                while (!Thread.interrupted()) { // 死循环
-                    BasicHandler handler = null;
-                    while ((handler = events.poll()) != null) {
-                        handler.socket.configureBlocking(false); // 设置非阻塞
-                        // Optionally try first read now
-                        handler.sk = handler.socket.register(selector, SelectionKey.OP_READ); // 注册通道
-                        handler.sk.attach(handler); // 管理事件的处理程序
-                    }
-
-                    selector.select(); // 阻塞，直到有通道事件就绪
-                    Set<SelectionKey> selected = selector.selectedKeys(); // 拿到就绪通道 SelectionKey 的集合
-                    Iterator<SelectionKey> it = selected.iterator();
-                    while (it.hasNext()) {
-                        SelectionKey skTmp = it.next();
-                        dispatch(skTmp); // 根据 key 的事件类型进行分发
-                    }
-                    selected.clear(); // 清空就绪通道的 key
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        void dispatch(SelectionKey k) {
-            Runnable r = (Runnable) (k.attachment()); // 拿到通道注册时附加的对象
-            if (r != null) r.run();
-        }
-
-        void reigster(BasicHandler basicHandler) {
-            events.offer(basicHandler);
-            selector.wakeup();
-        }
-
     }
 }

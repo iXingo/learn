@@ -11,6 +11,11 @@ public class HelloVerticle extends AbstractVerticle {
 
     private long counter = 1;
 
+    public static void main(String[] args) {
+        Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new HelloVerticle());
+    }
+
     @Override
     public void start() {
 
@@ -35,10 +40,5 @@ public class HelloVerticle extends AbstractVerticle {
         });
 
         logger.info("Open http://localhost:8080/");
-    }
-
-    public static void main(String[] args) {
-        Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new HelloVerticle());
     }
 }

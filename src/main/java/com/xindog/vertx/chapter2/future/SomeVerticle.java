@@ -6,6 +6,11 @@ import io.vertx.core.Vertx;
 
 public class SomeVerticle extends AbstractVerticle {
 
+    public static void main(String[] args) {
+        Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new SomeVerticle());
+    }
+
     @Override
     public void start(Promise<Void> promise) {   // <1>
         vertx.createHttpServer()
@@ -17,10 +22,5 @@ public class SomeVerticle extends AbstractVerticle {
                         promise.fail(ar.cause()); // <4>
                     }
                 });
-    }
-
-    public static void main(String[] args) {
-        Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new SomeVerticle());
     }
 }

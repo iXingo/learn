@@ -1,15 +1,6 @@
 package com.xindog.java.Future;
 
 public class Client {
-    public Data request(final String queryStr) {
-        final FutureData future = new FutureData();//实现获取FutureData
-        new Thread(() -> {    //RealData的构造很慢，所以在单独的线程中进行
-            RealData realdata = new RealData(queryStr);
-            future.setRealData(realdata);
-        }).start();
-        return future;//FutureData会被立即返回
-    }
-
     public static void main(String[] args) {
         Client client = new Client();
         //这里会立即返回，因为得到FutureData，而不是RealData
@@ -23,6 +14,15 @@ public class Client {
             // TODO: handle exception
         }
         System.out.println("数据=" + data.getResult());
+    }
+
+    public Data request(final String queryStr) {
+        final FutureData future = new FutureData();//实现获取FutureData
+        new Thread(() -> {    //RealData的构造很慢，所以在单独的线程中进行
+            RealData realdata = new RealData(queryStr);
+            future.setRealData(realdata);
+        }).start();
+        return future;//FutureData会被立即返回
     }
 
 }

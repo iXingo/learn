@@ -15,18 +15,17 @@ import java.nio.charset.StandardCharsets;
  * @see Reactor
  */
 public class BasicHandler implements Runnable {
+    // 定义服务的逻辑状态
+    static final int READING = 0, SENDING = 1, CLOSED = 2;
     private static final int MAXIN = 1024;
     private static final int MAXOUT = 1024;
-
-
     public SocketChannel socket;
     public SelectionKey sk;
     ByteBuffer input = ByteBuffer.allocate(MAXIN);
     ByteBuffer output = ByteBuffer.allocate(MAXOUT);
-
-    // 定义服务的逻辑状态
-    static final int READING = 0, SENDING = 1, CLOSED = 2;
     int state = READING;
+    // 缓存每次读取的内容
+    StringBuilder request = new StringBuilder();
 
     public BasicHandler(Selector sel, SocketChannel sc) throws IOException {
         socket = sc;
@@ -73,9 +72,6 @@ public class BasicHandler implements Runnable {
             sk.interestOps(SelectionKey.OP_WRITE);
         }
     }
-
-    // 缓存每次读取的内容
-    StringBuilder request = new StringBuilder();
 
     /**
      * 当读取到 \r\n 时表示结束

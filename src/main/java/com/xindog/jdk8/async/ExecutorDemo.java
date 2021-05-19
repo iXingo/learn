@@ -20,7 +20,7 @@ public class ExecutorDemo {
             }
         };
 
-        ScheduledFuture result = executor.scheduleAtFixedRate(task,1,2, TimeUnit.SECONDS);
+        ScheduledFuture result = executor.scheduleAtFixedRate(task, 1, 2, TimeUnit.SECONDS);
         for (int i = 0; i < 10; i++) {
             log.info("Main: Delay: {}", result.getDelay(TimeUnit.MILLISECONDS));
         }

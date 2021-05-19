@@ -11,6 +11,11 @@ public class Offload extends AbstractVerticle {
 
     private final Logger logger = LoggerFactory.getLogger(Offload.class);
 
+    public static void main(String[] args) {
+        Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new Offload());
+    }
+
     @Override
     public void start() {
         vertx.setPeriodic(5000, id -> {
@@ -36,10 +41,5 @@ public class Offload extends AbstractVerticle {
         } else {
             logger.error("Woops", ar.cause());
         }
-    }
-
-    public static void main(String[] args) {
-        Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new Offload());
     }
 }
