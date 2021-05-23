@@ -3,6 +3,7 @@ package com.xindog.vertx.chapter2.dissecting;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ public class MixedThreading extends AbstractVerticle {
             try {
                 run(context);
             } catch (InterruptedException e) {
-                logger.error("Woops", e);
+                logger.error("Oops, {}", ExceptionUtils.getStackTrace(e));
             }
         }).start();
     }
