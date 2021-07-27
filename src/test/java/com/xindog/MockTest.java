@@ -4,8 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static org.mockito.Mockito.RETURNS_SMART_NULLS;
 import static org.mockito.Mockito.mock;
@@ -105,6 +106,26 @@ public class MockTest {
             throw new RuntimeException("-----");
         }catch (Exception e){
             System.out.println("Exception");
+        }
+    }
+
+    @Test
+    public void urlTest(){
+        String url = "http://localhost:8887/query/test.json";
+        URI uri = null;
+        try {
+            uri = new URI(url);
+        } catch (URISyntaxException e) {
+            System.out.println("URI Syntax Error, the url is {}"+url);
+            throw new IllegalArgumentException("URI Syntax Error, url is" + url);
+        }
+        String path = uri.getPath();
+        System.out.println(path);
+        int count = StringUtils.countMatches(path, ":");
+        System.out.println(count);
+        if (count > 1) {
+            System.out.println("the url is {}"+ url);
+            throw new IllegalArgumentException("Missing pathParam value, url is" + url);
         }
     }
 }
