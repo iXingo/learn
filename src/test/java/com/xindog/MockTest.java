@@ -1,9 +1,11 @@
 package com.xindog;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.mockito.Mockito.RETURNS_SMART_NULLS;
 import static org.mockito.Mockito.mock;
@@ -85,5 +87,24 @@ public class MockTest {
         }
 
         System.out.println(flt);
+    }
+
+    @Test
+    public void regexpTest() {
+        String url = "https://gpuwa.nvidia.com/:pathParam1/:pathParam2/json ";
+        int count = StringUtils.countMatches(url, ":");
+        System.out.println(count);
+    }
+
+
+    @Test
+    public void exceptionTest(){
+        try {
+            throw new ClassCastException("Error");
+        }catch(ClassCastException e){
+            throw new RuntimeException("-----");
+        }catch (Exception e){
+            System.out.println("Exception");
+        }
     }
 }

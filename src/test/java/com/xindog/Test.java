@@ -31,11 +31,6 @@ public class Test {
                 break;
             }
             log.info("线程1: {}", i++);
-/*            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
             con.signal();
             lock.unlock();
         }
@@ -56,11 +51,6 @@ public class Test {
                 break;
             }
             log.info("线程2: {}", i++);
-/*            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
             con.signal();
             lock.unlock();
         }
