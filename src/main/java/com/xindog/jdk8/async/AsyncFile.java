@@ -16,7 +16,7 @@ public class AsyncFile {
 
         try {
             Path file = Paths.get("/Users/shawn/Downloads/2019-10-25-11-29-35-msg-60.csv");
-            AsynchronousFileChannel channel =  AsynchronousFileChannel.open(file, StandardOpenOption.READ,StandardOpenOption.WRITE);
+            AsynchronousFileChannel channel = AsynchronousFileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE);
             ByteBuffer byteBuffer = ByteBuffer.allocate(100_000);  //缓冲区大小
 
 
@@ -24,7 +24,7 @@ public class AsyncFile {
                 @Override
                 public void completed(Integer result, ByteBuffer attachment) {
                     // Run in new thread: Thread-0
-                    log.info("读取数据完成："+result);
+                    log.info("读取数据完成：" + result);
                     log.warn(byteBuffer.toString());
                     log.warn("读取线程结束");
 
@@ -51,11 +51,7 @@ public class AsyncFile {
         }
 
 
-
-
-
     }
-
 
 
 }
