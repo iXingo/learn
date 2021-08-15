@@ -16,7 +16,7 @@ public class SonClass extends FatherClass {
     private String mSonName;
 
     public void printSonMsg() {
-        log.info("Son Msg - name : {}, age:{}" ,mSonName, mSonAge);
+        log.info("Son Msg - name : {}, age:{}", mSonName, mSonAge);
     }
 
     private int getSonAge() {
