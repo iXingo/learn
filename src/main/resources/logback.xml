@@ -44,6 +44,8 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
+    <logger name="io.netty" level="INFO"/>
+
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
