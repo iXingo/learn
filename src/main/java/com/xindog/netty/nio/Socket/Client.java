@@ -1,15 +1,19 @@
 package com.xindog.netty.nio.Socket;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.Arrays;
 
 /**
  * TCP/IP的NIO非阻塞方式
  * 客户端
  */
+@Slf4j
 public class Client {
 
     //创建缓冲区
@@ -27,7 +31,8 @@ public class Client {
         byte[] bytes = new byte[512];
         while (true) {
             try {
-                System.in.read(bytes);
+                int count = System.in.read(bytes);
+                log.warn("读取到的数据字节数：{}, 内容字符为：[{}]， {}", count, new String(bytes, 0, count), Arrays.toString(bytes));
                 socket = SocketChannel.open();
                 socket.connect(address);
                 buffer.clear();
