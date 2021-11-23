@@ -16,6 +16,7 @@ public class ThreadsAndContexts {
 
     private static void createAndRun() {
         Vertx vertx = Vertx.vertx();
+        logger.warn("{}, {}", vertx.getOrCreateContext().getInstanceCount(), vertx.hashCode());
 
         vertx.getOrCreateContext()
                 .runOnContext(v -> logger.info("ABC"));
@@ -26,6 +27,7 @@ public class ThreadsAndContexts {
 
     private static void dataAndExceptions() {
         Vertx vertx = Vertx.vertx();
+        logger.warn("{}, {}", vertx.getOrCreateContext().getInstanceCount(), vertx.hashCode());
         Context ctx = vertx.getOrCreateContext();
         ctx.put("foo", "bar");
 

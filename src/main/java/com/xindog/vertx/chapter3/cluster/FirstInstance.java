@@ -15,6 +15,7 @@ public class FirstInstance {
             if (ar.succeeded()) {
                 logger.info("First instance has been started");
                 Vertx vertx = ar.result();
+                logger.warn("Deploying the first instance, {}", vertx.hashCode());
                 vertx.deployVerticle("com.xindog.vertx.chapter3.HeatSensor", new DeploymentOptions().setInstances(4));
                 vertx.deployVerticle("com.xindog.vertx.chapter3.HttpServer");
             } else {
