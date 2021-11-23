@@ -38,9 +38,9 @@ public class CollectorService extends AbstractVerticle {
 
     private void handleRequest(HttpServerRequest request) {
         CompositeFuture.all(
-                fetchTemperature(3000),
-                fetchTemperature(3001),
-                fetchTemperature(3002))
+                        fetchTemperature(3000),
+                        fetchTemperature(3001),
+                        fetchTemperature(3002))
                 .flatMap(this::sendToSnapshot)
                 .onSuccess(data -> request.response()
                         .putHeader("Content-Type", "application/json")

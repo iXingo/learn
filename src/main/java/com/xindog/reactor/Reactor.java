@@ -28,6 +28,7 @@ public class Reactor implements Runnable {
     // 选择器，通知通道就绪的事件
     final Selector selector;
     final ServerSocketChannel serverSocket;
+
     public Reactor(int port) throws IOException {
         selector = Selector.open();
         serverSocket = ServerSocketChannel.open();

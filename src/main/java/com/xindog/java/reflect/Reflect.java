@@ -1,5 +1,7 @@
 package com.xindog.java.reflect;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -12,12 +14,13 @@ import java.lang.reflect.Parameter;
  * Time:    11:02 AM
  * Project: learn
  */
+@Slf4j
 public class Reflect {
 
     private static void printFields() {
         //1.获取并输出类的名称
         Class<SonClass> mClass = SonClass.class;
-        System.out.println("类的名称：" + mClass.getName());
+        log.info("类的名称：{}", mClass.getName());
 
         //2.1 获取所有 public 访问权限的变量
         // 包括本类声明的和从父类继承的
@@ -30,9 +33,9 @@ public class Reflect {
         for (Field field : fields) {
             //获取访问权限并输出
             int modifiers = field.getModifiers();
-            System.out.print(Modifier.toString(modifiers) + " ");
+            log.info(Modifier.toString(modifiers) + " ");
             //输出变量的类型及变量名
-            System.out.println(field.getType().getName() + " " + field.getName());
+            log.info(field.getType().getName() + " " + field.getName());
         }
 
     }
