@@ -2,6 +2,7 @@ package com.xindog;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -97,17 +98,6 @@ public class MockTest {
         System.out.println(count);
     }
 
-
-    @Test
-    public void exceptionTest(){
-        try {
-            throw new ClassCastException("Error");
-        }catch(ClassCastException e){
-            throw new RuntimeException("-----");
-        }catch (Exception e){
-            System.out.println("Exception");
-        }
-    }
 
     @Test
     public void urlTest(){

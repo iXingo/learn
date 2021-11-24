@@ -4,10 +4,12 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class SensorData extends AbstractVerticle {
 
     private final HashMap<String, Double> lastValues = new HashMap<>();

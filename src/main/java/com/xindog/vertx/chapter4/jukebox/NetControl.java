@@ -5,9 +5,11 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.NetSocket;
 import io.vertx.core.parsetools.RecordParser;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class NetControl extends AbstractVerticle {
 
     private final Logger logger = LoggerFactory.getLogger(NetControl.class);
@@ -19,7 +21,7 @@ public class NetControl extends AbstractVerticle {
         logger.info("Start");
         vertx.createNetServer()
                 .connectHandler(this::handleClient)
-                .listen(3000);
+                .listen(3001);
     }
 
     private void handleClient(NetSocket socket) {
@@ -33,6 +35,7 @@ public class NetControl extends AbstractVerticle {
 
     private void handleBuffer(NetSocket socket, Buffer buffer) {
         String command = buffer.toString();
+        log.info("Received command: {}", command);
         switch (command) {
             case "/list":
                 listCommand(socket);
@@ -47,6 +50,7 @@ public class NetControl extends AbstractVerticle {
                 if (command.startsWith("/schedule ")) {
                     schedule(command);
                 } else {
+                    log.warn("Received command: {}", command);
                     socket.write("Unknown command\n");
                 }
         }

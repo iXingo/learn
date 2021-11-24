@@ -2,10 +2,12 @@ package com.xindog.vertx.chapter3;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
 import java.util.UUID;
 
+@Slf4j
 public class HeatSensor extends AbstractVerticle {
 
     private final Random random = new Random();

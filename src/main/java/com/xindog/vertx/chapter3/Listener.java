@@ -3,11 +3,13 @@ package com.xindog.vertx.chapter3;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
 
+@Slf4j
 public class Listener extends AbstractVerticle {
 
     private final Logger logger = LoggerFactory.getLogger(Listener.class);

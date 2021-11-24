@@ -16,7 +16,7 @@ public class VertxStreams {
             if (ar.succeeded()) {
                 log.info(String.valueOf(ar.getClass()));
                 AsyncFile file = ar.result();
-                file.handler(buffer -> log.info(buffer.toString()))
+                file.handler(buffer -> log.info("{}\n,{}",Thread.currentThread(),buffer.toString()))
                         .exceptionHandler(Throwable::printStackTrace)
                         .endHandler(done -> {
                             log.warn("DONE");

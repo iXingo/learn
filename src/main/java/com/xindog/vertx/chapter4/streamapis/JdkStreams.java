@@ -1,9 +1,12 @@
 package com.xindog.vertx.chapter4.streamapis;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+@Slf4j
 public class JdkStreams {
 
     public static void main(String[] args) {
@@ -16,7 +19,7 @@ public class JdkStreams {
                 count = in.read(buffer);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to open file", e);
         } finally {
             System.out.println("\n--- DONE");
         }

@@ -45,7 +45,7 @@ public class Jukebox extends AbstractVerticle {
 
         vertx.createHttpServer()
                 .requestHandler(this::httpHandler)
-                .listen(8080);
+                .listen(8081);
 
         vertx.setPeriodic(100, this::streamAudioChunk);
     }
