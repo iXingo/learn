@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Objects;
 
 import static org.junit.Assert.assertTrue;
@@ -81,5 +82,14 @@ public class AppTest implements Serializable {
     @Test
     public void testSplitter() {
         log.info(File.separator);
+    }
+    
+    
+    @Test
+    public void testLogMap(){
+        HashMap<String, String> testMap = new HashMap<>();
+        log.info("{}", testMap);
+        testMap.put("Hello","World");
+        log.info("{}",testMap);
     }
 }
