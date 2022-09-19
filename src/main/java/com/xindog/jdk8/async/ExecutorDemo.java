@@ -1,7 +1,6 @@
 package com.xindog.jdk8.async;
 
 
-import javafx.concurrent.Task;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
