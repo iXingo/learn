@@ -12,13 +12,7 @@ public class ExecutorDemo {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-        Task<String> task = new Task<String>() {
-            @Override
-            protected String call() {
-                log.info("Execute the task");
-                return "This is a task";
-            }
-        };
+        Runnable task = () -> log.info("Execute the task");
 
         ScheduledFuture result = executor.scheduleAtFixedRate(task, 1, 2, TimeUnit.SECONDS);
         for (int i = 0; i < 10; i++) {
