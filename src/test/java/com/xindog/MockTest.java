@@ -1,12 +1,13 @@
 package com.xindog;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.mockito.Mockito.RETURNS_SMART_NULLS;
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.mock;
  * Time:    2:28 PM
  * Project: learn
  */
+@Slf4j
 public class MockTest {
 
     @Test
@@ -117,5 +119,12 @@ public class MockTest {
             System.out.println("the url is {}"+ url);
             throw new IllegalArgumentException("Missing pathParam value, url is" + url);
         }
+    }
+
+    @Test
+    public void testLog(){
+        HashMap<String, String> testMap = new HashMap<>();
+        testMap.put("Hello","World");
+        log.info("{}", testMap);
     }
 }
