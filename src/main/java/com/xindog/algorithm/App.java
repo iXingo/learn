@@ -1,4 +1,4 @@
-package com.xindog;
+package com.xindog.algorithm;
 
 
 import java.util.ArrayList;
