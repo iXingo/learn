@@ -17,7 +17,7 @@ public class AsyncHttp {
         DefaultAsyncHttpClientConfig.Builder clientBuilder =
                 Dsl.config().setConnectTimeout(500).setIoThreadsCount(1).setThreadPoolName("Shawn Wang");
         AsyncHttpClient client = Dsl.asyncHttpClient(clientBuilder);
-        client.prepareGet("http://www.ixingo.com.cn").execute(new AsyncHandler<Object>() {
+        client.prepareGet("https://www.ixingo.com.cn").execute(new AsyncHandler<Object>() {
             @Override
             public State onStatusReceived(HttpResponseStatus httpResponseStatus) {
                 log.info("Status:" + httpResponseStatus);
@@ -51,7 +51,7 @@ public class AsyncHttp {
         });
 
 
-        client.prepareGet("http://www.xindog.com").execute(new AsyncHandler<Object>() {
+        client.prepareGet("https://www.xindog.com").execute(new AsyncHandler<Object>() {
             @Override
             public State onStatusReceived(HttpResponseStatus httpResponseStatus) throws Exception {
                 log.info("Status:" + httpResponseStatus);
