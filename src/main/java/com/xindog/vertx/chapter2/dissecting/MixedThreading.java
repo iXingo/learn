@@ -32,9 +32,9 @@ public class MixedThreading extends AbstractVerticle {
 
     private void run(Context context) throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
-        logger.info("I am in a non-Vert.x thread");
+        logger.info("I am in a non-Vert.x thread, {}, {}", context.isWorkerContext(), context.isEventLoopContext());
         context.runOnContext(v -> {
-            logger.info("I am on the event-loop");
+            logger.info("I am on the event-loop, {}, {}", context.isWorkerContext(), context.isEventLoopContext());
             vertx.setTimer(1000, id -> {
                 logger.info("This is the final countdown");
                 latch.countDown();

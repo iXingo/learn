@@ -38,7 +38,6 @@ public class Reactor implements Runnable {
         SelectionKey sk = serverSocket.register(selector, SelectionKey.OP_ACCEPT);
         // 关联事件的处理程序
         sk.attach(new Acceptor());
-
         log.debug("Listening on port " + port);
     }
 
@@ -63,7 +62,7 @@ public class Reactor implements Runnable {
                 while (it.hasNext()) {
                     SelectionKey skTmp = it.next();
                     dispatch(skTmp);
-                    log.debug(skTmp.toString());// 分发
+                    log.debug("Selection Key: {}", skTmp);// 分发
                 }
                 selected.clear(); // 清空就绪通道的 key
             }

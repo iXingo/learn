@@ -32,6 +32,7 @@ public class ThreadsAndContexts {
         ctx.put("foo", "bar");
 
         ctx.exceptionHandler(t -> {
+            //[vert.x-eventloop-thread-0]
             if ("Tada".equals(t.getMessage())) {
                 logger.info("Got a _Tada_ exception");
             } else {
@@ -45,6 +46,16 @@ public class ThreadsAndContexts {
 
         ctx.runOnContext(v -> {
             logger.info("foo = {}", (String) ctx.get("foo"));
+        });
+
+        //worker thread[vert.x-worker-thread-0]
+        ctx.executeBlocking(t ->{
+            try {
+                Thread.sleep(1000);
+                logger.warn("====1000 seconds later");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 }
