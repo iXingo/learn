@@ -10,12 +10,12 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-public class Kafka extends AbstractVerticle {
+public class KafkaVerticle extends AbstractVerticle {
 
     private final String topic;
     private final Properties props;
 
-    public Kafka(String brokers, String username, String password) {
+    public KafkaVerticle(String brokers, String username, String password) {
         this.topic = username + "-default";
 
         String jaasTemplate = "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"%s\" password=\"%s\";";
@@ -58,7 +58,7 @@ public class Kafka extends AbstractVerticle {
 
     public static void main(String[] args) {
         String brokers = "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094";
-        Kafka kafka = new Kafka(brokers,"100pn0kj", "hXCiaaoHQ10GeC3Vq1BCs0HpowPrOgBW");
+        KafkaVerticle kafka = new KafkaVerticle(brokers,"100pn0kj", "hXCiaaoHQ10GeC3Vq1BCs0HpowPrOgBW");
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(kafka);
     }
