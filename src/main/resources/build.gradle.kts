@@ -17,7 +17,7 @@ dependencies {
     implementation("io.vertx:vertx-rx-java2:4.3.7")
     implementation("io.vertx:vertx-web-client:4.3.6")
 
-    implementation("io.vertx:vertx-lang-kotlin:4.3.6")
+    implementation("io.vertx:vertx-lang-kotlin:4.3.7")
     implementation("io.vertx:vertx-lang-kotlin-coroutines:4.3.7")
     implementation(kotlin("stdlib-jdk8"))
 
