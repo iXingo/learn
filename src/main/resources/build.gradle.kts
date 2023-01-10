@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.8.0"
 }
 
 repositories {
@@ -13,15 +13,15 @@ repositories {
 }
 
 dependencies {
-    implementation("io.vertx:vertx-core:4.0.0")
-    implementation("io.vertx:vertx-rx-java2:4.0.0")
-    implementation("io.vertx:vertx-web-client:4.0.0")
+    implementation("io.vertx:vertx-core:4.3.7")
+    implementation("io.vertx:vertx-rx-java2:4.3.7")
+    implementation("io.vertx:vertx-web-client:4.3.7")
 
-    implementation("io.vertx:vertx-lang-kotlin:4.0.0")
-    implementation("io.vertx:vertx-lang-kotlin-coroutines:4.0.0")
+    implementation("io.vertx:vertx-lang-kotlin:4.3.7")
+    implementation("io.vertx:vertx-lang-kotlin-coroutines:4.3.7")
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
 }
 
 tasks.create<JavaExec>("run") {
