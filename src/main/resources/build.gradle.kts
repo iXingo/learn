@@ -18,7 +18,7 @@ dependencies {
     implementation("io.vertx:vertx-web-client:4.4.0")
 
     implementation("io.vertx:vertx-lang-kotlin:4.4.1")
-    implementation("io.vertx:vertx-lang-kotlin-coroutines:4.4.0")
+    implementation("io.vertx:vertx-lang-kotlin-coroutines:4.4.1")
     implementation(kotlin("stdlib-jdk8"))
 
     implementation("ch.qos.logback:logback-classic:1.4.6")
