@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.vertx:vertx-core:4.4.5")
+    implementation("io.vertx:vertx-core:4.4.6")
     implementation("io.vertx:vertx-rx-java2:4.4.6")
     implementation("io.vertx:vertx-web-client:4.4.5")
 
