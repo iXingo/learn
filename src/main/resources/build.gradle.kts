@@ -21,7 +21,7 @@ dependencies {
     implementation("io.vertx:vertx-lang-kotlin-coroutines:4.5.11")
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("ch.qos.logback:logback-classic:1.5.12")
+    implementation("ch.qos.logback:logback-classic:1.5.16")
 }
 
 tasks.create<JavaExec>("run") {
