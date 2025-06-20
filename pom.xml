@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vertx.version>4.5.12</vertx.version>
+        <vertx.version>4.5.16</vertx.version>
         <kotlin.version>1.9.24</kotlin.version>
     </properties>
 
