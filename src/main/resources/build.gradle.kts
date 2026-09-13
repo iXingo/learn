@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation("io.vertx:vertx-core:4.5.23")
-    implementation("io.vertx:vertx-rx-java2:4.5.15")
+    implementation("io.vertx:vertx-rx-java2:4.5.34")
     implementation("io.vertx:vertx-web-client:4.5.15")
 
     implementation("io.vertx:vertx-lang-kotlin:4.5.15")
